@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import WikiSection from './components/WikiSection';
 import CommentSection from './components/CommentSection';
 import ProfilePage from './components/profile/ProfilePage';
+import ExamCalendar from './components/ExamCalendar';
 
 const HomePage: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/exam-calendar" element={<ExamCalendar />} />
       </Routes>
     </Router>
   );

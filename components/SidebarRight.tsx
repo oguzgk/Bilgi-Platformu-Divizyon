@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Trophy, Coins, ChevronRight, Hash, Link as LinkIcon, Star } from 'lucide-react';
 import { CURRENT_USER, RELATED_LINKS, WIKI_DATA, COLORS } from '../constants';
 
@@ -87,10 +88,17 @@ const SidebarRight: React.FC = () => {
         <ul className="space-y-2">
             {RELATED_LINKS.map((link, idx) => (
                 <li key={idx}>
-                    <a href={link.url} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">
-                        <span className="text-sm font-medium text-gray-700">{link.title}</span>
-                        <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
-                    </a>
+                    {link.url.startsWith('/') ? (
+                      <Link to={link.url} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">
+                          <span className="text-sm font-medium text-gray-700">{link.title}</span>
+                          <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
+                      </Link>
+                    ) : (
+                      <a href={link.url} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">
+                          <span className="text-sm font-medium text-gray-700">{link.title}</span>
+                          <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
+                      </a>
+                    )}
                 </li>
             ))}
         </ul>

@@ -96,7 +96,7 @@ export const MOCK_COMMENTS: Comment[] = [
 ];
 
 export const RELATED_LINKS = [
-  { title: '2024 Vize Takvimi', url: '#' },
+  { title: '2024 Vize Takvimi', url: '/exam-calendar' },
   { title: 'Kampüs Haritası', url: '#' },
   { title: 'Hukuk Kulübü Duyuruları', url: '#' },
   { title: 'Yemekhane Menüsü', url: '#' },

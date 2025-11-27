@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import WikiSection from './components/WikiSection';
 import CommentSection from './components/CommentSection';
 import ProfilePage from './components/profile/ProfilePage';
-<<<<<<< HEAD
-import ExamCalendar from './components/ExamCalendar';
-=======
 import ShareBox from './components/ShareBox';
 import CreateContentPage from './components/CreateContentPage';
 import LoginPage from './components/LoginPage';
->>>>>>> 2ee1f8844a191a9115fd09945f523699c391c1c1
 
 interface HomePageProps {
   onLogout: () => void;
@@ -58,11 +54,6 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-<<<<<<< HEAD
-        <Route path="/" element={<HomePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/exam-calendar" element={<ExamCalendar />} />
-=======
         <Route 
           path="/login" 
           element={
@@ -93,7 +84,6 @@ const App: React.FC = () => {
             </ProtectedRoute>
           } 
         />
->>>>>>> 2ee1f8844a191a9115fd09945f523699c391c1c1
       </Routes>
     </Router>
   );

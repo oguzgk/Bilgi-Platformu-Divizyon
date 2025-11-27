@@ -1,6 +1,6 @@
 import React from 'react';
 import { Home, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut, GraduationCap, User } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES, COLORS } from '../constants';
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -14,7 +14,11 @@ const iconMap: Record<string, React.ReactNode> = {
   User: <User size={20} />,
 };
 
-const SidebarLeft: React.FC = () => {
+interface SidebarLeftProps {
+  onLogout?: () => void;
+}
+
+const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
   const location = useLocation();
 
   const isActive = (catId: string) => {
@@ -64,7 +68,10 @@ const SidebarLeft: React.FC = () => {
           <Settings size={18} />
           Ayarlar
         </button>
-        <button className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1">
+        <button 
+          onClick={onLogout}
+          className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+        >
           <LogOut size={18} />
           Çıkış Yap
         </button>

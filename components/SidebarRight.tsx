@@ -1,10 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Trophy, Coins, ChevronRight, Hash, Link as LinkIcon, Star } from 'lucide-react';
+import { Trophy, Coins, ChevronRight, Hash, Link as LinkIcon, Star, ArrowRight } from 'lucide-react';
 import { CURRENT_USER, RELATED_LINKS, WIKI_DATA, COLORS } from '../constants';
+import RoleBadge from './RoleBadge';
+import { getCoinsToNextRole, getRoleInfo } from '../utils/roleHelpers';
 
 const SidebarRight: React.FC = () => {
   const xpPercentage = (CURRENT_USER.xp / CURRENT_USER.maxXp) * 100;
+  const { nextRole, coinsNeeded } = getCoinsToNextRole(CURRENT_USER.coins);
+  const currentRoleInfo = getRoleInfo(CURRENT_USER.role);
+  const [activeSection, setActiveSection] = useState<string>(WIKI_DATA.headers[0]?.id || '');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Tüm section'ları bul
+      const sections = WIKI_DATA.headers.map(header => {
+        const element = document.getElementById(header.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return {
+            id: header.id,
+            top: rect.top,
+            inView: rect.top >= 0 && rect.top <= window.innerHeight / 2
+          };
+        }
+        return null;
+      }).filter(Boolean);
+
+      // En üstteki görünür section'ı bul
+      const visibleSection = sections.find(section => section && section.top >= -100 && section.top <= 300);
+      
+      if (visibleSection) {
+        setActiveSection(visibleSection.id);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // İlk yüklemede çalıştır
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100; // Header yüksekliği kadar offset
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
 
   return (
     <aside className="fixed right-0 top-0 h-screen w-80 bg-white border-l border-gray-100 flex flex-col z-20 hidden xl:flex overflow-y-auto custom-scrollbar p-6">
@@ -32,6 +78,12 @@ const SidebarRight: React.FC = () => {
           </div>
         </div>
 
+        {/* Rol Badge */}
+        <div className="mb-4 flex items-center justify-between">
+          <RoleBadge role={CURRENT_USER.role} size="medium" showMultiplier={true} />
+          <span className="text-xs text-gray-400">{CURRENT_USER.totalContributions} katkı</span>
+        </div>
+
         {/* XP Bar */}
         <div className="mb-3">
           <div className="flex justify-between text-xs font-semibold mb-1">
@@ -47,13 +99,31 @@ const SidebarRight: React.FC = () => {
         </div>
 
         {/* Coins */}
-        <div className="flex items-center justify-between bg-yellow-50 rounded-lg p-3 border border-yellow-100">
+        <div className="flex items-center justify-between bg-yellow-50 rounded-lg p-3 border border-yellow-100 mb-4">
            <div className="flex items-center gap-2 text-yellow-700 font-bold">
               <Coins size={18} className="text-yellow-500" fill={COLORS.gold} />
-              <span>{CURRENT_USER.coins}</span>
+              <span>{CURRENT_USER.coins.toLocaleString()}</span>
            </div>
-           <span className="text-xs text-yellow-600 font-medium">SelçukCoin</span>
+           <span className="text-xs text-yellow-600 font-medium">GençCoin</span>
         </div>
+
+        {/* Next Role Progress */}
+        {nextRole && (
+          <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-lg p-3 border border-slate-200">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-semibold text-gray-600">Bir sonraki rol</span>
+              <div className="flex items-center gap-1">
+                <RoleBadge role={nextRole} size="small" showName={false} />
+                <span className="text-xs font-bold text-gray-700">{getRoleInfo(nextRole).name}</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-gray-600">
+              <span className="font-semibold">{coinsNeeded.toLocaleString()} Coin</span>
+              <ArrowRight size={12} />
+              <span>daha gerekli</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Table of Contents - Sticky Scroll Spy mock */}
@@ -63,19 +133,26 @@ const SidebarRight: React.FC = () => {
             İçindekiler
         </h4>
         <ul className="space-y-3 relative border-l-2 border-gray-100 ml-2">
-          {WIKI_DATA.headers.map((header, idx) => (
-            <li key={header.id} className="pl-4 relative">
-              {idx === 0 && (
-                <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-[#00BFA5] rounded-full"></div>
-              )}
-              <a 
-                href={`#${header.id}`} 
-                className={`text-sm block transition-colors ${idx === 0 ? 'text-[#00BFA5] font-semibold' : 'text-gray-500 hover:text-gray-800'}`}
-              >
-                {header.text}
-              </a>
-            </li>
-          ))}
+          {WIKI_DATA.headers.map((header) => {
+            const isActive = activeSection === header.id;
+            return (
+              <li key={header.id} className="pl-4 relative">
+                {isActive && (
+                  <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-[#00BFA5] rounded-full transition-all duration-300"></div>
+                )}
+                <button 
+                  onClick={() => scrollToSection(header.id)}
+                  className={`text-sm block transition-all duration-200 text-left w-full hover:translate-x-1 ${
+                    isActive 
+                      ? 'text-[#00BFA5] font-semibold' 
+                      : 'text-gray-500 hover:text-gray-800'
+                  }`}
+                >
+                  {header.text}
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { 
   Bold, 
   Italic, 
@@ -13,14 +13,61 @@ import {
   CheckCircle2,
   Clock,
   Lightbulb,
-  Save
+  Save,
+  Loader2,
+  X
 } from 'lucide-react';
-import { COLORS } from '../constants';
+import { COLORS, COIN_REWARDS, CURRENT_USER } from '../constants';
+import { useCoinNotification } from './CoinNotification';
 
-const CreateContentPage: React.FC = () => {
+function CreateContentPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [sourceLink, setSourceLink] = useState('');
+  const [isPublishing, setIsPublishing] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+  const { showNotification } = useCoinNotification();
+  
+  // ShareBox'tan gelen veriler
+  const [feeling, setFeeling] = useState<{ emoji: string; label: string } | null>(null);
+  const [taggedFriends, setTaggedFriends] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (location.state) {
+      const state = location.state as any;
+      if (state.feeling) {
+        setFeeling(state.feeling);
+      }
+      if (state.taggedFriends) {
+        setTaggedFriends(state.taggedFriends);
+      }
+    }
+  }, [location]);
+
+  const handlePublish = async () => {
+    if (!title.trim() || !content.trim()) {
+      alert('Başlık ve içerik gereklidir!');
+      return;
+    }
+
+    setIsPublishing(true);
+    
+    // Simülasyon: Yayınlanıyor
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Coin kazandır
+    const coinAmount = COIN_REWARDS.createTopic * CURRENT_USER.multiplier;
+    showNotification(coinAmount, 'Yeni başlık oluşturdunuz!', CURRENT_USER.multiplier);
+    
+    setIsPublishing(false);
+    
+    // Ana sayfaya yönlendir
+    setTimeout(() => {
+      navigate('/');
+    }, 1000);
+  };
 
   const toolbarButtons = [
     { icon: Bold, label: 'Kalın' },
@@ -76,6 +123,37 @@ const CreateContentPage: React.FC = () => {
 
             {/* Editör Alanı */}
             <div className="p-6 md:p-8 min-h-[500px]">
+              {/* Duygu ve Etiketlenen Arkadaşlar */}
+              {(feeling || taggedFriends.length > 0) && (
+                <div className="mb-6 flex flex-wrap items-center gap-2">
+                  {feeling && (
+                    <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                      <span className="text-2xl">{feeling.emoji}</span>
+                      <span className="text-sm font-medium text-amber-700">Kendini {feeling.label} hissediyor</span>
+                      <button
+                        onClick={() => setFeeling(null)}
+                        className="ml-2 text-amber-600 hover:text-amber-800"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  )}
+                  {taggedFriends.length > 0 && (
+                    <div className="flex items-center gap-2 bg-sky-50 border border-sky-200 rounded-lg px-3 py-2">
+                      <span className="text-sm font-medium text-sky-700">
+                        {taggedFriends.length} arkadaş etiketlendi
+                      </span>
+                      <button
+                        onClick={() => setTaggedFriends([])}
+                        className="ml-2 text-sky-600 hover:text-sky-800"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+              
               {/* Başlık */}
               <input
                 type="text"
@@ -127,20 +205,51 @@ const CreateContentPage: React.FC = () => {
           </div>
 
           {/* Alt butonlar */}
-          <div className="mt-6 flex items-center justify-between">
-            <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors shadow-sm">
+          <div className="mt-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <button 
+              onClick={() => setShowPreview(!showPreview)}
+              className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50 transition-colors shadow-sm"
+            >
               <Eye size={18} />
-              <span>Önizleme</span>
+              <span>{showPreview ? 'Düzenlemeye Dön' : 'Önizleme'}</span>
             </button>
 
             <button 
-              className="flex items-center gap-2 px-6 py-3 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all active:scale-95"
+              onClick={handlePublish}
+              disabled={!title.trim() || !content.trim() || isPublishing}
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ backgroundColor: COLORS.turquoise }}
             >
-              <Coins size={18} />
-              <span>YAYINLA & COIN KAZAN</span>
+              {isPublishing ? <Loader2 size={18} className="animate-spin" /> : <Coins size={18} />}
+              <span>{isPublishing ? 'YAYINLANIYOR...' : 'YAYINLA & COIN KAZAN'}</span>
             </button>
           </div>
+
+          {/* Önizleme Modal */}
+          {showPreview && (
+            <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-2xl font-bold">Önizleme</h3>
+                  <button 
+                    onClick={() => setShowPreview(false)}
+                    className="text-gray-400 hover:text-gray-600"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <h1 className="text-3xl font-bold mb-4">{title || 'Başlık girilmedi'}</h1>
+                <div className="prose max-w-none">
+                  <p className="whitespace-pre-wrap">{content || 'İçerik girilmedi'}</p>
+                </div>
+                {sourceLink && (
+                  <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-600">Kaynak: <a href={sourceLink} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{sourceLink}</a></p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Sağ: Bilgi kartları */}
@@ -206,7 +315,7 @@ const CreateContentPage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default CreateContentPage;
 

@@ -7,17 +7,56 @@ import ProfilePage from './components/profile/ProfilePage';
 import ShareBox from './components/ShareBox';
 import CreateContentPage from './components/CreateContentPage';
 import LoginPage from './components/LoginPage';
+import DiscoverFeed from './components/DiscoverFeed';
+import { CoinNotificationProvider } from './components/CoinNotification';
+import { NotificationProvider } from './contexts/NotificationContext';
 
 interface HomePageProps {
   onLogout: () => void;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ onLogout }) => {
+  const [activeTab, setActiveTab] = useState<'discover' | 'topic'>('discover');
+
   return (
     <Layout onLogout={onLogout}>
-      <ShareBox />
-      <WikiSection />
-      <CommentSection />
+      {/* Tab Navigation */}
+      <div className="mb-6 flex items-center gap-4 border-b border-gray-200">
+        <button
+          onClick={() => setActiveTab('discover')}
+          className={`pb-3 px-4 font-bold transition-all ${
+            activeTab === 'discover'
+              ? 'text-[#00BFA5] border-b-2 border-[#00BFA5]'
+              : 'text-gray-500 hover:text-gray-700'
+          }`}
+        >
+          🔥 Keşfet
+        </button>
+        <button
+          onClick={() => setActiveTab('topic')}
+          className={`pb-3 px-4 font-bold transition-all ${
+            activeTab === 'topic'
+              ? 'text-[#00BFA5] border-b-2 border-[#00BFA5]'
+              : 'text-gray-500 hover:text-gray-700'
+          }`}
+        >
+          📖 Başlık Detay (Demo)
+        </button>
+      </div>
+
+      {/* Content */}
+      {activeTab === 'discover' ? (
+        <>
+          <ShareBox />
+          <DiscoverFeed />
+        </>
+      ) : (
+        <>
+          <ShareBox />
+          <WikiSection />
+          <CommentSection />
+        </>
+      )}
     </Layout>
   );
 };
@@ -52,40 +91,44 @@ const App: React.FC = () => {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route 
-          path="/login" 
-          element={
-            isLoggedIn ? <Navigate to="/" replace /> : <LoginPage onLogin={handleLogin} />
-          } 
-        />
-        <Route 
-          path="/" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <HomePage onLogout={handleLogout} />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/profile" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <ProfilePage />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/create" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <CreateContentPage />
-            </ProtectedRoute>
-          } 
-        />
-      </Routes>
-    </Router>
+    <NotificationProvider>
+      <CoinNotificationProvider>
+        <Router>
+          <Routes>
+            <Route 
+              path="/login" 
+              element={
+                isLoggedIn ? <Navigate to="/" replace /> : <LoginPage onLogin={handleLogin} />
+              } 
+            />
+            <Route 
+              path="/" 
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <HomePage onLogout={handleLogout} />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <ProfilePage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/create" 
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <CreateContentPage />
+                </ProtectedRoute>
+              } 
+            />
+          </Routes>
+        </Router>
+      </CoinNotificationProvider>
+    </NotificationProvider>
   );
 };
 

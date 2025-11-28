@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Home, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut, GraduationCap, User, X } from 'lucide-react';
+import { Home, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut, GraduationCap, User, X, ExternalLink, TrendingUp } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { CATEGORIES, COLORS } from '../constants';
+import { CATEGORIES, COLORS, CATEGORY_CONTENT } from '../constants';
 import { useNotifications } from '../contexts/NotificationContext';
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -159,32 +159,95 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
             className="absolute inset-0 bg-black/50" 
             onClick={() => setShowCategoryModal(null)}
           ></div>
-          <div className="relative bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl animate-slideDown">
+          <div className="relative bg-white rounded-2xl p-6 max-w-2xl w-full shadow-2xl animate-slideDown max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowCategoryModal(null)}
               className="absolute top-4 right-4 p-1 hover:bg-gray-100 rounded-lg"
             >
               <X size={20} />
             </button>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-[#00BFA5] rounded-xl flex items-center justify-center">
-                {iconMap[CATEGORIES.find(c => c.id === showCategoryModal.id)?.icon || 'Home']}
+            
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#00BFA5] to-teal-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                <span className="text-3xl">{iconMap[CATEGORIES.find(c => c.id === showCategoryModal.id)?.icon || 'Home']}</span>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900">{showCategoryModal.name}</h3>
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900">{CATEGORY_CONTENT[showCategoryModal.id]?.title || showCategoryModal.name}</h3>
+                <p className="text-sm text-gray-500">{CATEGORY_CONTENT[showCategoryModal.id]?.description || 'Kategori açıklaması'}</p>
+              </div>
             </div>
-            <p className="text-gray-600 mb-6">
-              {showCategoryModal.name} kategorisine ait içerikler yakında eklenecek!
-            </p>
-            <div className="bg-gradient-to-r from-[#00BFA5]/10 to-teal-500/10 rounded-xl p-4 mb-6">
-              <p className="text-sm text-gray-700">
-                <strong>Çok Yakında:</strong> Bu kategoride wiki maddeleri, yorumlar ve kullanıcı katkılarını görebileceksiniz.
-              </p>
-            </div>
+
+            {CATEGORY_CONTENT[showCategoryModal.id] ? (
+              <>
+                {/* Popüler Başlıklar */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <TrendingUp size={16} />
+                    Popüler Başlıklar
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {CATEGORY_CONTENT[showCategoryModal.id].popularTopics.map((topic, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          setShowCategoryModal(null);
+                          // TODO: Başlığa yönlendir
+                        }}
+                        className="text-left p-3 bg-gray-50 hover:bg-[#00BFA5]/10 border border-gray-200 hover:border-[#00BFA5] rounded-lg transition-all group"
+                      >
+                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#00BFA5] transition-colors">
+                          {topic}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Hızlı Linkler */}
+                <div className="mb-6">
+                  <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <ExternalLink size={16} />
+                    Hızlı Erişim
+                  </h4>
+                  <div className="space-y-2">
+                    {CATEGORY_CONTENT[showCategoryModal.id].quickLinks.map((link, idx) => (
+                      <Link
+                        key={idx}
+                        to={link.url}
+                        onClick={() => setShowCategoryModal(null)}
+                        className="flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-[#00BFA5] hover:shadow-md rounded-lg transition-all group"
+                      >
+                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#00BFA5] transition-colors">
+                          {link.title}
+                        </span>
+                        <ExternalLink size={14} className="text-gray-400 group-hover:text-[#00BFA5] transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Info Box */}
+                <div className="bg-gradient-to-r from-blue-50 to-teal-50 border border-blue-200 rounded-xl p-4">
+                  <p className="text-sm text-gray-700">
+                    <strong className="text-[#00BFA5]">💡 İpucu:</strong> Bu kategorideki içeriklere katkıda bulunarak coin kazanabilir ve rolünüzü yükseltebilirsiniz!
+                  </p>
+                </div>
+              </>
+            ) : (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
+                <p className="text-sm text-gray-700">
+                  <strong>Yakında:</strong> Bu kategori içerikleri hazırlanıyor...
+                </p>
+              </div>
+            )}
+
+            {/* Action Button */}
             <button
               onClick={() => setShowCategoryModal(null)}
-              className="w-full px-4 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors"
+              className="w-full mt-4 px-4 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors"
             >
-              Anladım
+              Kapat
             </button>
           </div>
         </div>

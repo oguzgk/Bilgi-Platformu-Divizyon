@@ -8,6 +8,7 @@ import ShareBox from './components/ShareBox';
 import CreateContentPage from './components/CreateContentPage';
 import LoginPage from './components/LoginPage';
 import DiscoverFeed from './components/DiscoverFeed';
+import ContentPage from './components/ContentPage';
 import { CoinNotificationProvider } from './components/CoinNotification';
 import { NotificationProvider } from './contexts/NotificationContext';
 
@@ -117,16 +118,40 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/create" 
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <CreateContentPage />
-                </ProtectedRoute>
-              } 
-            />
-          </Routes>
-        </Router>
+          <Route 
+            path="/create" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <CreateContentPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/hukuk/:slug" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ContentPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/kampus/:slug" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ContentPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/sosyal/:slug" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ContentPage />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+      </Router>
       </CoinNotificationProvider>
     </NotificationProvider>
   );

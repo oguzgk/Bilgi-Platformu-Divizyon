@@ -138,10 +138,115 @@ export const CATEGORIES: Category[] = [
   { id: '2', name: 'Hukuk Fakültesi', icon: 'Scale', active: true },
   { id: '3', name: 'Mühendislik', icon: 'Cpu' },
   { id: '4', name: 'Tıp Fakültesi', icon: 'Stethoscope' },
-  { id: '5', name: 'Edebiyat', icon: 'BookOpen' },
+  { id: '5', name: 'Edebiyat Fakültesi', icon: 'BookOpen' },
   { id: '6', name: 'Kampüs Yaşamı', icon: 'Coffee' },
-  { id: '7', name: 'Etkinlikler', icon: 'Calendar' },
+  { id: '7', name: 'Sosyal Etkinlikler', icon: 'Calendar' },
 ];
+
+// Kategori bazlı içerikler
+export const CATEGORY_CONTENT: Record<string, {
+  title: string;
+  description: string;
+  popularTopics: string[];
+  quickLinks: { title: string; url: string }[];
+}> = {
+  '2': {
+    title: 'Hukuk Fakültesi',
+    description: 'Selçuk Üniversitesi Hukuk Fakültesi ders notları, sınav takvimi ve kulüp duyuruları',
+    popularTopics: [
+      'Roma Hukuku Ders Notları',
+      'Anayasa Hukuku Özet',
+      'Medeni Hukuk Kişiler',
+      'Ceza Hukuku Genel',
+    ],
+    quickLinks: [
+      { title: '2024 Vize Takvimi', url: '/hukuk/vize-takvimi' },
+      { title: 'Hukuk Kulübü', url: '/hukuk/kulup' },
+      { title: 'Önerilen Kaynaklar', url: '/hukuk/kaynaklar' },
+      { title: 'Hocalar Hakkında', url: '/hukuk/hocalar' },
+    ]
+  },
+  '3': {
+    title: 'Mühendislik Fakültesi',
+    description: 'Bilgisayar, Makine, Elektrik mühendisliği ders notları ve proje arşivi',
+    popularTopics: [
+      'Programlama Temelleri',
+      'Matematik 1 Çözümleri',
+      'Fizik Lab Raporları',
+      'Bitirme Projesi İpuçları',
+    ],
+    quickLinks: [
+      { title: 'Lab Duyuruları', url: '/muhendislik/lab' },
+      { title: 'Proje Arşivi', url: '/muhendislik/projeler' },
+      { title: 'Staj Fırsatları', url: '/muhendislik/staj' },
+      { title: 'Teknofest Takımları', url: '/muhendislik/teknofest' },
+    ]
+  },
+  '4': {
+    title: 'Tıp Fakültesi',
+    description: 'Anatomi, fizyoloji, dahiliye notları ve nöbet deneyimleri',
+    popularTopics: [
+      'Anatomi Atlas Önerileri',
+      'Fizyoloji Ders Notları',
+      'İlk Yardım Rehberi',
+      'Nöbet Günlükleri',
+    ],
+    quickLinks: [
+      { title: 'Hastane Oryantasyonu', url: '/tip/hastane' },
+      { title: 'Anatomi Atlası', url: '/tip/anatomi' },
+      { title: 'Öğrenci Toplulukları', url: '/tip/topluluklar' },
+      { title: 'Yaz Okulu', url: '/tip/yaz-okulu' },
+    ]
+  },
+  '5': {
+    title: 'Edebiyat Fakültesi',
+    description: 'Türk dili, tarih, psikoloji, sosyoloji bölümleri ders notları',
+    popularTopics: [
+      'Türk Edebiyatı Özeti',
+      'Osmanlıca Dersleri',
+      'Psikoloji 101',
+      'Sosyoloji Kuramları',
+    ],
+    quickLinks: [
+      { title: 'Edebiyat Kulübü', url: '/edebiyat/kulup' },
+      { title: 'Kitap Önerileri', url: '/edebiyat/kitaplar' },
+      { title: 'Şiir Akşamları', url: '/edebiyat/siir' },
+      { title: 'Arşiv Çalışması', url: '/edebiyat/arsiv' },
+    ]
+  },
+  '6': {
+    title: 'Kampüs Yaşamı',
+    description: 'Yurt, yemekhane, ulaşım, barınma ve günlük yaşam rehberi',
+    popularTopics: [
+      'Konya Ulaşım Rehberi',
+      'Öğrenci Yurtları',
+      'Yemekhane Menüleri',
+      'Kampüs Haritası',
+    ],
+    quickLinks: [
+      { title: 'Yurt Başvurusu', url: '/kampus/yurt' },
+      { title: 'Toplu Taşıma', url: '/kampus/ulasim' },
+      { title: 'Kütüphane Saatleri', url: '/kampus/kutuphane' },
+      { title: 'Spor Tesisleri', url: '/kampus/spor' },
+    ]
+  },
+  '7': {
+    title: 'Sosyal Etkinlikler',
+    description: 'Konserler, festivaller, kulüp etkinlikleri ve buluşma noktaları',
+    popularTopics: [
+      'Kampüs Konserleri',
+      'Kulüp Etkinlikleri',
+      'Mevlana Kutlamaları',
+      'Mezuniyet Törenleri',
+    ],
+    quickLinks: [
+      { title: 'Etkinlik Takvimi', url: '/etkinlikler/takvim' },
+      { title: 'Kulüpler', url: '/etkinlikler/kulupler' },
+      { title: 'Konserler', url: '/etkinlikler/konserler' },
+      { title: 'Festivaller', url: '/etkinlikler/festivaller' },
+    ]
+  }
+};
 
 export const WIKI_DATA: WikiContent = {
   title: 'Selçuk Hukuk 1. Sınıf Notları',
@@ -208,11 +313,14 @@ export const MOCK_COMMENTS: Comment[] = [
   }
 ];
 
+// Dinamik İlgili Linkler (şu anki sayfaya göre)
 export const RELATED_LINKS = [
-  { title: '2024 Vize Takvimi', url: '/exam-calendar' },
-  { title: 'Kampüs Haritası', url: '#' },
-  { title: 'Hukuk Kulübü Duyuruları', url: '#' },
-  { title: 'Yemekhane Menüsü', url: '#' },
+  { title: '2024-2025 Vize Sınav Takvimi', url: '/hukuk/vize-takvimi', category: 'Akademik' },
+  { title: 'Kampüs Haritası (İnteraktif)', url: '/kampus/harita', category: 'Kampüs' },
+  { title: 'Hukuk Kulübü Etkinlikleri', url: '/hukuk/kulup-etkinlikleri', category: 'Sosyal' },
+  { title: 'Öğrenci Yemekhanesi Menüsü', url: '/kampus/yemekhane', category: 'Kampüs' },
+  { title: 'Kütüphane Çalışma Saatleri', url: '/kampus/kutuphane-saatleri', category: 'Kampüs' },
+  { title: 'Dönerci Şükrü (En İyi Döner)', url: '/sosyal/donerci-sukru', category: 'Yeme-İçme' },
 ];
 
 // Ana sayfa için trend başlıklar (PDF: en çok düzenlenen Wikiler)

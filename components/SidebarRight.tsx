@@ -163,21 +163,36 @@ const SidebarRight: React.FC = () => {
             İlgili Konular
         </h4>
         <ul className="space-y-2">
-            {RELATED_LINKS.map((link, idx) => (
+            {RELATED_LINKS.map((link, idx) => {
+              const categoryColors: Record<string, string> = {
+                'Akademik': 'bg-blue-50 hover:bg-blue-100 border-blue-200',
+                'Kampüs': 'bg-green-50 hover:bg-green-100 border-green-200',
+                'Sosyal': 'bg-purple-50 hover:bg-purple-100 border-purple-200',
+                'Yeme-İçme': 'bg-orange-50 hover:bg-orange-100 border-orange-200',
+              };
+              const categoryColor = categoryColors[link.category || 'Kampüs'];
+              
+              return (
                 <li key={idx}>
-                    {link.url.startsWith('/') ? (
-                      <Link to={link.url} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">
-                          <span className="text-sm font-medium text-gray-700">{link.title}</span>
-                          <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
-                      </Link>
-                    ) : (
-                      <a href={link.url} className="flex items-center justify-between p-3 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors group">
-                          <span className="text-sm font-medium text-gray-700">{link.title}</span>
-                          <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
-                      </a>
-                    )}
+                    <Link 
+                      to={link.url} 
+                      className={`flex items-start justify-between p-3 rounded-xl border transition-all group ${categoryColor}`}
+                    >
+                      <div className="flex-1 min-w-0">
+                        <span className="text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-[#00BFA5] transition-colors">
+                          {link.title}
+                        </span>
+                        {link.category && (
+                          <span className="inline-block mt-1 text-xs font-semibold text-gray-500">
+                            {link.category}
+                          </span>
+                        )}
+                      </div>
+                      <ChevronRight size={16} className="text-gray-400 group-hover:text-[#00BFA5] flex-shrink-0 ml-2 mt-0.5" />
+                    </Link>
                 </li>
-            ))}
+              );
+            })}
         </ul>
       </div>
 

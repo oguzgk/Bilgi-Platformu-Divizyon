@@ -1,31 +1,317 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProfileSidebar from './ProfileSidebar';
 import ProfileContent from './ProfileContent';
-import { Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Home, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut, User, X, Menu } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { CATEGORIES, COLORS } from '../../constants';
+import { useNotifications } from '../../contexts/NotificationContext';
 
-const ProfilePage: React.FC = () => {
+// İkon haritası - SidebarLeft ile aynı
+const iconMap: Record<string, React.ReactNode> = {
+    Home: <Home size={20} />,
+    Scale: <Scale size={20} />,
+    Cpu: <Cpu size={20} />,
+    Stethoscope: <Stethoscope size={20} />,
+    BookOpen: <BookOpen size={20} />,
+    Coffee: <Coffee size={20} />,
+    Calendar: <Calendar size={20} />,
+    User: <User size={20} />,
+};
+
+interface ProfilePageProps {
+    onLogout?: () => void;
+}
+
+const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
+    const location = useLocation();
+    const [showSettingsModal, setShowSettingsModal] = useState(false);
+    const [showCategoryModal, setShowCategoryModal] = useState<{ id: string; name: string } | null>(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { addNotification } = useNotifications();
+
+    // Aktif menü öğesini kontrol et
+    const isActive = (catId: string) => {
+        if (catId === '1' && location.pathname === '/') return true;
+        if (catId === 'profile' && location.pathname === '/profile') return true;
+        return false;
+    };
+
+    // Kategori tıklama işlevi
+    const handleCategoryClick = (category: { id: string; name: string; }) => {
+        if (category.id === '1' || category.id === 'profile') {
+            return; // Ana sayfa ve profil zaten yönlendiriliyor
+        }
+        setShowCategoryModal(category);
+        addNotification(
+            'announcement',
+            `${category.name} Kategorisi`,
+            `${category.name} kategorisini görüntülüyorsunuz.`,
+            { contentTitle: category.name }
+        );
+    };
+
     return (
-        <div className="min-h-screen bg-seljuk-ice p-4 md:p-8">
-            {/* Navigation Back */}
-            <div className="max-w-7xl mx-auto mb-6">
-                <Link to="/" className="inline-flex items-center gap-2 text-gray-500 hover:text-seljuk-turquoise transition-colors font-medium">
-                    <Home size={20} />
-                    <span>Ana Sayfaya Dön</span>
-                </Link>
-            </div>
-
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Left Sidebar (Identity & Wallet Control) - ~30% */}
-                <div className="lg:col-span-4 xl:col-span-4 h-full">
-                    <ProfileSidebar />
+        <div className="min-h-screen bg-seljuk-ice">
+            {/* Sol Menü - Masaüstü için */}
+            <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex-col z-20 hidden lg:flex">
+                {/* Brand */}
+                <div className="p-6 flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: COLORS.turquoise }}>
+                        K
+                    </div>
+                    <h1 className="text-xl font-bold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
                 </div>
 
-                {/* Right Main Area (Activity Log & Stats) - ~70% */}
-                <div className="lg:col-span-8 xl:col-span-8">
-                    <ProfileContent />
+                {/* Navigation */}
+                <nav className="flex-1 px-4 overflow-y-auto custom-scrollbar">
+                    <div className="mb-6">
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Menü</p>
+                        <ul className="space-y-1">
+                            {CATEGORIES.map((cat) => (
+                                <li key={cat.id}>
+                                    {cat.id === '1' || cat.id === 'profile' ? (
+                                        <Link
+                                            to={cat.id === '1' ? '/' : '/profile'}
+                                            className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(cat.id)
+                                                ? `bg-[#F0F4F8] text-[#00BFA5]`
+                                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                                                }`}
+                                        >
+                                            <span className={isActive(cat.id) ? 'text-[#00BFA5]' : 'text-gray-400'}>
+                                                {iconMap[cat.icon]}
+                                            </span>
+                                            {cat.name}
+                                        </Link>
+                                    ) : (
+                                        <button
+                                            onClick={() => handleCategoryClick(cat)}
+                                            className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                        >
+                                            <span className="text-gray-400">
+                                                {iconMap[cat.icon]}
+                                            </span>
+                                            {cat.name}
+                                        </button>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </nav>
+
+                {/* Footer Actions */}
+                <div className="p-4 border-t border-gray-100">
+                    <button
+                        onClick={() => setShowSettingsModal(true)}
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                        <Settings size={18} />
+                        Ayarlar
+                    </button>
+                    <button
+                        onClick={onLogout}
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+                    >
+                        <LogOut size={18} />
+                        Çıkış Yap
+                    </button>
+                </div>
+            </aside>
+
+            {/* Mobil Menü Overlay */}
+            {isMobileMenuOpen && (
+                <div className="fixed inset-0 z-50 lg:hidden">
+                    <div className="absolute inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)}></div>
+                    <aside className="absolute left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex flex-col animate-slideIn">
+                        {/* Brand */}
+                        <div className="p-6 flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: COLORS.turquoise }}>
+                                    K
+                                </div>
+                                <h1 className="text-xl font-bold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
+                            </div>
+                            <button onClick={() => setIsMobileMenuOpen(false)} className="p-1 hover:bg-gray-100 rounded-lg">
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* Navigation */}
+                        <nav className="flex-1 px-4 overflow-y-auto custom-scrollbar">
+                            <div className="mb-6">
+                                <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Menü</p>
+                                <ul className="space-y-1">
+                                    {CATEGORIES.map((cat) => (
+                                        <li key={cat.id}>
+                                            {cat.id === '1' || cat.id === 'profile' ? (
+                                                <Link
+                                                    to={cat.id === '1' ? '/' : '/profile'}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(cat.id)
+                                                        ? `bg-[#F0F4F8] text-[#00BFA5]`
+                                                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                                                        }`}
+                                                >
+                                                    <span className={isActive(cat.id) ? 'text-[#00BFA5]' : 'text-gray-400'}>
+                                                        {iconMap[cat.icon]}
+                                                    </span>
+                                                    {cat.name}
+                                                </Link>
+                                            ) : (
+                                                <button
+                                                    onClick={() => {
+                                                        handleCategoryClick(cat);
+                                                        setIsMobileMenuOpen(false);
+                                                    }}
+                                                    className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                                >
+                                                    <span className="text-gray-400">
+                                                        {iconMap[cat.icon]}
+                                                    </span>
+                                                    {cat.name}
+                                                </button>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </nav>
+
+                        {/* Footer Actions */}
+                        <div className="p-4 border-t border-gray-100">
+                            <button
+                                onClick={() => {
+                                    setShowSettingsModal(true);
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+                            >
+                                <Settings size={18} />
+                                Ayarlar
+                            </button>
+                            <button
+                                onClick={onLogout}
+                                className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+                            >
+                                <LogOut size={18} />
+                                Çıkış Yap
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            )}
+
+            {/* Mobil Header */}
+            <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center gap-3">
+                <button
+                    onClick={() => setIsMobileMenuOpen(true)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                    <Menu size={24} className="text-gray-600" />
+                </button>
+                <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: COLORS.turquoise }}>
+                        K
+                    </div>
+                    <span className="text-lg font-bold text-gray-800">Profilim</span>
                 </div>
             </div>
+
+            {/* Ana İçerik */}
+            <div className="lg:ml-64 p-4 md:p-8">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    {/* Left Sidebar (Identity & Wallet Control) - ~30% */}
+                    <div className="lg:col-span-4 xl:col-span-4 h-full">
+                        <ProfileSidebar />
+                    </div>
+
+                    {/* Right Main Area (Activity Log & Stats) - ~70% */}
+                    <div className="lg:col-span-8 xl:col-span-8">
+                        <ProfileContent />
+                    </div>
+                </div>
+            </div>
+
+            {/* Settings Modal */}
+            {showSettingsModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div
+                        className="absolute inset-0 bg-black/50"
+                        onClick={() => setShowSettingsModal(false)}
+                    ></div>
+                    <div className="relative bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl animate-slideDown">
+                        <button
+                            onClick={() => setShowSettingsModal(false)}
+                            className="absolute top-4 right-4 p-1 hover:bg-gray-100 rounded-lg"
+                        >
+                            <X size={20} />
+                        </button>
+                        <div className="flex items-center gap-3 mb-6">
+                            <Settings size={28} className="text-[#00BFA5]" />
+                            <h3 className="text-2xl font-bold text-gray-900">Ayarlar</h3>
+                        </div>
+                        <div className="space-y-3">
+                            <button className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors">
+                                <h4 className="font-semibold text-gray-900">Hesap Ayarları</h4>
+                                <p className="text-sm text-gray-500">Profil bilgilerini düzenle</p>
+                            </button>
+                            <button className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors">
+                                <h4 className="font-semibold text-gray-900">Bildirim Tercihleri</h4>
+                                <p className="text-sm text-gray-500">Hangi bildirimleri almak istediğini seç</p>
+                            </button>
+                            <button className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors">
+                                <h4 className="font-semibold text-gray-900">Gizlilik</h4>
+                                <p className="text-sm text-gray-500">Gizlilik ayarlarını yönet</p>
+                            </button>
+                            <button className="w-full text-left px-4 py-3 hover:bg-gray-50 rounded-lg transition-colors">
+                                <h4 className="font-semibold text-gray-900">Tema</h4>
+                                <p className="text-sm text-gray-500">Açık/Koyu mod seçenekleri</p>
+                            </button>
+                        </div>
+                        <p className="text-xs text-gray-500 text-center mt-6">
+                            Detaylı ayarlar yakında eklenecek 🚀
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            {/* Category Modal */}
+            {showCategoryModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    <div
+                        className="absolute inset-0 bg-black/50"
+                        onClick={() => setShowCategoryModal(null)}
+                    ></div>
+                    <div className="relative bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl animate-slideDown">
+                        <button
+                            onClick={() => setShowCategoryModal(null)}
+                            className="absolute top-4 right-4 p-1 hover:bg-gray-100 rounded-lg"
+                        >
+                            <X size={20} />
+                        </button>
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-12 h-12 bg-[#00BFA5] rounded-xl flex items-center justify-center text-white">
+                                {iconMap[CATEGORIES.find(c => c.id === showCategoryModal.id)?.icon || 'Home']}
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-900">{showCategoryModal.name}</h3>
+                        </div>
+                        <p className="text-gray-600 mb-6">
+                            {showCategoryModal.name} kategorisine ait içerikler yakında eklenecek!
+                        </p>
+                        <div className="bg-gradient-to-r from-[#00BFA5]/10 to-teal-500/10 rounded-xl p-4 mb-6">
+                            <p className="text-sm text-gray-700">
+                                <strong>Çok Yakında:</strong> Bu kategoride wiki maddeleri, yorumlar ve kullanıcı katkılarını görebileceksiniz.
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => setShowCategoryModal(null)}
+                            className="w-full px-4 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors"
+                        >
+                            Anladım
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

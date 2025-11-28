@@ -113,7 +113,7 @@ const App: React.FC = () => {
               path="/profile" 
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <ProfilePage />
+                  <ProfilePage onLogout={handleLogout} />
                 </ProtectedRoute>
               } 
             />

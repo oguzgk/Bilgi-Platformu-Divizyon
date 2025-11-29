@@ -16,6 +16,7 @@ interface WikiEdit {
   upvotes: number;
   downvotes: number;
   coinsEarned: number;
+  userVote?: 'up' | 'down' | null;
 }
 
 interface MyComment {
@@ -53,6 +54,7 @@ function MyContents() {
       upvotes: 12,
       downvotes: 1,
       coinsEarned: 10,
+      userVote: null,
     },
     {
       id: 'w2',
@@ -63,6 +65,7 @@ function MyContents() {
       upvotes: 25,
       downvotes: 0,
       coinsEarned: 15,
+      userVote: null,
     },
     {
       id: 'w3',
@@ -73,6 +76,7 @@ function MyContents() {
       upvotes: 5,
       downvotes: 2,
       coinsEarned: 0,
+      userVote: null,
     },
   ]);
 
@@ -215,6 +219,76 @@ function MyContents() {
     navigate(`/topic/${topicId}`);
   };
 
+  const handleVoteWiki = (wikiId: string, voteType: 'up' | 'down') => {
+    setMyWikiEdits(prev => prev.map(wiki => {
+      if (wiki.id !== wikiId) return wiki;
+      
+      let newUpvotes = wiki.upvotes;
+      let newDownvotes = wiki.downvotes;
+      
+      if (wiki.userVote === voteType) {
+        // Oy geri çekildi
+        if (voteType === 'up') {
+          newUpvotes = Math.max(0, newUpvotes - 1);
+        } else {
+          newDownvotes = Math.max(0, newDownvotes - 1);
+        }
+        
+        addNotification(
+          'like',
+          'Oy Geri Çekildi',
+          `"${wiki.title}" için ${voteType === 'up' ? 'beğeni' : 'beğenmeme'} oyunuz geri çekildi.`,
+          { contentTitle: wiki.title }
+        );
+        
+        return {
+          ...wiki,
+          upvotes: newUpvotes,
+          downvotes: newDownvotes,
+          userVote: null,
+        };
+      } else {
+        // Yeni oy veya değiştirme
+        if (wiki.userVote === 'up') {
+          newUpvotes = Math.max(0, newUpvotes - 1);
+        }
+        if (wiki.userVote === 'down') {
+          newDownvotes = Math.max(0, newDownvotes - 1);
+        }
+        
+        if (voteType === 'up') {
+          newUpvotes++;
+        } else {
+          newDownvotes++;
+        }
+        
+        // Bildirim gönder
+        if (voteType === 'up') {
+          addNotification(
+            'like',
+            'Beğeni Eklendi',
+            `"${wiki.title}" içeriğine beğeni eklediniz. (${newUpvotes} beğeni)`,
+            { contentTitle: wiki.title }
+          );
+        } else {
+          addNotification(
+            'like',
+            'Beğenmeme Eklendi',
+            `"${wiki.title}" içeriğine beğenmeme eklediniz. (${newDownvotes} beğenmeme)`,
+            { contentTitle: wiki.title }
+          );
+        }
+        
+        return {
+          ...wiki,
+          upvotes: newUpvotes,
+          downvotes: newDownvotes,
+          userVote: voteType,
+        };
+      }
+    }));
+  };
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'approved':
@@ -353,14 +427,38 @@ function MyContents() {
                 </div>
 
                 <div className="flex items-center gap-6 text-sm">
-                  <div className="flex items-center gap-1 text-green-600">
-                    <ThumbsUp size={16} />
+                  <button
+                    onClick={() => handleVoteWiki(wiki.id, 'up')}
+                    className={`flex items-center gap-1 transition-all ${
+                      wiki.userVote === 'up'
+                        ? 'text-green-600 font-bold'
+                        : 'text-green-600 hover:text-green-700 hover:scale-105'
+                    }`}
+                    title="Beğen"
+                  >
+                    <ThumbsUp 
+                      size={16} 
+                      fill={wiki.userVote === 'up' ? 'currentColor' : 'none'}
+                      className="transition-transform hover:scale-110"
+                    />
                     <span className="font-semibold">{wiki.upvotes}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-red-600">
-                    <ThumbsDown size={16} />
+                  </button>
+                  <button
+                    onClick={() => handleVoteWiki(wiki.id, 'down')}
+                    className={`flex items-center gap-1 transition-all ${
+                      wiki.userVote === 'down'
+                        ? 'text-red-600 font-bold'
+                        : 'text-red-600 hover:text-red-700 hover:scale-105'
+                    }`}
+                    title="Beğenme"
+                  >
+                    <ThumbsDown 
+                      size={16} 
+                      fill={wiki.userVote === 'down' ? 'currentColor' : 'none'}
+                      className="transition-transform hover:scale-110"
+                    />
                     <span className="font-semibold">{wiki.downvotes}</span>
-                  </div>
+                  </button>
                   {wiki.coinsEarned > 0 && (
                     <div className="flex items-center gap-1 text-amber-600">
                       <span className="text-lg">🪙</span>

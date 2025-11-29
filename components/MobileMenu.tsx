@@ -1,7 +1,7 @@
 import React from 'react';
-import { X, Home, User, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut } from 'lucide-react';
+import { X, Home, User, GraduationCap, Coffee, Calendar, Settings, LogOut, Users, Award, Tag, Bell } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { CATEGORIES, COLORS, CURRENT_USER } from '../constants';
+import { COLORS, CURRENT_USER } from '../constants';
 import RoleBadge from './RoleBadge';
 
 interface MobileMenuProps {
@@ -12,21 +12,34 @@ interface MobileMenuProps {
 
 const iconMap: Record<string, React.ReactNode> = {
   Home: <Home size={20} />,
-  Scale: <Scale size={20} />,
-  Cpu: <Cpu size={20} />,
-  Stethoscope: <Stethoscope size={20} />,
-  BookOpen: <BookOpen size={20} />,
+  GraduationCap: <GraduationCap size={20} />,
   Coffee: <Coffee size={20} />,
   Calendar: <Calendar size={20} />,
   User: <User size={20} />,
+  Users: <Users size={20} />,
+  Award: <Award size={20} />,
+  Tag: <Tag size={20} />,
+  Bell: <Bell size={20} />,
 };
 
 function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
   const location = useLocation();
 
-  const isActive = (catId: string) => {
-    if (catId === '1' && location.pathname === '/') return true;
-    if (catId === 'profile' && location.pathname === '/profile') return true;
+  const MENU_ITEMS = [
+    { id: '1', name: 'Anasayfa', icon: 'Home', path: '/' },
+    { id: 'faculties', name: 'Fakülteler', icon: 'GraduationCap', path: '/faculties' },
+    { id: '6', name: 'Kampüs Yaşamı', icon: 'Coffee', path: '/kampus/yasam' },
+    { id: '7', name: 'Sosyal Etkinlikler', icon: 'Calendar', path: '/sosyal/etkinlikler' },
+    { id: 'profile', name: 'Profilim', icon: 'User', path: '/profile' },
+    { id: 'friends', name: 'Arkadaşlar', icon: 'Users', path: '/friends' },
+    { id: 'badges', name: 'Rozetler', icon: 'Award', path: '/badges' },
+    { id: 'tags', name: 'Etiketler', icon: 'Tag', path: '/tags' },
+    { id: 'notifications', name: 'Bildirimler', icon: 'Bell', path: '/notifications' },
+  ];
+
+  const isActive = (itemPath: string) => {
+    if (itemPath === '/' && location.pathname === '/') return true;
+    if (itemPath !== '/' && location.pathname.startsWith(itemPath)) return true;
     return false;
   };
 
@@ -81,21 +94,21 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
         <nav className="p-4">
           <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Menü</p>
           <ul className="space-y-1">
-            {CATEGORIES.map((cat) => (
-              <li key={cat.id}>
+            {MENU_ITEMS.map((item) => (
+              <li key={item.id}>
                 <Link
-                  to={cat.id === '1' ? '/' : cat.id === 'profile' ? '/profile' : '#'}
+                  to={item.path}
                   onClick={onClose}
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    isActive(cat.id)
+                    isActive(item.path)
                       ? `bg-[#F0F4F8] text-[#00BFA5]`
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   }`}
                 >
-                  <span className={isActive(cat.id) ? 'text-[#00BFA5]' : 'text-gray-400'}>
-                    {iconMap[cat.icon]}
+                  <span className={isActive(item.path) ? 'text-[#00BFA5]' : 'text-gray-400'}>
+                    {iconMap[item.icon]}
                   </span>
-                  {cat.name}
+                  {item.name}
                 </Link>
               </li>
             ))}
@@ -104,10 +117,14 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
 
         {/* Footer Actions */}
         <div className="p-4 border-t border-gray-100 absolute bottom-0 left-0 right-0 bg-white">
-          <button className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors">
+          <Link 
+            to="/settings"
+            onClick={onClose}
+            className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+          >
             <Settings size={18} />
             Ayarlar
-          </button>
+          </Link>
           <button 
             onClick={() => {
               onLogout?.();

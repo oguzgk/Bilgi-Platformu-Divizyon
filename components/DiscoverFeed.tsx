@@ -99,7 +99,7 @@ function DiscoverFeed() {
           {TRENDING_TOPICS.map((topic) => (
             <Link
               key={topic.id}
-              to="/"
+              to={`/topic/${topic.id}`}
               className="block bg-white rounded-xl p-4 border border-gray-200 hover:border-[#00BFA5] transition-all hover:shadow-lg hover:-translate-y-1 group"
             >
               <div className="flex items-start justify-between gap-3">
@@ -156,7 +156,7 @@ function DiscoverFeed() {
             >
               {/* Topic başlığı */}
               <Link 
-                to="/"
+                to={`/topic/${comment.topicId}`}
                 className="text-xs text-purple-600 font-semibold hover:underline mb-2 block"
               >
                 📌 {comment.topicTitle}

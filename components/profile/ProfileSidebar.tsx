@@ -5,6 +5,8 @@ import RoleBadge from '../RoleBadge';
 import { getRoleInfo } from '../../utils/roleHelpers';
 
 const ProfileSidebar: React.FC = () => {
+    // Kullanıcının coin bakiyesini state olarak yönetiyoruz
+    const [userCoins, setUserCoins] = useState(CURRENT_USER.coins);
     const [transferAmount, setTransferAmount] = useState(0);
     const [showModal, setShowModal] = useState(false);
     
@@ -21,6 +23,9 @@ const ProfileSidebar: React.FC = () => {
     };
     
     const confirmTransfer = () => {
+        // Coin bakiyesini güncelle (bakiyeden transfer miktarını düş)
+        setUserCoins(prevCoins => prevCoins - transferAmount);
+        
         // TODO: Backend API çağrısı
         alert(`${transferAmount} GençCoin başarıyla ${kulturKartPoints} Genç Kültür Kart Puanına dönüştürüldü!`);
         setShowModal(false);
@@ -77,7 +82,7 @@ const ProfileSidebar: React.FC = () => {
                             <Coins size={32} strokeWidth={2.5} />
                         </div>
                         <div>
-                            <span className="text-4xl font-extrabold text-gray-800 tracking-tight">{CURRENT_USER.coins.toLocaleString()}</span>
+                            <span className="text-4xl font-extrabold text-gray-800 tracking-tight">{userCoins.toLocaleString()}</span>
                             <p className="text-xs text-gray-500 mt-1">GençCoin</p>
                         </div>
                     </div>
@@ -96,7 +101,7 @@ const ProfileSidebar: React.FC = () => {
                             <input
                                 type="range"
                                 min="0"
-                                max={CURRENT_USER.coins}
+                                max={userCoins}
                                 value={transferAmount}
                                 onChange={(e) => setTransferAmount(Number(e.target.value))}
                                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-seljuk-turquoise"
@@ -114,7 +119,11 @@ const ProfileSidebar: React.FC = () => {
                         <button 
                             onClick={handleTransfer}
                             disabled={transferAmount < 100}
-                            className="w-full bg-seljuk-coral hover:bg-red-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-seljuk-coral/30 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                            className={`w-full font-bold py-3 px-4 rounded-xl shadow-lg transition-all transform flex items-center justify-center gap-2 ${
+                                transferAmount < 100 
+                                    ? 'bg-red-600 cursor-not-allowed' 
+                                    : 'bg-[#00BFA5] hover:bg-[#009688] hover:-translate-y-0.5 shadow-[#00BFA5]/30'
+                            } text-white`}
                         >
                             KÜLTÜR KARTA AKTAR
                             <ArrowRight size={18} />

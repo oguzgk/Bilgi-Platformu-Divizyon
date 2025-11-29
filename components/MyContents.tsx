@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Edit3, MessageSquare, FileText, Trash2, Eye, ThumbsUp, ThumbsDown, Clock, TrendingUp, Check } from 'lucide-react';
 import { CURRENT_USER } from '../constants';
 import { useCoinNotification } from './CoinNotification';
 import { useNotifications } from '../contexts/NotificationContext';
+import { formatTimeAgo } from '../utils/dateHelpers';
 
 type ContentType = 'all' | 'wikis' | 'comments' | 'topics';
 
@@ -79,6 +80,38 @@ function MyContents() {
       userVote: null,
     },
   ]);
+
+  // localStorage'dan yeni paylaşılan içerikleri yükle
+  useEffect(() => {
+    const storedContents = localStorage.getItem('userWikiEdits');
+    if (storedContents) {
+      try {
+        const parsedContents: WikiEdit[] = JSON.parse(storedContents);
+        
+        // Tarihleri formatla (sadece ISO string formatındaysa)
+        const formattedContents = parsedContents.map(content => {
+          // Eğer editDate zaten formatlanmışsa (örn: "2 saat önce"), olduğu gibi bırak
+          // Eğer ISO string formatındaysa (örn: "2024-01-01T12:00:00.000Z"), formatla
+          const isISOFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(content.editDate);
+          const formattedDate = isISOFormat ? formatTimeAgo(content.editDate) : content.editDate;
+          
+          return {
+            ...content,
+            editDate: formattedDate,
+          };
+        });
+        
+        // Mevcut içeriklerle birleştir (duplikasyonu önle)
+        setMyWikiEdits(prev => {
+          const existingIds = new Set(prev.map(w => w.id));
+          const newContents = formattedContents.filter(c => !existingIds.has(c.id));
+          return [...newContents, ...prev];
+        });
+      } catch (error) {
+        console.error('localStorage içerikleri okunurken hata:', error);
+      }
+    }
+  }, []);
 
   const [myComments, setMyComments] = useState<MyComment[]>([
     {

@@ -10,7 +10,7 @@ interface LoginPageProps {
 const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'login' | 'register' | 'forgot'>('login');
-  const [tcNo, setTcNo] = useState('');
+  const [loginIdentifier, setLoginIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
@@ -21,7 +21,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [registerData, setRegisterData] = useState({
     fullName: '',
     email: '',
-    tcNo: '',
+    genckartId: '',
     phone: '',
     password: '',
     confirmPassword: '',
@@ -37,13 +37,43 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     e.preventDefault();
     setError('');
 
-    // Test kullanıcısı: TC: 123, Şifre: 123
-    if (tcNo === '123' && password === '123') {
-      onLogin();
-      navigate('/');
+    const idRaw = loginIdentifier.trim();
+    const id = idRaw.toLowerCase();
+
+    // Eğer kullanıcı e-posta girdiyse, yalnızca .edu.tr domainini kabul et
+    if (id.includes('@')) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(id)) {
+        setError('Geçerli bir e-posta adresi girin.');
+        return;
+      }
+      const atIndex = id.lastIndexOf('@');
+      if (atIndex === -1) {
+        setError('Geçerli bir e-posta adresi girin.');
+        return;
+      }
+      const domain = id.slice(atIndex + 1);
+      if (!domain.endsWith('edu.tr')) {
+        setError('Sadece "@...edu.tr" domainine sahip üniversite e-postaları kabul edilir.');
+        return;
+      }
+
+      // Test e-posta kullanıcı
+      if (id === 'test@uni.edu.tr' && password === '123') {
+        onLogin();
+        navigate('/');
+        return;
+      }
     } else {
-      setError('Geçersiz TC No veya şifre. Test için: TC: 123, Şifre: 123');
+      // Genç Kart ID ile giriş
+      if (id === '123' && password === '123') {
+        onLogin();
+        navigate('/');
+        return;
+      }
     }
+
+    setError('Geçersiz Genç Kart ID, üniversite e-posta adresi veya şifre. Test: ID: 123 veya test@uni.edu.tr (Şifre: 123)');
   };
 
   const handleRegister = (e: React.FormEvent) => {
@@ -51,8 +81,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     setError('');
 
     // Validasyon
-    if (!registerData.fullName || !registerData.email || !registerData.tcNo || !registerData.phone || !registerData.password) {
-      setError('Lütfen tüm alanları doldurun.');
+    // Zorunlu alanlar: fullName, phone, password ve en az biri: genckartId veya üniversite e-posta
+    if (!registerData.fullName || !registerData.phone || !registerData.password || (!registerData.genckartId && !registerData.email)) {
+      setError('Lütfen tüm gerekli alanları doldurun (Genç Kart ID veya üniversite e-posta dahil).');
       return;
     }
 
@@ -64,6 +95,26 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     if (registerData.password.length < 6) {
       setError('Şifre en az 6 karakter olmalıdır.');
       return;
+    }
+
+    // Eğer e-posta sağlanmışsa, format ve domain kontrolü yap
+    if (registerData.email) {
+      const email = registerData.email.trim().toLowerCase();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setError('Geçerli bir e-posta adresi girin.');
+        return;
+      }
+      const atIndex = email.lastIndexOf('@');
+      if (atIndex === -1) {
+        setError('Geçerli bir e-posta adresi girin.');
+        return;
+      }
+      const domain = email.slice(atIndex + 1);
+      if (!domain.endsWith('edu.tr')) {
+        setError('E-posta adresi "@...edu.tr" domainiyle bitmelidir.');
+        return;
+      }
     }
 
     if (!registerData.acceptTerms) {
@@ -79,7 +130,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       setRegisterData({
         fullName: '',
         email: '',
-        tcNo: '',
+        genckartId: '',
         phone: '',
         password: '',
         confirmPassword: '',
@@ -101,6 +152,16 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(forgotEmail)) {
       setError('Geçerli bir e-posta adresi girin.');
+      return;
+    }
+    const atIndex = forgotEmail.lastIndexOf('@');
+    if (atIndex === -1) {
+      setError('Geçerli bir e-posta adresi girin.');
+      return;
+    }
+    const domain = forgotEmail.toLowerCase().slice(atIndex + 1);
+    if (!domain.endsWith('edu.tr')) {
+      setError('Sadece "@...edu.tr" domainine sahip üniversite e-postaları kabul edilir.');
       return;
     }
 
@@ -569,7 +630,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 {/* TC No */}
                 <div>
                   <label className="block text-sm text-slate-600 mb-2">
-                    Genç Kültür Kart ID / T.C. No
+                    Genç Kart ID
                   </label>
                   <div className="relative">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
@@ -577,9 +638,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     </div>
                     <input
                       type="text"
-                      value={tcNo}
-                      onChange={(e) => setTcNo(e.target.value)}
-                      placeholder="12345678901"
+                      value={loginIdentifier}
+                      onChange={(e) => setLoginIdentifier(e.target.value)}
+                      placeholder="Genç Kart ID veya üniversite e-posta (.edu.tr)"
                       className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-slate-700"
                     />
                   </div>
@@ -717,8 +778,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     {/* TC No ve Telefon - Yan yana */}
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm text-slate-600 mb-2">
-                          T.C. Kimlik No
+                          <label className="block text-sm text-slate-600 mb-2">
+                          Genç Kart ID
                         </label>
                         <div className="relative">
                           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
@@ -726,10 +787,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                           </div>
                           <input
                             type="text"
-                            maxLength={11}
-                            value={registerData.tcNo}
-                            onChange={(e) => setRegisterData({...registerData, tcNo: e.target.value.replace(/\D/g, '')})}
-                            placeholder="12345678901"
+                            maxLength={20}
+                            value={registerData.genckartId}
+                            onChange={(e) => setRegisterData({...registerData, genckartId: e.target.value})}
+                            placeholder="Genç Kart ID"
                             className="w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-slate-700 text-sm"
                           />
                         </div>

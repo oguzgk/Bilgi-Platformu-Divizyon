@@ -17,6 +17,7 @@ import BadgeGallery from './components/BadgeGallery';
 import TagCloud from './components/TagCloud';
 import NotificationCenter from './components/notifications/NotificationCenter';
 import FriendsPage from './components/social/FriendsPage';
+import CampusLifePage from './components/CampusLifePage';
 import { CoinNotificationProvider } from './components/CoinNotification';
 import { NotificationProvider } from './contexts/NotificationContext';
 
@@ -209,6 +210,16 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <ContentPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/kampus" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Layout onLogout={handleLogout}>
+                  <CampusLifePage />
+                </Layout>
               </ProtectedRoute>
             } 
           />

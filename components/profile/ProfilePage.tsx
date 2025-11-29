@@ -33,8 +33,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
     const MENU_ITEMS = [
         { id: '1', name: 'Anasayfa', icon: 'Home', path: '/' },
         { id: 'faculties', name: 'Fakülteler', icon: 'GraduationCap', path: '/faculties' },
-        { id: '6', name: 'Kampüs Yaşamı', icon: 'Coffee', path: '/kampus/yasam' },
-        { id: '7', name: 'Sosyal Etkinlikler', icon: 'Calendar', path: '/sosyal/etkinlikler' },
+        { id: '6', name: 'Kampüs Yaşamı', icon: 'Coffee', path: '/kampus' },
         { id: 'profile', name: 'Profilim', icon: 'User', path: '/profile' },
         { id: 'friends', name: 'Arkadaşlar', icon: 'Users', path: '/friends' },
         { id: 'badges', name: 'Rozetler', icon: 'Award', path: '/badges' },

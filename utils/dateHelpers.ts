@@ -58,3 +58,5 @@ export const formatDateTime = (dateString: string): string => {
   });
 };
 
+// Alias for formatDistanceToNow
+export const formatTimeAgo = formatDistanceToNow;

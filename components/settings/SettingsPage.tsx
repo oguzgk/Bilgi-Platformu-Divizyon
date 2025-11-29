@@ -17,7 +17,12 @@ import {
   Coffee,
   Calendar,
   LogOut,
-  ChevronLeft
+  ChevronLeft,
+  Trophy,
+  Award,
+  Tag,
+  BarChart3,
+  Users
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { CURRENT_USER, COLORS } from '../../constants';
@@ -106,6 +111,10 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
     { id: '6', name: 'Kampüs Yaşamı', icon: Coffee, path: '/kampus/yasam' },
     { id: '7', name: 'Sosyal Etkinlikler', icon: Calendar, path: '/sosyal/etkinlikler' },
     { id: 'profile', name: 'Profilim', icon: User, path: '/profile' },
+    { id: 'friends', name: 'Arkadaşlar', icon: Users, path: '/friends' },
+    { id: 'badges', name: 'Rozetler', icon: Award, path: '/badges' },
+    { id: 'tags', name: 'Etiketler', icon: Tag, path: '/tags' },
+    { id: 'notifications', name: 'Bildirimler', icon: Bell, path: '/notifications' },
   ];
 
   return (

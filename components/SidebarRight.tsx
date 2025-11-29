@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Trophy, Coins, ChevronRight, Hash, Link as LinkIcon, Star, ArrowRight } from 'lucide-react';
-import { CURRENT_USER, RELATED_LINKS, WIKI_DATA, COLORS } from '../constants';
+import { Trophy, Coins, ChevronRight, Link as LinkIcon, Star, ArrowRight } from 'lucide-react';
+import { CURRENT_USER, RELATED_LINKS, COLORS } from '../constants';
 import RoleBadge from './RoleBadge';
 import { getCoinsToNextRole, getRoleInfo } from '../utils/roleHelpers';
 
@@ -9,48 +9,6 @@ const SidebarRight: React.FC = () => {
   const xpPercentage = (CURRENT_USER.xp / CURRENT_USER.maxXp) * 100;
   const { nextRole, coinsNeeded } = getCoinsToNextRole(CURRENT_USER.coins);
   const currentRoleInfo = getRoleInfo(CURRENT_USER.role);
-  const [activeSection, setActiveSection] = useState<string>(WIKI_DATA.headers[0]?.id || '');
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Tüm section'ları bul
-      const sections = WIKI_DATA.headers.map(header => {
-        const element = document.getElementById(header.id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return {
-            id: header.id,
-            top: rect.top,
-            inView: rect.top >= 0 && rect.top <= window.innerHeight / 2
-          };
-        }
-        return null;
-      }).filter(Boolean);
-
-      // En üstteki görünür section'ı bul
-      const visibleSection = sections.find(section => section && section.top >= -100 && section.top <= 300);
-      
-      if (visibleSection) {
-        setActiveSection(visibleSection.id);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // İlk yüklemede çalıştır
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -100; // Header yüksekliği kadar offset
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      setActiveSection(id);
-    }
-  };
 
   return (
     <aside className="fixed right-0 top-0 h-screen w-80 bg-white border-l border-gray-100 flex flex-col z-20 hidden xl:flex overflow-y-auto custom-scrollbar p-6">
@@ -126,34 +84,24 @@ const SidebarRight: React.FC = () => {
         )}
       </div>
 
-      {/* Table of Contents - Sticky Scroll Spy mock */}
-      <div className="mb-8">
-        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <Hash size={14} />
-            İçindekiler
-        </h4>
-        <ul className="space-y-3 relative border-l-2 border-gray-100 ml-2">
-          {WIKI_DATA.headers.map((header) => {
-            const isActive = activeSection === header.id;
-            return (
-              <li key={header.id} className="pl-4 relative">
-                {isActive && (
-                  <div className="absolute -left-[2px] top-0 bottom-0 w-[2px] bg-[#00BFA5] rounded-full transition-all duration-300"></div>
-                )}
-                <button 
-                  onClick={() => scrollToSection(header.id)}
-                  className={`text-sm block transition-all duration-200 text-left w-full hover:translate-x-1 ${
-                    isActive 
-                      ? 'text-[#00BFA5] font-semibold' 
-                      : 'text-gray-500 hover:text-gray-800'
-                  }`}
-                >
-                  {header.text}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+      {/* Leaderboard Quick Link */}
+      <div className="mb-6">
+        <Link
+          to="/leaderboard"
+          className="block p-4 bg-gradient-to-r from-yellow-50 to-amber-50 border-2 border-yellow-200 rounded-xl hover:shadow-lg transition-all hover:-translate-y-1 group"
+        >
+          <div className="flex items-center gap-3 mb-2">
+            <Trophy size={24} className="text-yellow-600 group-hover:animate-bounce" />
+            <div>
+              <h4 className="font-bold text-gray-900">Liderlik Tablosu</h4>
+              <p className="text-xs text-gray-600">En başarılılar</p>
+            </div>
+          </div>
+          <div className="flex items-center justify-between text-xs text-gray-500 pt-2 border-t border-yellow-200">
+            <span>Sıralamayı gör</span>
+            <ChevronRight size={16} className="text-yellow-600" />
+          </div>
+        </Link>
       </div>
 
       {/* Related Topics */}
@@ -164,26 +112,42 @@ const SidebarRight: React.FC = () => {
         </h4>
         <ul className="space-y-2">
             {RELATED_LINKS.map((link, idx) => {
-              const categoryColors: Record<string, string> = {
-                'Akademik': 'bg-blue-50 hover:bg-blue-100 border-blue-200',
-                'Kampüs': 'bg-green-50 hover:bg-green-100 border-green-200',
-                'Sosyal': 'bg-purple-50 hover:bg-purple-100 border-purple-200',
-                'Yeme-İçme': 'bg-orange-50 hover:bg-orange-100 border-orange-200',
+              const categoryColors: Record<string, { bg: string, text: string, border: string }> = {
+                'Akademik': { 
+                  bg: 'bg-teal-50/50 hover:bg-teal-50', 
+                  text: 'text-teal-700',
+                  border: 'border-teal-100 hover:border-teal-200'
+                },
+                'Kampüs': { 
+                  bg: 'bg-emerald-50/50 hover:bg-emerald-50', 
+                  text: 'text-emerald-700',
+                  border: 'border-emerald-100 hover:border-emerald-200'
+                },
+                'Sosyal': { 
+                  bg: 'bg-cyan-50/50 hover:bg-cyan-50', 
+                  text: 'text-cyan-700',
+                  border: 'border-cyan-100 hover:border-cyan-200'
+                },
+                'Yeme-İçme': { 
+                  bg: 'bg-amber-50/50 hover:bg-amber-50', 
+                  text: 'text-amber-700',
+                  border: 'border-amber-100 hover:border-amber-200'
+                },
               };
-              const categoryColor = categoryColors[link.category || 'Kampüs'];
+              const colors = categoryColors[link.category || 'Kampüs'];
               
               return (
                 <li key={idx}>
                     <Link 
                       to={link.url} 
-                      className={`flex items-start justify-between p-3 rounded-xl border transition-all group ${categoryColor}`}
+                      className={`flex items-start justify-between p-3 rounded-xl border transition-all group ${colors.bg} ${colors.border}`}
                     >
                       <div className="flex-1 min-w-0">
                         <span className="text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-[#00BFA5] transition-colors">
                           {link.title}
                         </span>
                         {link.category && (
-                          <span className="inline-block mt-1 text-xs font-semibold text-gray-500">
+                          <span className={`inline-block mt-1 text-xs font-semibold ${colors.text}`}>
                             {link.category}
                           </span>
                         )}

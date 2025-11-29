@@ -4,6 +4,7 @@ import { WIKI_DATA, COLORS, COIN_REWARDS, CURRENT_USER } from '../constants';
 import { summarizeWikiContent } from '../services/geminiService';
 import { useCoinNotification } from './CoinNotification';
 import { useNotifications } from '../contexts/NotificationContext';
+import WikiEditor from './wiki/WikiEditor';
 
 function WikiSection() {
   const [summary, setSummary] = useState<string | null>(null);
@@ -12,6 +13,7 @@ function WikiSection() {
   const [downvoteCount, setDownvoteCount] = useState(4);
   const [userVote, setUserVote] = useState<'up' | 'down' | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [showEditor, setShowEditor] = useState(false);
   
   const { showNotification } = useCoinNotification();
   const { addNotification } = useNotifications();
@@ -53,22 +55,7 @@ function WikiSection() {
   };
 
   const handleEdit = () => {
-    setIsEditing(true);
-    // Simülasyon: Düzenleme yapıldı
-    setTimeout(() => {
-      const coinAmount = COIN_REWARDS.editWiki * CURRENT_USER.multiplier;
-      showNotification(coinAmount, 'Wiki düzenlemesi yaptınız!', CURRENT_USER.multiplier);
-      
-      // Bildirim oluştur
-      addNotification(
-        'coin_earned',
-        'Coin Kazandın! 🎉',
-        `Wiki düzenlemesi için ${coinAmount} coin kazandın!`,
-        { amount: coinAmount, contentTitle: WIKI_DATA.title }
-      );
-      
-      setIsEditing(false);
-    }, 1500);
+    setShowEditor(true);
   };
 
   const handleShare = () => {
@@ -404,6 +391,15 @@ function WikiSection() {
           </div>
         </div>
       )}
+
+      {/* Wiki Editor Modal */}
+      <WikiEditor
+        isOpen={showEditor}
+        onClose={() => setShowEditor(false)}
+        initialContent={WIKI_DATA.content}
+        topicId="demo-topic-1"
+        topicTitle={WIKI_DATA.title}
+      />
     </div>
   );
 }

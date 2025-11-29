@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut, GraduationCap, User, X, ExternalLink, TrendingUp } from 'lucide-react';
+import { Home, Scale, Cpu, Stethoscope, BookOpen, Coffee, Calendar, Settings, LogOut, GraduationCap, User, X, ExternalLink, TrendingUp, Trophy, Award, Tag, Bell, Shield, BarChart3, Users } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES, COLORS, CATEGORY_CONTENT } from '../constants';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -14,6 +14,13 @@ const iconMap: Record<string, React.ReactNode> = {
   Coffee: <Coffee size={20} />,
   Calendar: <Calendar size={20} />,
   User: <User size={20} />,
+  Users: <Users size={20} />,
+  Trophy: <Trophy size={20} />,
+  Award: <Award size={20} />,
+  Tag: <Tag size={20} />,
+  Bell: <Bell size={20} />,
+  Shield: <Shield size={20} />,
+  BarChart3: <BarChart3 size={20} />,
 };
 
 interface SidebarLeftProps {
@@ -31,6 +38,10 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
     { id: '6', name: 'Kampüs Yaşamı', icon: 'Coffee', path: '/kampus/yasam' },
     { id: '7', name: 'Sosyal Etkinlikler', icon: 'Calendar', path: '/sosyal/etkinlikler' },
     { id: 'profile', name: 'Profilim', icon: 'User', path: '/profile' },
+    { id: 'friends', name: 'Arkadaşlar', icon: 'Users', path: '/friends' },
+    { id: 'badges', name: 'Rozetler', icon: 'Award', path: '/badges' },
+    { id: 'tags', name: 'Etiketler', icon: 'Tag', path: '/tags' },
+    { id: 'notifications', name: 'Bildirimler', icon: 'Bell', path: '/notifications' },
   ];
 
   const isActive = (itemPath: string) => {

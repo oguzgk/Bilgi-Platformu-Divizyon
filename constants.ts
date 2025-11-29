@@ -495,3 +495,108 @@ export const MOCK_NOTIFICATIONS: Notification[] = [
     }
   },
 ];
+
+// ARAMA İÇİN MOCK DATA
+export const MOCK_SEARCH_DATA = {
+  topics: [
+    { id: 't1', title: 'selçuk üniversitesi yurt tavsiyeleri', category: 'Kampüs Yaşamı', excerpt: 'En iyi yurtlar ve fiyatları hakkında bilgiler...', author: 'mehmet_42', views: 234, comments: 18 },
+    { id: 't2', title: 'hukuk fakültesi staj başvurusu', category: 'Hukuk Fakültesi', excerpt: 'Staj başvurusu nasıl yapılır, gerekli belgeler...', author: 'ayse_hukuk', views: 567, comments: 42 },
+    { id: 't3', title: 'meram bağları gezilecek yerler', category: 'Sosyal Etkinlikler', excerpt: 'Meram Bağlarında neler yapılabilir, piknik alanları...', author: 'kemal_meram', views: 890, comments: 65 },
+    { id: 't4', title: 'kampüs yemekhanesi menü önerileri', category: 'Kampüs Yaşamı', excerpt: 'Hangi gün hangi yemek daha iyi, tavsiyeler...', author: 'zeynep_yemek', views: 445, comments: 28 },
+    { id: 't5', title: 'selimiye camii tarihi ve mimari', category: 'Sosyal Etkinlikler', excerpt: 'Selimiye Camii hakkında detaylı bilgiler...', author: 'ali_tarih', views: 1200, comments: 87 },
+  ],
+  wikis: [
+    { id: 'w1', title: 'Selçuk Üniversitesi Tarihçesi', category: 'Akademik', excerpt: 'Üniversitemizin kuruluşundan bugüne tarihçesi...', lastUpdated: '2 gün önce', author: 'admin' },
+    { id: 'w2', title: 'Kampüs Haritası ve Binalar', category: 'Kampüs', excerpt: 'Tüm fakülte ve binaların konumları...', lastUpdated: '1 hafta önce', author: 'mehmet_42' },
+    { id: 'w3', title: 'Konya Mutfağı', category: 'Yeme-İçme', excerpt: 'Konya\'ya özgü yemekler ve tarifleri...', lastUpdated: '3 gün önce', author: 'zeynep_yemek' },
+    { id: 'w4', title: 'Mevlana Müzesi Rehberi', category: 'Sosyal', excerpt: 'Mevlana Müzesi ziyaret rehberi ve bilgileri...', lastUpdated: '5 gün önce', author: 'fatma_kultur' },
+  ],
+  users: [
+    { id: 'u1', username: 'mehmet_42', displayName: 'Mehmet Yılmaz', role: 'seyyah', totalContributions: 45, avatarUrl: 'https://i.pravatar.cc/150?img=12' },
+    { id: 'u2', username: 'ayse_hukuk', displayName: 'Ayşe Demir', role: 'gezgin', totalContributions: 120, avatarUrl: 'https://i.pravatar.cc/150?img=45' },
+    { id: 'u3', username: 'kemal_meram', displayName: 'Kemal Güler', role: 'kasif_meraklisi', totalContributions: 250, avatarUrl: 'https://i.pravatar.cc/150?img=33' },
+    { id: 'u4', username: 'zeynep_yemek', displayName: 'Zeynep Arslan', role: 'seyyah', totalContributions: 67, avatarUrl: 'https://i.pravatar.cc/150?img=23' },
+  ],
+  comments: [
+    { id: 'c1', content: 'Kütüphane 3. kat sessiz çalışma bölümü gerçekten harika, herkese tavsiye ederim.', topicTitle: 'En İyi Ders Çalışma Yerleri', author: 'mehmet_42', likes: 8 },
+    { id: 'c2', content: 'Bu haftaki konser çok iyiydi, organizasyon harika!', topicTitle: 'Kampüs Etkinlikleri', author: 'ayse_hukuk', likes: 15 },
+    { id: 'c3', content: 'Japon Kyoto Parkı huzur bulmak için birebir.', topicTitle: 'Konya\'da Gezilecek Yerler', author: 'kemal_meram', likes: 10 },
+  ],
+};
+
+// POPÜLER ARAMALAR
+export const POPULAR_SEARCHES = [
+  'yurt tavsiyeleri',
+  'staj başvurusu',
+  'yemekhane menü',
+  'selimiye camii',
+  'kampüs haritası',
+  'mevlana müzesi',
+  'dönerci şükrü',
+  'kütüphane saatleri',
+];
+
+// LEADERBOARD MOCK DATA
+export const LEADERBOARD_DATA = {
+  weekly: [
+    { id: 'u1', username: 'kemal_meram', displayName: 'Kemal Güler', avatarUrl: 'https://i.pravatar.cc/150?img=33', role: 'kasif_meraklisi', coins: 450, contributions: 23, change: 'up' },
+    { id: 'u2', username: 'ayse_hukuk', displayName: 'Ayşe Demir', avatarUrl: 'https://i.pravatar.cc/150?img=45', role: 'gezgin', coins: 380, contributions: 19, change: 'up' },
+    { id: 'u3', username: 'mehmet_42', displayName: 'Mehmet Yılmaz', avatarUrl: 'https://i.pravatar.cc/150?img=12', role: 'seyyah', coins: 290, contributions: 15, change: 'down' },
+    { id: 'u4', username: 'zeynep_yemek', displayName: 'Zeynep Arslan', avatarUrl: 'https://i.pravatar.cc/150?img=23', role: 'seyyah', coins: 245, contributions: 12, change: 'same' },
+    { id: 'u5', username: 'ali_tarih', displayName: 'Ali Yıldız', avatarUrl: 'https://i.pravatar.cc/150?img=52', role: 'gezgin', coins: 210, contributions: 11, change: 'up' },
+    { id: 'u6', username: 'fatma_kultur', displayName: 'Fatma Kaya', avatarUrl: 'https://i.pravatar.cc/150?img=67', role: 'seyyah', coins: 189, contributions: 9, change: 'same' },
+    { id: 'u7', username: 'emre_tip', displayName: 'Emre Demir', avatarUrl: 'https://i.pravatar.cc/150?img=71', role: 'yeni_gelen', coins: 156, contributions: 8, change: 'up' },
+    { id: 'u8', username: 'sema_aksoy', displayName: 'Sema Aksoy', avatarUrl: 'https://i.pravatar.cc/150?img=82', role: 'seyyah', coins: 134, contributions: 7, change: 'down' },
+    { id: 'u9', username: 'ahmet_yilmaz', displayName: 'Ahmet Yılmaz', avatarUrl: 'https://i.pravatar.cc/150?img=92', role: 'yeni_gelen', coins: 112, contributions: 6, change: 'up' },
+    { id: 'u10', username: 'beyza_oz', displayName: 'Beyza Öz', avatarUrl: 'https://i.pravatar.cc/150?img=99', role: 'yeni_gelen', coins: 98, contributions: 5, change: 'same' },
+  ],
+  monthly: [
+    { id: 'u1', username: 'ayse_hukuk', displayName: 'Ayşe Demir', avatarUrl: 'https://i.pravatar.cc/150?img=45', role: 'gezgin', coins: 1850, contributions: 95, change: 'up' },
+    { id: 'u2', username: 'kemal_meram', displayName: 'Kemal Güler', avatarUrl: 'https://i.pravatar.cc/150?img=33', role: 'kasif_meraklisi', coins: 1720, contributions: 89, change: 'same' },
+    { id: 'u3', username: 'mehmet_42', displayName: 'Mehmet Yılmaz', avatarUrl: 'https://i.pravatar.cc/150?img=12', role: 'seyyah', coins: 1450, contributions: 75, change: 'up' },
+    { id: 'u4', username: 'ali_tarih', displayName: 'Ali Yıldız', avatarUrl: 'https://i.pravatar.cc/150?img=52', role: 'gezgin', coins: 1290, contributions: 68, change: 'down' },
+    { id: 'u5', username: 'zeynep_yemek', displayName: 'Zeynep Arslan', avatarUrl: 'https://i.pravatar.cc/150?img=23', role: 'seyyah', coins: 1120, contributions: 58, change: 'up' },
+  ],
+  allTime: [
+    { id: 'u1', username: 'admin', displayName: 'Admin', avatarUrl: 'https://i.pravatar.cc/150?img=1', role: 'konya_bilgesi', coins: 52340, contributions: 1234, change: 'same' },
+    { id: 'u2', username: 'kemal_meram', displayName: 'Kemal Güler', avatarUrl: 'https://i.pravatar.cc/150?img=33', role: 'kasif_meraklisi', coins: 15720, contributions: 789, change: 'same' },
+    { id: 'u3', username: 'ayse_hukuk', displayName: 'Ayşe Demir', avatarUrl: 'https://i.pravatar.cc/150?img=45', role: 'gezgin', coins: 12450, contributions: 645, change: 'same' },
+  ],
+};
+
+// ROZET SİSTEMİ
+export interface Badge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  rarity: 'common' | 'rare' | 'epic' | 'legendary';
+  category: 'contribution' | 'social' | 'special' | 'achievement';
+  requirement: string;
+  unlocked: boolean;
+}
+
+export const ALL_BADGES: Badge[] = [
+  // Katkı Rozetleri
+  { id: 'first_edit', name: 'İlk Düzenleme', icon: '✍️', rarity: 'common', category: 'contribution', requirement: 'İlk wiki düzenlemesini yap', unlocked: true, description: 'İlk wiki düzenlemesini başarıyla tamamladın!' },
+  { id: 'wiki_master', name: 'Wiki Gurusu', icon: '📚', rarity: 'epic', category: 'contribution', requirement: '50 wiki düzenlemesi yap', unlocked: true, description: '50 wiki düzenlemesi yaparak bilgi hazinesi oldun!' },
+  { id: 'comment_king', name: 'Yorum Kralı', icon: '💬', rarity: 'rare', category: 'contribution', requirement: '100 yorum yap', unlocked: false, description: '100 yorum yaparak toplulukta aktif ol!' },
+  { id: 'topic_creator', name: 'Başlık Yaratıcısı', icon: '🎯', rarity: 'rare', category: 'contribution', requirement: '20 başlık oluştur', unlocked: false, description: '20 yeni başlık açarak konuşmaları başlat!' },
+  
+  // Sosyal Rozetler
+  { id: 'popular', name: 'Popüler', icon: '⭐', rarity: 'rare', category: 'social', requirement: '100 takipçiye ulaş', unlocked: true, description: '100 takipçi kazanarak popüler oldun!' },
+  { id: 'social_butterfly', name: 'Sosyal Kelebek', icon: '🦋', rarity: 'epic', category: 'social', requirement: '50 arkadaş edin', unlocked: false, description: '50 arkadaşla bağlantı kur!' },
+  { id: 'helpful', name: 'Yardımsever', icon: '🤝', rarity: 'rare', category: 'social', requirement: '50+ beğeni al', unlocked: true, description: 'İçeriklerinle 50+ beğeni kazandın!' },
+  { id: 'influencer', name: 'Etkileyici', icon: '🌟', rarity: 'legendary', category: 'social', requirement: '500+ takipçi', unlocked: false, description: '500 takipçiyle topluluk lideri ol!' },
+  
+  // Özel Rozetler
+  { id: 'early_bird', name: 'Erken Katılımcı', icon: '🚀', rarity: 'legendary', category: 'special', requirement: 'Beta dönemde katıl', unlocked: true, description: 'Platformun beta döneminde yer aldın!' },
+  { id: 'anniversary', name: 'Yıldönümü', icon: '🎂', rarity: 'epic', category: 'special', requirement: '1 yıl aktif üyelik', unlocked: false, description: '1 yıldır toplulukla birliktesin!' },
+  { id: 'night_owl', name: 'Gece Kuşu', icon: '🦉', rarity: 'rare', category: 'special', requirement: 'Gece 2-5 arası aktif ol', unlocked: false, description: 'Gece geç saatlerde bile aktifsin!' },
+  
+  // Başarı Rozetleri
+  { id: 'streak_7', name: 'Haftalık Ateş', icon: '🔥', rarity: 'rare', category: 'achievement', requirement: '7 gün üst üste aktif', unlocked: true, description: '7 gün üst üste platformda aktif oldun!' },
+  { id: 'coin_master', name: 'Coin Ustası', icon: '💰', rarity: 'epic', category: 'achievement', requirement: '10,000 coin kazan', unlocked: false, description: '10,000 coin biriktirerek zengin oldun!' },
+  { id: 'level_10', name: 'Seviye 10', icon: '🎖️', rarity: 'epic', category: 'achievement', requirement: 'Level 10\'a ulaş', unlocked: false, description: 'Level 10\'a ulaşarak deneyimli oldun!' },
+  { id: 'perfectionist', name: 'Mükemmeliyetçi', icon: '✨', rarity: 'legendary', category: 'achievement', requirement: 'Hiç downvote alma', unlocked: false, description: 'Tüm içeriklerin kaliteli ve beğenildi!' },
+];

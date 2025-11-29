@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProfilePage from './components/profile/ProfilePage';
+import UserProfilePage from './components/profile/UserProfilePage';
 import ShareBox from './components/ShareBox';
 import CreateContentPage from './components/CreateContentPage';
 import LoginPage from './components/LoginPage';
@@ -11,6 +12,11 @@ import FacultiesPage from './components/FacultiesPage';
 import SettingsPage from './components/settings/SettingsPage';
 import MyContents from './components/MyContents';
 import TopicDetailPage from './components/TopicDetailPage';
+import Leaderboard from './components/Leaderboard';
+import BadgeGallery from './components/BadgeGallery';
+import TagCloud from './components/TagCloud';
+import NotificationCenter from './components/notifications/NotificationCenter';
+import FriendsPage from './components/social/FriendsPage';
 import { CoinNotificationProvider } from './components/CoinNotification';
 import { NotificationProvider } from './contexts/NotificationContext';
 
@@ -117,6 +123,14 @@ const App: React.FC = () => {
             } 
           />
           <Route 
+            path="/user/:username" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <UserProfilePage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
             path="/faculties" 
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
@@ -139,6 +153,46 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <TopicDetailPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/leaderboard" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Leaderboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/badges" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <BadgeGallery />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/tags" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <TagCloud />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/notifications" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <NotificationCenter />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/friends" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <FriendsPage />
               </ProtectedRoute>
             } 
           />

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Scale, Cpu, Stethoscope, BookOpen, ChevronRight, TrendingUp, Users, ExternalLink } from 'lucide-react';
+import { Scale, Cpu, Stethoscope, BookOpen, ChevronRight, TrendingUp, Users, ExternalLink, GraduationCap } from 'lucide-react';
 import { CATEGORY_CONTENT } from '../constants';
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -10,45 +10,97 @@ const iconMap: Record<string, React.ReactNode> = {
   BookOpen: <BookOpen size={32} />,
 };
 
+// Üniversiteler ve renkleri - Ana renk paletinin tonlarında
+const UNIVERSITIES = [
+  { 
+    id: 'selcuk', 
+    name: 'Selçuk Üniversitesi', 
+    shortName: 'Selçuk Ü.',
+    color: 'from-[#00BFA5] to-teal-600', // Ana turkuaz renk
+    bgColor: 'bg-[#00BFA5]',
+    hoverColor: 'hover:bg-teal-600',
+    borderColor: 'border-[#00BFA5]',
+    textColor: 'text-[#00BFA5]'
+  },
+  { 
+    id: 'konya-teknik', 
+    name: 'Konya Teknik Üniversitesi', 
+    shortName: 'KTO Ü.',
+    color: 'from-teal-400 to-cyan-600', // Daha açık turkuaz/cyan
+    bgColor: 'bg-teal-400',
+    hoverColor: 'hover:bg-cyan-600',
+    borderColor: 'border-teal-400',
+    textColor: 'text-teal-500'
+  },
+  { 
+    id: 'kto-karatay', 
+    name: 'KTO Karatay Üniversitesi', 
+    shortName: 'Karatay Ü.',
+    color: 'from-emerald-500 to-teal-700', // Yeşil-turkuaz arası
+    bgColor: 'bg-emerald-500',
+    hoverColor: 'hover:bg-teal-700',
+    borderColor: 'border-emerald-500',
+    textColor: 'text-emerald-600'
+  },
+  { 
+    id: 'gida-tarim', 
+    name: 'Konya Gıda-Tarım Üniversitesi', 
+    shortName: 'Gıda-Tarım Ü.',
+    color: 'from-cyan-500 to-teal-600', // Cyan-teal tonu
+    bgColor: 'bg-cyan-500',
+    hoverColor: 'hover:bg-teal-600',
+    borderColor: 'border-cyan-500',
+    textColor: 'text-cyan-600'
+  },
+  { 
+    id: 'necmettin-erbakan', 
+    name: 'Necmettin Erbakan Üniversitesi', 
+    shortName: 'NEÜ',
+    color: 'from-teal-600 to-emerald-700', // Koyu teal-emerald
+    bgColor: 'bg-teal-600',
+    hoverColor: 'hover:bg-emerald-700',
+    borderColor: 'border-teal-600',
+    textColor: 'text-teal-700'
+  },
+];
+
 const FACULTIES = [
   { 
     id: '2', 
     name: 'Hukuk Fakültesi', 
     icon: 'Scale',
-    color: 'from-blue-500 to-blue-600',
     stats: { topics: 156, students: 2340 }
   },
   { 
     id: '3', 
     name: 'Mühendislik Fakültesi', 
     icon: 'Cpu',
-    color: 'from-purple-500 to-purple-600',
     stats: { topics: 289, students: 4521 }
   },
   { 
     id: '4', 
     name: 'Tıp Fakültesi', 
     icon: 'Stethoscope',
-    color: 'from-red-500 to-red-600',
     stats: { topics: 203, students: 1876 }
   },
   { 
     id: '5', 
     name: 'Edebiyat Fakültesi', 
     icon: 'BookOpen',
-    color: 'from-amber-500 to-amber-600',
     stats: { topics: 178, students: 3102 }
   },
 ];
 
 function FacultiesPage() {
+  const [selectedUniversity, setSelectedUniversity] = useState(UNIVERSITIES[0]);
+
   return (
     <div className="min-h-[80vh]">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 rounded-2xl p-8 mb-8 text-white shadow-lg">
+      <div className={`bg-gradient-to-r ${selectedUniversity.color} rounded-2xl p-8 mb-8 text-white shadow-lg transition-all duration-500`}>
         <h1 className="text-4xl font-bold mb-3">🎓 Fakülteler</h1>
         <p className="text-lg opacity-90 max-w-2xl">
-          Selçuk Üniversitesi fakültelerinin ders notları, sınav takvimleri, kulüp duyuruları ve öğrenci deneyimleri burada!
+          {selectedUniversity.name} fakültelerinin ders notları, sınav takvimleri, kulüp duyuruları ve öğrenci deneyimleri burada!
         </p>
         <div className="flex items-center gap-6 mt-6">
           <div className="flex items-center gap-2">
@@ -62,6 +114,57 @@ function FacultiesPage() {
         </div>
       </div>
 
+      {/* Üniversite Seçimi */}
+      <div className="mb-8">
+        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <GraduationCap size={24} className="text-[#00BFA5]" />
+          Üniversite Seç
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {UNIVERSITIES.map((university) => (
+            <button
+              key={university.id}
+              onClick={() => setSelectedUniversity(university)}
+              className={`relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 transform hover:scale-105 hover:shadow-xl ${
+                selectedUniversity.id === university.id
+                  ? `bg-gradient-to-br ${university.color} text-white shadow-lg scale-105`
+                  : 'bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700'
+              }`}
+            >
+              <div className="relative z-10">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${
+                  selectedUniversity.id === university.id
+                    ? 'bg-white/20 backdrop-blur-sm'
+                    : 'bg-gray-100'
+                }`}>
+                  <GraduationCap size={24} className={selectedUniversity.id === university.id ? 'text-white' : university.textColor} />
+                </div>
+                <h3 className="font-bold text-lg mb-1 line-clamp-2">
+                  {university.name}
+                </h3>
+                <p className={`text-sm ${
+                  selectedUniversity.id === university.id ? 'text-white/80' : 'text-gray-500'
+                }`}>
+                  {university.shortName}
+                </p>
+              </div>
+              
+              {/* Selected Indicator */}
+              {selectedUniversity.id === university.id && (
+                <div className="absolute top-3 right-3 w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                </div>
+              )}
+
+              {/* Background Pattern */}
+              <div className="absolute top-0 right-0 opacity-10 transform translate-x-4 -translate-y-4">
+                <GraduationCap size={80} />
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Faculties Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {FACULTIES.map((faculty) => {
@@ -69,10 +172,10 @@ function FacultiesPage() {
           return (
             <div 
               key={faculty.id}
-              className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 group"
+              className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-500 group"
             >
               {/* Faculty Header */}
-              <div className={`bg-gradient-to-r ${faculty.color} p-6 text-white relative overflow-hidden`}>
+              <div className={`bg-gradient-to-r ${selectedUniversity.color} p-6 text-white relative overflow-hidden transition-all duration-500`}>
                 <div className="absolute top-0 right-0 opacity-10 transform translate-x-4 -translate-y-4">
                   <div className="scale-[3]">{iconMap[faculty.icon]}</div>
                 </div>

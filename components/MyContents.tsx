@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Edit3, MessageSquare, FileText, Trash2, Eye, ThumbsUp, ThumbsDown, Clock, TrendingUp, Check } from 'lucide-react';
 import { CURRENT_USER } from '../constants';
 import { useCoinNotification } from './CoinNotification';
 import { useNotifications } from '../contexts/NotificationContext';
+import { formatTimeAgo } from '../utils/dateHelpers';
 
 type ContentType = 'all' | 'wikis' | 'comments' | 'topics';
 
@@ -16,6 +17,7 @@ interface WikiEdit {
   upvotes: number;
   downvotes: number;
   coinsEarned: number;
+  userVote?: 'up' | 'down' | null;
 }
 
 interface MyComment {
@@ -53,6 +55,7 @@ function MyContents() {
       upvotes: 12,
       downvotes: 1,
       coinsEarned: 10,
+      userVote: null,
     },
     {
       id: 'w2',
@@ -63,6 +66,7 @@ function MyContents() {
       upvotes: 25,
       downvotes: 0,
       coinsEarned: 15,
+      userVote: null,
     },
     {
       id: 'w3',
@@ -73,8 +77,41 @@ function MyContents() {
       upvotes: 5,
       downvotes: 2,
       coinsEarned: 0,
+      userVote: null,
     },
   ]);
+
+  // localStorage'dan yeni paylaşılan içerikleri yükle
+  useEffect(() => {
+    const storedContents = localStorage.getItem('userWikiEdits');
+    if (storedContents) {
+      try {
+        const parsedContents: WikiEdit[] = JSON.parse(storedContents);
+        
+        // Tarihleri formatla (sadece ISO string formatındaysa)
+        const formattedContents = parsedContents.map(content => {
+          // Eğer editDate zaten formatlanmışsa (örn: "2 saat önce"), olduğu gibi bırak
+          // Eğer ISO string formatındaysa (örn: "2024-01-01T12:00:00.000Z"), formatla
+          const isISOFormat = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(content.editDate);
+          const formattedDate = isISOFormat ? formatTimeAgo(content.editDate) : content.editDate;
+          
+          return {
+            ...content,
+            editDate: formattedDate,
+          };
+        });
+        
+        // Mevcut içeriklerle birleştir (duplikasyonu önle)
+        setMyWikiEdits(prev => {
+          const existingIds = new Set(prev.map(w => w.id));
+          const newContents = formattedContents.filter(c => !existingIds.has(c.id));
+          return [...newContents, ...prev];
+        });
+      } catch (error) {
+        console.error('localStorage içerikleri okunurken hata:', error);
+      }
+    }
+  }, []);
 
   const [myComments, setMyComments] = useState<MyComment[]>([
     {
@@ -215,6 +252,77 @@ function MyContents() {
     navigate(`/topic/${topicId}`);
   };
 
+  const handleVoteWiki = (wikiId: string, voteType: 'up' | 'down') => {
+    // Önce mevcut wiki'yi bul
+    const currentWiki = myWikiEdits.find(wiki => wiki.id === wikiId);
+    if (!currentWiki) return;
+    
+    let newUpvotes = currentWiki.upvotes;
+    let newDownvotes = currentWiki.downvotes;
+    let notificationTitle = '';
+    let notificationMessage = '';
+    
+    if (currentWiki.userVote === voteType) {
+      // Oy geri çekildi
+      if (voteType === 'up') {
+        newUpvotes = Math.max(0, newUpvotes - 1);
+      } else {
+        newDownvotes = Math.max(0, newDownvotes - 1);
+      }
+      
+      notificationTitle = 'Oy Geri Çekildi';
+      notificationMessage = `"${currentWiki.title}" için ${voteType === 'up' ? 'beğeni' : 'beğenmeme'} oyunuz geri çekildi.`;
+      
+      // State'i güncelle
+      setMyWikiEdits(prev => prev.map(wiki => {
+        if (wiki.id !== wikiId) return wiki;
+        return {
+          ...wiki,
+          upvotes: newUpvotes,
+          downvotes: newDownvotes,
+          userVote: null,
+        };
+      }));
+    } else {
+      // Yeni oy veya değiştirme
+      if (currentWiki.userVote === 'up') {
+        newUpvotes = Math.max(0, newUpvotes - 1);
+      }
+      if (currentWiki.userVote === 'down') {
+        newDownvotes = Math.max(0, newDownvotes - 1);
+      }
+      
+      if (voteType === 'up') {
+        newUpvotes++;
+        notificationTitle = 'Beğeni Eklendi';
+        notificationMessage = `"${currentWiki.title}" içeriğine beğeni eklediniz. (${newUpvotes} beğeni)`;
+      } else {
+        newDownvotes++;
+        notificationTitle = 'Beğenmeme Eklendi';
+        notificationMessage = `"${currentWiki.title}" içeriğine beğenmeme eklediniz. (${newDownvotes} beğenmeme)`;
+      }
+      
+      // State'i güncelle
+      setMyWikiEdits(prev => prev.map(wiki => {
+        if (wiki.id !== wikiId) return wiki;
+        return {
+          ...wiki,
+          upvotes: newUpvotes,
+          downvotes: newDownvotes,
+          userVote: voteType,
+        };
+      }));
+    }
+    
+    // Bildirimi state güncellemesinden sonra ekle (sadece bir kez)
+    addNotification(
+      'like',
+      notificationTitle,
+      notificationMessage,
+      { contentTitle: currentWiki.title }
+    );
+  };
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'approved':
@@ -353,14 +461,38 @@ function MyContents() {
                 </div>
 
                 <div className="flex items-center gap-6 text-sm">
-                  <div className="flex items-center gap-1 text-green-600">
-                    <ThumbsUp size={16} />
+                  <button
+                    onClick={() => handleVoteWiki(wiki.id, 'up')}
+                    className={`flex items-center gap-1 transition-all ${
+                      wiki.userVote === 'up'
+                        ? 'text-green-600 font-bold'
+                        : 'text-green-600 hover:text-green-700 hover:scale-105'
+                    }`}
+                    title="Beğen"
+                  >
+                    <ThumbsUp 
+                      size={16} 
+                      fill={wiki.userVote === 'up' ? 'currentColor' : 'none'}
+                      className="transition-transform hover:scale-110"
+                    />
                     <span className="font-semibold">{wiki.upvotes}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-red-600">
-                    <ThumbsDown size={16} />
+                  </button>
+                  <button
+                    onClick={() => handleVoteWiki(wiki.id, 'down')}
+                    className={`flex items-center gap-1 transition-all ${
+                      wiki.userVote === 'down'
+                        ? 'text-red-600 font-bold'
+                        : 'text-red-600 hover:text-red-700 hover:scale-105'
+                    }`}
+                    title="Beğenme"
+                  >
+                    <ThumbsDown 
+                      size={16} 
+                      fill={wiki.userVote === 'down' ? 'currentColor' : 'none'}
+                      className="transition-transform hover:scale-110"
+                    />
                     <span className="font-semibold">{wiki.downvotes}</span>
-                  </div>
+                  </button>
                   {wiki.coinsEarned > 0 && (
                     <div className="flex items-center gap-1 text-amber-600">
                       <span className="text-lg">🪙</span>

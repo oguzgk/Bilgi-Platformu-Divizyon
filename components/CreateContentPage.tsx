@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { COLORS, COIN_REWARDS, CURRENT_USER } from '../constants';
 import { useCoinNotification } from './CoinNotification';
+import { formatTimeAgo } from '../utils/dateHelpers';
 
 function CreateContentPage() {
   const navigate = useNavigate();
@@ -60,6 +61,29 @@ function CreateContentPage() {
     // Coin kazandır
     const coinAmount = COIN_REWARDS.createTopic * CURRENT_USER.multiplier;
     showNotification(coinAmount, 'Yeni başlık oluşturdunuz!', CURRENT_USER.multiplier);
+    
+    // Yeni içeriği localStorage'a kaydet
+    const newWikiEdit = {
+      id: `w_${Date.now()}`,
+      title: title.trim(),
+      category: 'Genel', // Varsayılan kategori, gerçek uygulamada seçilebilir
+      editDate: new Date().toISOString(),
+      status: 'pending' as const,
+      upvotes: 0,
+      downvotes: 0,
+      coinsEarned: coinAmount,
+      userVote: null as const,
+    };
+    
+    // localStorage'dan mevcut içerikleri al
+    const existingContents = localStorage.getItem('userWikiEdits');
+    const contents = existingContents ? JSON.parse(existingContents) : [];
+    
+    // Yeni içeriği başa ekle
+    contents.unshift(newWikiEdit);
+    
+    // localStorage'a kaydet
+    localStorage.setItem('userWikiEdits', JSON.stringify(contents));
     
     setIsPublishing(false);
     

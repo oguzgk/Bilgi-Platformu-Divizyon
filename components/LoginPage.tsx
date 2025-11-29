@@ -136,6 +136,255 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             background: `linear-gradient(135deg, ${COLORS.turquoise}dd 0%, ${COLORS.turquoise}99 50%, ${COLORS.turquoise}cc 100%)`,
           }}
         />
+
+        {/* Zambak Çiçekleri */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Merkez - Büyük Zambak */}
+          <svg 
+            className="absolute bottom-0 left-1/2 -translate-x-1/2"
+            width="450" 
+            height="80vh" 
+            viewBox="0 0 200 300"
+            style={{
+              animation: 'lilyGrow 2s ease-out forwards',
+              transformOrigin: 'bottom center'
+            }}
+          >
+            {/* Gövde (kalın ve düz) */}
+            <path
+              d="M 100 300 L 100 60"
+              stroke="rgba(255,255,255,0.85)"
+              strokeWidth="4"
+              fill="none"
+              strokeLinecap="round"
+            />
+            
+            {/* Sol alt yaprak */}
+            <path
+              d="M 100 240 Q 55 235, 35 255 Q 40 265, 100 248"
+              fill="rgba(255,255,255,0.65)"
+              stroke="rgba(255,255,255,0.85)"
+              strokeWidth="1.5"
+            />
+            
+            {/* Sağ alt yaprak */}
+            <path
+              d="M 100 240 Q 145 235, 165 255 Q 160 265, 100 248"
+              fill="rgba(255,255,255,0.65)"
+              stroke="rgba(255,255,255,0.85)"
+              strokeWidth="1.5"
+            />
+            
+            {/* Sol orta yaprak */}
+            <path
+              d="M 100 170 Q 60 168, 42 182 Q 46 190, 100 175"
+              fill="rgba(255,255,255,0.65)"
+              stroke="rgba(255,255,255,0.85)"
+              strokeWidth="1.5"
+            />
+            
+            {/* Sağ orta yaprak */}
+            <path
+              d="M 100 170 Q 140 168, 158 182 Q 154 190, 100 175"
+              fill="rgba(255,255,255,0.65)"
+              stroke="rgba(255,255,255,0.85)"
+              strokeWidth="1.5"
+            />
+            
+            {/* Zambak yaprakları - 6 taç yaprak (uzun, sivri, geriye kıvrımlı) */}
+            
+            {/* Arka üç yaprak */}
+            <path
+              d="M 100 60 Q 82 45, 72 20 Q 68 5, 65 -5 Q 72 0, 78 10 Q 88 30, 100 60"
+              fill="rgba(255,255,255,0.75)"
+              stroke="rgba(255,255,255,0.95)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 100 60 Q 100 40, 100 20 Q 100 5, 100 -5 Q 100 5, 100 20 Q 100 40, 100 60"
+              fill="rgba(255,255,255,0.75)"
+              stroke="rgba(255,255,255,0.95)"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M 100 60 Q 118 45, 128 20 Q 132 5, 135 -5 Q 128 0, 122 10 Q 112 30, 100 60"
+              fill="rgba(255,255,255,0.75)"
+              stroke="rgba(255,255,255,0.95)"
+              strokeWidth="1.5"
+            />
+            
+            {/* Ön üç yaprak (daha beyaz ve belirgin) */}
+            <path
+              d="M 100 60 Q 65 48, 45 28 Q 30 8, 18 -10 Q 32 -5, 46 5 Q 72 35, 100 60"
+              fill="rgba(255,255,255,0.88)"
+              stroke="rgba(255,255,255,1)"
+              strokeWidth="2"
+            />
+            <path
+              d="M 100 60 Q 135 48, 155 28 Q 170 8, 182 -10 Q 168 -5, 154 5 Q 128 35, 100 60"
+              fill="rgba(255,255,255,0.88)"
+              stroke="rgba(255,255,255,1)"
+              strokeWidth="2"
+            />
+            <path
+              d="M 100 60 Q 94 35, 88 15 Q 85 0, 82 -10 Q 90 -3, 95 8 Q 98 30, 100 60"
+              fill="rgba(255,255,255,0.88)"
+              stroke="rgba(255,255,255,1)"
+              strokeWidth="2"
+            />
+            
+            {/* Organ (erkek üreme organı - polen çubukları) */}
+            <line x1="100" y1="60" x2="93" y2="40" stroke="rgba(180,255,180,0.9)" strokeWidth="1.5" />
+            <line x1="100" y1="60" x2="100" y2="37" stroke="rgba(180,255,180,0.9)" strokeWidth="1.5" />
+            <line x1="100" y1="60" x2="107" y2="40" stroke="rgba(180,255,180,0.9)" strokeWidth="1.5" />
+            
+            {/* Polen (turuncu uçlar) */}
+            <ellipse cx="93" cy="38" rx="2.5" ry="3.5" fill="rgba(255,140,0,0.95)" />
+            <ellipse cx="100" cy="35" rx="2.5" ry="3.5" fill="rgba(255,140,0,0.95)" />
+            <ellipse cx="107" cy="38" rx="2.5" ry="3.5" fill="rgba(255,140,0,0.95)" />
+            
+            {/* Dişi organ (merkez pistil) */}
+            <line x1="100" y1="60" x2="100" y2="30" stroke="rgba(200,255,200,0.95)" strokeWidth="2" />
+            <circle cx="100" cy="28" r="3" fill="rgba(150,255,150,0.95)" />
+          </svg>
+
+          {/* Küçük Zambak 1 - En sol */}
+          <svg 
+            className="absolute bottom-0"
+            style={{
+              left: '5%',
+              animation: 'lilyGrow 2s ease-out forwards 0.2s',
+              transformOrigin: 'bottom center',
+              opacity: 0,
+              width: '280px',
+              height: '280px'
+            }}
+            viewBox="0 0 200 200"
+          >
+            <path d="M 100 200 L 100 90" stroke="rgba(255,255,255,0.75)" strokeWidth="3" fill="none" strokeLinecap="round" />
+            <path d="M 100 140 Q 70 135, 58 148 Q 60 152, 100 143" fill="rgba(255,255,255,0.6)" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" />
+            
+            <path d="M 100 90 Q 90 80, 85 62 Q 83 50, 82 42 Q 86 48, 90 58 Q 95 73, 100 90" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+            <path d="M 100 90 Q 100 75, 100 58 Q 100 45, 100 38 Q 100 45, 100 58 Q 100 75, 100 90" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+            <path d="M 100 90 Q 110 80, 115 62 Q 117 50, 118 42 Q 114 48, 110 58 Q 105 73, 100 90" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+            <path d="M 100 90 Q 78 82, 68 70 Q 60 58, 55 48 Q 63 55, 72 65 Q 85 78, 100 90" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.98)" strokeWidth="1.8" />
+            <path d="M 100 90 Q 122 82, 132 70 Q 140 58, 145 48 Q 137 55, 128 65 Q 115 78, 100 90" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.98)" strokeWidth="1.8" />
+            <path d="M 100 90 Q 97 70, 94 52 Q 93 40, 92 32 Q 96 38, 98 48 Q 99 65, 100 90" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.98)" strokeWidth="1.8" />
+            
+            <line x1="100" y1="90" x2="97" y2="75" stroke="rgba(180,255,180,0.85)" strokeWidth="1.2" />
+            <line x1="100" y1="90" x2="100" y2="73" stroke="rgba(180,255,180,0.85)" strokeWidth="1.2" />
+            <line x1="100" y1="90" x2="103" y2="75" stroke="rgba(180,255,180,0.85)" strokeWidth="1.2" />
+            <ellipse cx="97" cy="73" rx="2" ry="3" fill="rgba(255,140,0,0.9)" />
+            <ellipse cx="100" cy="71" rx="2" ry="3" fill="rgba(255,140,0,0.9)" />
+            <ellipse cx="103" cy="73" rx="2" ry="3" fill="rgba(255,140,0,0.9)" />
+          </svg>
+
+          {/* Küçük Zambak 2 - Sol ortada */}
+          <svg 
+            className="absolute bottom-0"
+            style={{
+              left: '28%',
+              animation: 'lilyGrow 2s ease-out forwards 0.3s',
+              transformOrigin: 'bottom center',
+              opacity: 0,
+              width: '280px',
+              height: '280px'
+            }}
+            viewBox="0 0 200 200"
+          >
+            <path d="M 100 200 L 100 90" stroke="rgba(255,255,255,0.75)" strokeWidth="3" fill="none" strokeLinecap="round" />
+            <path d="M 100 140 Q 130 135, 142 148 Q 140 152, 100 143" fill="rgba(255,255,255,0.6)" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" />
+            
+            <path d="M 100 90 Q 90 80, 85 62 Q 83 50, 82 42 Q 86 48, 90 58 Q 95 73, 100 90" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+            <path d="M 100 90 Q 100 75, 100 58 Q 100 45, 100 38 Q 100 45, 100 58 Q 100 75, 100 90" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+            <path d="M 100 90 Q 110 80, 115 62 Q 117 50, 118 42 Q 114 48, 110 58 Q 105 73, 100 90" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.9)" strokeWidth="1.5" />
+            <path d="M 100 90 Q 78 82, 68 70 Q 60 58, 55 48 Q 63 55, 72 65 Q 85 78, 100 90" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.98)" strokeWidth="1.8" />
+            <path d="M 100 90 Q 122 82, 132 70 Q 140 58, 145 48 Q 137 55, 128 65 Q 115 78, 100 90" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.98)" strokeWidth="1.8" />
+            <path d="M 100 90 Q 97 70, 94 52 Q 93 40, 92 32 Q 96 38, 98 48 Q 99 65, 100 90" fill="rgba(255,255,255,0.82)" stroke="rgba(255,255,255,0.98)" strokeWidth="1.8" />
+            
+            <line x1="100" y1="90" x2="97" y2="75" stroke="rgba(180,255,180,0.85)" strokeWidth="1.2" />
+            <line x1="100" y1="90" x2="100" y2="73" stroke="rgba(180,255,180,0.85)" strokeWidth="1.2" />
+            <line x1="100" y1="90" x2="103" y2="75" stroke="rgba(180,255,180,0.85)" strokeWidth="1.2" />
+            <ellipse cx="97" cy="73" rx="2" ry="3" fill="rgba(255,140,0,0.9)" />
+            <ellipse cx="100" cy="71" rx="2" ry="3" fill="rgba(255,140,0,0.9)" />
+            <ellipse cx="103" cy="73" rx="2" ry="3" fill="rgba(255,140,0,0.9)" />
+          </svg>
+
+          {/* Küçük Zambak 3 - Sağ ortada */}
+          <svg 
+            className="absolute bottom-0"
+            style={{
+              right: '28%',
+              animation: 'lilyGrow 2s ease-out forwards 0.4s',
+              transformOrigin: 'bottom center',
+              opacity: 0,
+              width: '280px',
+              height: '280px'
+            }}
+            viewBox="0 0 200 200"
+          >
+            <path d="M 100 200 L 100 100" stroke="rgba(255,255,255,0.7)" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 100 150 Q 72 146, 62 158 Q 64 162, 100 153" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.75)" strokeWidth="1.3" />
+            
+            <path d="M 100 100 Q 92 92, 88 78 Q 86 68, 85 62 Q 88 67, 91 75 Q 95 87, 100 100" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+            <path d="M 100 100 Q 100 88, 100 74 Q 100 63, 100 57 Q 100 63, 100 74 Q 100 88, 100 100" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+            <path d="M 100 100 Q 108 92, 112 78 Q 114 68, 115 62 Q 112 67, 109 75 Q 105 87, 100 100" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+            <path d="M 100 100 Q 82 93, 74 83 Q 68 72, 64 62 Q 70 68, 77 78 Q 88 91, 100 100" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" />
+            <path d="M 100 100 Q 118 93, 126 83 Q 132 72, 136 62 Q 130 68, 123 78 Q 112 91, 100 100" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" />
+            <path d="M 100 100 Q 98 82, 95 66 Q 94 56, 93 50 Q 96 55, 98 63 Q 99 78, 100 100" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" />
+            
+            <line x1="100" y1="100" x2="97" y2="87" stroke="rgba(180,255,180,0.8)" strokeWidth="1" />
+            <line x1="100" y1="100" x2="100" y2="85" stroke="rgba(180,255,180,0.8)" strokeWidth="1" />
+            <line x1="100" y1="100" x2="103" y2="87" stroke="rgba(180,255,180,0.8)" strokeWidth="1" />
+            <ellipse cx="97" cy="85" rx="1.8" ry="2.5" fill="rgba(255,140,0,0.85)" />
+            <ellipse cx="100" cy="83" rx="1.8" ry="2.5" fill="rgba(255,140,0,0.85)" />
+            <ellipse cx="103" cy="85" rx="1.8" ry="2.5" fill="rgba(255,140,0,0.85)" />
+          </svg>
+
+          {/* Küçük Zambak 4 - En sağ */}
+          <svg 
+            className="absolute bottom-0"
+            style={{
+              right: '5%',
+              animation: 'lilyGrow 2s ease-out forwards 0.5s',
+              transformOrigin: 'bottom center',
+              opacity: 0,
+              width: '280px',
+              height: '280px'
+            }}
+            viewBox="0 0 200 200"
+          >
+            <path d="M 100 200 L 100 100" stroke="rgba(255,255,255,0.7)" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 100 150 Q 128 146, 138 158 Q 136 162, 100 153" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.75)" strokeWidth="1.3" />
+            
+            <path d="M 100 100 Q 92 92, 88 78 Q 86 68, 85 62 Q 88 67, 91 75 Q 95 87, 100 100" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+            <path d="M 100 100 Q 100 88, 100 74 Q 100 63, 100 57 Q 100 63, 100 74 Q 100 88, 100 100" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+            <path d="M 100 100 Q 108 92, 112 78 Q 114 68, 115 62 Q 112 67, 109 75 Q 105 87, 100 100" fill="rgba(255,255,255,0.65)" stroke="rgba(255,255,255,0.85)" strokeWidth="1.3" />
+            <path d="M 100 100 Q 82 93, 74 83 Q 68 72, 64 62 Q 70 68, 77 78 Q 88 91, 100 100" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" />
+            <path d="M 100 100 Q 118 93, 126 83 Q 132 72, 136 62 Q 130 68, 123 78 Q 112 91, 100 100" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" />
+            <path d="M 100 100 Q 98 82, 95 66 Q 94 56, 93 50 Q 96 55, 98 63 Q 99 78, 100 100" fill="rgba(255,255,255,0.75)" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" />
+            
+            <line x1="100" y1="100" x2="97" y2="87" stroke="rgba(180,255,180,0.8)" strokeWidth="1" />
+            <line x1="100" y1="100" x2="100" y2="85" stroke="rgba(180,255,180,0.8)" strokeWidth="1" />
+            <line x1="100" y1="100" x2="103" y2="87" stroke="rgba(180,255,180,0.8)" strokeWidth="1" />
+            <ellipse cx="97" cy="85" rx="1.8" ry="2.5" fill="rgba(255,140,0,0.85)" />
+            <ellipse cx="100" cy="83" rx="1.8" ry="2.5" fill="rgba(255,140,0,0.85)" />
+            <ellipse cx="103" cy="85" rx="1.8" ry="2.5" fill="rgba(255,140,0,0.85)" />
+          </svg>
+        </div>
+
+        <style>{`
+          @keyframes lilyGrow {
+            0% {
+              transform: scale(0) translateY(50px);
+              opacity: 0;
+            }
+            100% {
+              transform: scale(1) translateY(0);
+              opacity: 0.3;
+            }
+          }
+        `}</style>
         
         {/* Arka plan efekti - deniz dalgası */}
         <div className="absolute inset-0 opacity-30">

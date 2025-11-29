@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
-import WikiSection from './components/WikiSection';
-import CommentSection from './components/CommentSection';
 import ProfilePage from './components/profile/ProfilePage';
 import ShareBox from './components/ShareBox';
 import CreateContentPage from './components/CreateContentPage';
 import LoginPage from './components/LoginPage';
 import DiscoverFeed from './components/DiscoverFeed';
 import ContentPage from './components/ContentPage';
+import FacultiesPage from './components/FacultiesPage';
+import SettingsPage from './components/settings/SettingsPage';
+import MyContents from './components/MyContents';
+import TopicDetailPage from './components/TopicDetailPage';
 import { CoinNotificationProvider } from './components/CoinNotification';
 import { NotificationProvider } from './contexts/NotificationContext';
 
@@ -17,7 +19,7 @@ interface HomePageProps {
 }
 
 const HomePage: React.FC<HomePageProps> = ({ onLogout }) => {
-  const [activeTab, setActiveTab] = useState<'discover' | 'topic'>('discover');
+  const [activeTab, setActiveTab] = useState<'discover' | 'mycontents'>('discover');
 
   return (
     <Layout onLogout={onLogout}>
@@ -34,14 +36,14 @@ const HomePage: React.FC<HomePageProps> = ({ onLogout }) => {
           🔥 Keşfet
         </button>
         <button
-          onClick={() => setActiveTab('topic')}
+          onClick={() => setActiveTab('mycontents')}
           className={`pb-3 px-4 font-bold transition-all ${
-            activeTab === 'topic'
+            activeTab === 'mycontents'
               ? 'text-[#00BFA5] border-b-2 border-[#00BFA5]'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          📖 Başlık Detay (Demo)
+          📝 Benim İçeriklerim
         </button>
       </div>
 
@@ -52,11 +54,7 @@ const HomePage: React.FC<HomePageProps> = ({ onLogout }) => {
           <DiscoverFeed />
         </>
       ) : (
-        <>
-          <ShareBox />
-          <WikiSection />
-          <CommentSection />
-        </>
+        <MyContents />
       )}
     </Layout>
   );
@@ -110,14 +108,40 @@ const App: React.FC = () => {
                 </ProtectedRoute>
               } 
             />
-            <Route 
-              path="/profile" 
-              element={
-                <ProtectedRoute isLoggedIn={isLoggedIn}>
-                  <ProfilePage onLogout={handleLogout} />
-                </ProtectedRoute>
-              } 
-            />
+          <Route 
+            path="/profile" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <ProfilePage onLogout={handleLogout} />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/faculties" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Layout onLogout={handleLogout}>
+                  <FacultiesPage />
+                </Layout>
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/settings" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SettingsPage onLogout={handleLogout} />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/topic/:topicId" 
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <TopicDetailPage />
+              </ProtectedRoute>
+            } 
+          />
           <Route 
             path="/create" 
             element={

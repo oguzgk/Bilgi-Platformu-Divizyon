@@ -7,6 +7,7 @@ import {
 import { CURRENT_USER } from '../../constants';
 import RoleBadge from '../RoleBadge';
 import { useNotifications } from '../../contexts/NotificationContext';
+import ChatBox from './ChatBox';
 
 interface Friend {
   id: string;
@@ -26,6 +27,7 @@ function FriendsPage() {
   const { addNotification } = useNotifications();
   const [activeTab, setActiveTab] = useState<'friends' | 'requests' | 'suggestions'>('friends');
   const [searchQuery, setSearchQuery] = useState('');
+  const [openChatBox, setOpenChatBox] = useState<Friend | null>(null);
 
   // Mock data
   const [friends, setFriends] = useState<Friend[]>([
@@ -256,13 +258,13 @@ function FriendsPage() {
                       )}
                     </div>
                     <div className="flex flex-col gap-2">
-                      <Link
-                        to={`/messages/${friend.username}`}
+                      <button
+                        onClick={() => setOpenChatBox(friend)}
                         className="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors"
                         title="Mesaj Gönder"
                       >
                         <MessageSquare size={18} />
-                      </Link>
+                      </button>
                       <button
                         onClick={() => handleRemoveFriend(friend.id, friend.displayName)}
                         className="p-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors"
@@ -360,6 +362,19 @@ function FriendsPage() {
           </div>
         )}
       </div>
+
+      {/* Chat Box */}
+      {openChatBox && (
+        <ChatBox
+          friend={{
+            username: openChatBox.username,
+            displayName: openChatBox.displayName,
+            avatarUrl: openChatBox.avatarUrl,
+            isOnline: openChatBox.isOnline
+          }}
+          onClose={() => setOpenChatBox(null)}
+        />
+      )}
     </div>
   );
 }

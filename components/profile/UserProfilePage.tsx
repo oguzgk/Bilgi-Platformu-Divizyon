@@ -9,6 +9,7 @@ import { COLORS, MOCK_SEARCH_DATA } from '../../constants';
 import { getRoleInfo } from '../../utils/roleHelpers';
 import RoleBadge from '../RoleBadge';
 import { useNotifications } from '../../contexts/NotificationContext';
+import ChatBox from '../social/ChatBox';
 
 function UserProfilePage() {
   const { username } = useParams<{ username: string }>();
@@ -20,6 +21,7 @@ function UserProfilePage() {
   
   const [isFollowing, setIsFollowing] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [showChatBox, setShowChatBox] = useState(false);
 
   // Kullanıcı aktiviteleri (mock)
   const activities = [
@@ -50,7 +52,7 @@ function UserProfilePage() {
   };
 
   const handleMessage = () => {
-    addNotification('announcement', 'Yakında! 💬', 'Mesajlaşma özelliği yakında eklenecek!');
+    setShowChatBox(true);
   };
 
   const handleReport = (reason: string) => {
@@ -317,6 +319,19 @@ function UserProfilePage() {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Chat Box */}
+      {showChatBox && (
+        <ChatBox
+          friend={{
+            username: user.username,
+            displayName: user.title,
+            avatarUrl: user.metadata?.avatarUrl || 'https://i.pravatar.cc/150',
+            isOnline: true // Mock olarak true, gerçek uygulamada API'den gelecek
+          }}
+          onClose={() => setShowChatBox(false)}
+        />
       )}
     </div>
   );

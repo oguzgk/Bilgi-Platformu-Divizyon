@@ -220,73 +220,74 @@ function MyContents() {
   };
 
   const handleVoteWiki = (wikiId: string, voteType: 'up' | 'down') => {
-    setMyWikiEdits(prev => prev.map(wiki => {
-      if (wiki.id !== wikiId) return wiki;
+    // Önce mevcut wiki'yi bul
+    const currentWiki = myWikiEdits.find(wiki => wiki.id === wikiId);
+    if (!currentWiki) return;
+    
+    let newUpvotes = currentWiki.upvotes;
+    let newDownvotes = currentWiki.downvotes;
+    let notificationTitle = '';
+    let notificationMessage = '';
+    
+    if (currentWiki.userVote === voteType) {
+      // Oy geri çekildi
+      if (voteType === 'up') {
+        newUpvotes = Math.max(0, newUpvotes - 1);
+      } else {
+        newDownvotes = Math.max(0, newDownvotes - 1);
+      }
       
-      let newUpvotes = wiki.upvotes;
-      let newDownvotes = wiki.downvotes;
+      notificationTitle = 'Oy Geri Çekildi';
+      notificationMessage = `"${currentWiki.title}" için ${voteType === 'up' ? 'beğeni' : 'beğenmeme'} oyunuz geri çekildi.`;
       
-      if (wiki.userVote === voteType) {
-        // Oy geri çekildi
-        if (voteType === 'up') {
-          newUpvotes = Math.max(0, newUpvotes - 1);
-        } else {
-          newDownvotes = Math.max(0, newDownvotes - 1);
-        }
-        
-        addNotification(
-          'like',
-          'Oy Geri Çekildi',
-          `"${wiki.title}" için ${voteType === 'up' ? 'beğeni' : 'beğenmeme'} oyunuz geri çekildi.`,
-          { contentTitle: wiki.title }
-        );
-        
+      // State'i güncelle
+      setMyWikiEdits(prev => prev.map(wiki => {
+        if (wiki.id !== wikiId) return wiki;
         return {
           ...wiki,
           upvotes: newUpvotes,
           downvotes: newDownvotes,
           userVote: null,
         };
+      }));
+    } else {
+      // Yeni oy veya değiştirme
+      if (currentWiki.userVote === 'up') {
+        newUpvotes = Math.max(0, newUpvotes - 1);
+      }
+      if (currentWiki.userVote === 'down') {
+        newDownvotes = Math.max(0, newDownvotes - 1);
+      }
+      
+      if (voteType === 'up') {
+        newUpvotes++;
+        notificationTitle = 'Beğeni Eklendi';
+        notificationMessage = `"${currentWiki.title}" içeriğine beğeni eklediniz. (${newUpvotes} beğeni)`;
       } else {
-        // Yeni oy veya değiştirme
-        if (wiki.userVote === 'up') {
-          newUpvotes = Math.max(0, newUpvotes - 1);
-        }
-        if (wiki.userVote === 'down') {
-          newDownvotes = Math.max(0, newDownvotes - 1);
-        }
-        
-        if (voteType === 'up') {
-          newUpvotes++;
-        } else {
-          newDownvotes++;
-        }
-        
-        // Bildirim gönder
-        if (voteType === 'up') {
-          addNotification(
-            'like',
-            'Beğeni Eklendi',
-            `"${wiki.title}" içeriğine beğeni eklediniz. (${newUpvotes} beğeni)`,
-            { contentTitle: wiki.title }
-          );
-        } else {
-          addNotification(
-            'like',
-            'Beğenmeme Eklendi',
-            `"${wiki.title}" içeriğine beğenmeme eklediniz. (${newDownvotes} beğenmeme)`,
-            { contentTitle: wiki.title }
-          );
-        }
-        
+        newDownvotes++;
+        notificationTitle = 'Beğenmeme Eklendi';
+        notificationMessage = `"${currentWiki.title}" içeriğine beğenmeme eklediniz. (${newDownvotes} beğenmeme)`;
+      }
+      
+      // State'i güncelle
+      setMyWikiEdits(prev => prev.map(wiki => {
+        if (wiki.id !== wikiId) return wiki;
         return {
           ...wiki,
           upvotes: newUpvotes,
           downvotes: newDownvotes,
           userVote: voteType,
         };
-      }
-    }));
+      }));
+    }
+    
+    // Bildirimi state güncellemesinden sonra ekle (sadece bir kez)
+    addNotification(
+      'like',
+      notificationTitle,
+      notificationMessage,
+      { contentTitle: currentWiki.title }
+    );
   };
 
   const getStatusBadge = (status: string) => {

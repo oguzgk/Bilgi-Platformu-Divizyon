@@ -97,8 +97,11 @@ function FacultiesPage() {
   return (
     <div className="min-h-[80vh]">
       {/* Hero Section */}
-      <div className={`bg-gradient-to-r ${selectedUniversity.color} rounded-2xl p-8 mb-8 text-white shadow-lg transition-all duration-500`}>
-        <h1 className="text-4xl font-semibold mb-3">🎓 Fakülteler</h1>
+      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 rounded-2xl p-8 mb-8 text-white shadow-lg transition-all duration-500">
+        <h1 className="text-4xl font-semibold mb-3 flex items-center gap-3">
+          <GraduationCap size={40} />
+          Fakülteler
+        </h1>
         <p className="text-lg opacity-90 max-w-2xl">
           {selectedUniversity.name} fakültelerinin ders notları, sınav takvimleri, kulüp duyuruları ve öğrenci deneyimleri burada!
         </p>
@@ -125,34 +128,29 @@ function FacultiesPage() {
             <button
               key={university.id}
               onClick={() => setSelectedUniversity(university)}
-              className={`relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 transform hover:scale-105 hover:shadow-xl ${
+              className={`relative overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 transform hover:scale-105 hover:shadow-xl bg-white border-2 ${
                 selectedUniversity.id === university.id
-                  ? `bg-gradient-to-br ${university.color} text-white shadow-lg scale-105`
-                  : 'bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-700'
+                  ? 'border-[#00BFA5] shadow-lg scale-105'
+                  : 'border-gray-200 hover:border-gray-300'
               }`}
             >
               <div className="relative z-10">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${
-                  selectedUniversity.id === university.id
-                    ? 'bg-white/20 backdrop-blur-sm'
-                    : 'bg-gray-100'
-                }`}>
-                  <GraduationCap size={24} className={selectedUniversity.id === university.id ? 'text-white' : university.textColor} />
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 bg-gray-100">
+                  <GraduationCap size={24} className={
+                    selectedUniversity.id === university.id ? 'text-[#00BFA5]' : 'text-gray-400'
+                  } />
                 </div>
-                <h3 className="font-semibold text-lg mb-1 line-clamp-2">
+                <h3 className={`font-semibold text-lg mb-1 line-clamp-2 ${
+                  selectedUniversity.id === university.id ? 'text-[#00BFA5]' : 'text-gray-700'
+                }`}>
                   {university.name}
                 </h3>
-                <p className={`text-sm ${
-                  selectedUniversity.id === university.id ? 'text-white/80' : 'text-gray-500'
-                }`}>
-                  {university.shortName}
-                </p>
               </div>
               
               {/* Selected Indicator */}
               {selectedUniversity.id === university.id && (
-                <div className="absolute top-3 right-3 w-6 h-6 bg-white rounded-full flex items-center justify-center">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="absolute top-3 right-3 w-6 h-6 bg-[#00BFA5] rounded-full flex items-center justify-center">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
                 </div>
               )}
 
@@ -175,7 +173,7 @@ function FacultiesPage() {
               className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-500 group"
             >
               {/* Faculty Header */}
-              <div className={`bg-gradient-to-r ${selectedUniversity.color} p-6 text-white relative overflow-hidden transition-all duration-500`}>
+              <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 p-6 text-white relative overflow-hidden transition-all duration-500">
                 <div className="absolute top-0 right-0 opacity-10 transform translate-x-4 -translate-y-4">
                   <div className="scale-[3]">{iconMap[faculty.icon]}</div>
                 </div>

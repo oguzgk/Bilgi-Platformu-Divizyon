@@ -16,13 +16,13 @@ function EmptyState({ icon: Icon, title, description, actionLabel, onAction }: E
         <Icon size={40} className="text-gray-400" />
       </div>
       
-      <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
+      <h3 className="text-xl font-semibold text-gray-800 mb-2">{title}</h3>
       <p className="text-gray-500 mb-6 max-w-md">{description}</p>
       
       {actionLabel && onAction && (
         <button
           onClick={onAction}
-          className="px-6 py-3 bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+          className="px-6 py-3 bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
         >
           {actionLabel}
         </button>

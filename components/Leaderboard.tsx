@@ -47,13 +47,12 @@ function Leaderboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
+    <div>
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
           <Link 
             to="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-medium mb-4"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
           >
             <ChevronLeft size={20} />
             <span>Ana Sayfaya Dön</span>
@@ -64,7 +63,7 @@ function Leaderboard() {
               <Trophy size={32} />
             </div>
             <div>
-              <h1 className="text-4xl font-extrabold">Liderlik Tablosu</h1>
+              <h1 className="text-4xl font-semibold">Liderlik Tablosu</h1>
               <p className="text-white/80 text-lg">En aktif ve başarılı kullanıcılar</p>
             </div>
           </div>
@@ -75,7 +74,7 @@ function Leaderboard() {
               <div className="flex items-center gap-3">
                 <Users size={24} className="text-white/80" />
                 <div>
-                  <p className="text-2xl font-bold">{currentData.length}</p>
+                  <p className="text-2xl font-semibold">{currentData.length}</p>
                   <p className="text-white/70 text-sm">Aktif Kullanıcı</p>
                 </div>
               </div>
@@ -84,7 +83,7 @@ function Leaderboard() {
               <div className="flex items-center gap-3">
                 <Zap size={24} className="text-white/80" />
                 <div>
-                  <p className="text-2xl font-bold">
+                  <p className="text-2xl font-semibold">
                     {currentData.reduce((sum, u) => sum + u.contributions, 0)}
                   </p>
                   <p className="text-white/70 text-sm">Toplam Katkı</p>
@@ -95,7 +94,7 @@ function Leaderboard() {
               <div className="flex items-center gap-3">
                 <Star size={24} className="text-white/80" />
                 <div>
-                  <p className="text-2xl font-bold">
+                  <p className="text-2xl font-semibold">
                     {currentData.reduce((sum, u) => sum + u.coins, 0).toLocaleString()}
                   </p>
                   <p className="text-white/70 text-sm">Toplam Coin</p>
@@ -104,10 +103,9 @@ function Leaderboard() {
             </div>
           </div>
         </div>
-      </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="py-8">
         {/* Filters */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
@@ -122,7 +120,7 @@ function Leaderboard() {
                   <button
                     key={time}
                     onClick={() => setTimeFilter(time)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                       timeFilter === time
                         ? 'bg-[#00BFA5] text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -152,7 +150,7 @@ function Leaderboard() {
                     <button
                       key={cat.id}
                       onClick={() => setCategoryFilter(cat.id as CategoryFilter)}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
                         categoryFilter === cat.id
                           ? 'bg-[#00BFA5] text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -183,15 +181,15 @@ function Leaderboard() {
                     alt={currentData[1].displayName}
                     className="w-20 h-20 rounded-full border-4 border-gray-400 shadow-lg"
                   />
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white font-bold border-2 border-white shadow-md">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center text-white font-semibold border-2 border-white shadow-md">
                     2
                   </div>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-1">{currentData[1].displayName}</h3>
+                <h3 className="font-semibold text-gray-900 mb-1">{currentData[1].displayName}</h3>
                 <p className="text-sm text-gray-500 mb-2">@{currentData[1].username}</p>
                 <RoleBadge role={currentData[1].role} size="small" showName={false} />
                 <div className="mt-4 pt-4 border-t border-gray-300">
-                  <p className="text-2xl font-bold text-gray-900">{currentData[1].coins.toLocaleString()}</p>
+                  <p className="text-2xl font-semibold text-gray-900">{currentData[1].coins.toLocaleString()}</p>
                   <p className="text-xs text-gray-500">Coin</p>
                 </div>
               </Link>
@@ -211,15 +209,15 @@ function Leaderboard() {
                     alt={currentData[0].displayName}
                     className="w-24 h-24 rounded-full border-4 border-yellow-500 shadow-xl"
                   />
-                  <div className="absolute -top-2 -right-2 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-lg border-2 border-white shadow-lg">
+                  <div className="absolute -top-2 -right-2 w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-white font-semibold text-lg border-2 border-white shadow-lg">
                     1
                   </div>
                 </div>
-                <h3 className="font-bold text-gray-900 text-lg mb-1">{currentData[0].displayName}</h3>
+                <h3 className="font-semibold text-gray-900 text-lg mb-1">{currentData[0].displayName}</h3>
                 <p className="text-sm text-gray-600 mb-2">@{currentData[0].username}</p>
                 <RoleBadge role={currentData[0].role} size="small" showName={false} />
                 <div className="mt-4 pt-4 border-t border-yellow-300">
-                  <p className="text-3xl font-bold text-yellow-700">{currentData[0].coins.toLocaleString()}</p>
+                  <p className="text-3xl font-semibold text-yellow-700">{currentData[0].coins.toLocaleString()}</p>
                   <p className="text-sm text-yellow-600">Coin</p>
                 </div>
               </Link>
@@ -237,15 +235,15 @@ function Leaderboard() {
                     alt={currentData[2].displayName}
                     className="w-20 h-20 rounded-full border-4 border-amber-500 shadow-lg"
                   />
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold border-2 border-white shadow-md">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-semibold border-2 border-white shadow-md">
                     3
                   </div>
                 </div>
-                <h3 className="font-bold text-gray-900 mb-1">{currentData[2].displayName}</h3>
+                <h3 className="font-semibold text-gray-900 mb-1">{currentData[2].displayName}</h3>
                 <p className="text-sm text-gray-500 mb-2">@{currentData[2].username}</p>
                 <RoleBadge role={currentData[2].role} size="small" showName={false} />
                 <div className="mt-4 pt-4 border-t border-amber-300">
-                  <p className="text-2xl font-bold text-gray-900">{currentData[2].coins.toLocaleString()}</p>
+                  <p className="text-2xl font-semibold text-gray-900">{currentData[2].coins.toLocaleString()}</p>
                   <p className="text-xs text-gray-500">Coin</p>
                 </div>
               </Link>
@@ -256,7 +254,7 @@ function Leaderboard() {
         {/* Full List */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
           <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
               <Trophy size={24} className="text-[#00BFA5]" />
               Tam Liste ({currentData.length} kullanıcı)
             </h2>
@@ -272,7 +270,7 @@ function Leaderboard() {
                   className="flex items-center gap-4 px-6 py-4 hover:bg-gray-50 transition-colors group"
                 >
                   {/* Rank */}
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 ${getRankBadge(rank)}`}>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg flex-shrink-0 ${getRankBadge(rank)}`}>
                     {getRankIcon(rank) || rank}
                   </div>
 
@@ -285,7 +283,7 @@ function Leaderboard() {
 
                   {/* Info */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-900 group-hover:text-[#00BFA5] transition-colors">
+                    <h3 className="font-semibold text-gray-900 group-hover:text-[#00BFA5] transition-colors">
                       {user.displayName}
                     </h3>
                     <div className="flex items-center gap-2 mt-1">
@@ -297,7 +295,7 @@ function Leaderboard() {
                   {/* Stats */}
                   <div className="hidden md:flex items-center gap-6 flex-shrink-0">
                     <div className="text-right">
-                      <p className="text-2xl font-bold text-gray-900">{user.coins.toLocaleString()}</p>
+                      <p className="text-2xl font-semibold text-gray-900">{user.coins.toLocaleString()}</p>
                       <p className="text-xs text-gray-500">Coin</p>
                     </div>
                     <div className="text-right">
@@ -321,7 +319,7 @@ function Leaderboard() {
           <div className="flex items-start gap-4">
             <Trophy size={32} className="text-teal-600 flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">Nasıl Sıralamaya Girebilirim?</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">Nasıl Sıralamaya Girebilirim?</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
                   <span className="text-teal-600">•</span>

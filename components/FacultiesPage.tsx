@@ -98,7 +98,7 @@ function FacultiesPage() {
     <div className="min-h-[80vh]">
       {/* Hero Section */}
       <div className={`bg-gradient-to-r ${selectedUniversity.color} rounded-2xl p-8 mb-8 text-white shadow-lg transition-all duration-500`}>
-        <h1 className="text-4xl font-bold mb-3">🎓 Fakülteler</h1>
+        <h1 className="text-4xl font-semibold mb-3">🎓 Fakülteler</h1>
         <p className="text-lg opacity-90 max-w-2xl">
           {selectedUniversity.name} fakültelerinin ders notları, sınav takvimleri, kulüp duyuruları ve öğrenci deneyimleri burada!
         </p>
@@ -116,7 +116,7 @@ function FacultiesPage() {
 
       {/* Üniversite Seçimi */}
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
           <GraduationCap size={24} className="text-[#00BFA5]" />
           Üniversite Seç
         </h2>
@@ -139,7 +139,7 @@ function FacultiesPage() {
                 }`}>
                   <GraduationCap size={24} className={selectedUniversity.id === university.id ? 'text-white' : university.textColor} />
                 </div>
-                <h3 className="font-bold text-lg mb-1 line-clamp-2">
+                <h3 className="font-semibold text-lg mb-1 line-clamp-2">
                   {university.name}
                 </h3>
                 <p className={`text-sm ${
@@ -184,7 +184,7 @@ function FacultiesPage() {
                     <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
                       {iconMap[faculty.icon]}
                     </div>
-                    <h2 className="text-2xl font-bold">{faculty.name}</h2>
+                    <h2 className="text-2xl font-semibold">{faculty.name}</h2>
                   </div>
                   <p className="text-sm opacity-90 mb-4">{content?.description || 'Fakülte bilgileri'}</p>
                   <div className="flex items-center gap-6 text-sm">
@@ -201,7 +201,7 @@ function FacultiesPage() {
               {/* Popular Topics */}
               {content && (
                 <div className="p-6">
-                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                     <TrendingUp size={16} />
                     Popüler Başlıklar
                   </h3>
@@ -220,7 +220,7 @@ function FacultiesPage() {
                   </div>
 
                   {/* Quick Links */}
-                  <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2 mt-6">
+                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2 mt-6">
                     <ExternalLink size={16} />
                     Hızlı Erişim
                   </h3>
@@ -231,7 +231,7 @@ function FacultiesPage() {
                         to={link.url}
                         className="flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-[#00BFA5] hover:shadow-md rounded-lg transition-all group/link"
                       >
-                        <span className="text-sm font-medium text-gray-700 group-hover/link:text-[#00BFA5] transition-colors">
+                        <span className="text-sm font-normal text-gray-700 group-hover/link:text-[#00BFA5] transition-colors">
                           {link.title}
                         </span>
                         <ExternalLink size={14} className="text-gray-400 group-hover/link:text-[#00BFA5] transition-colors" />
@@ -247,7 +247,7 @@ function FacultiesPage() {
 
       {/* Info Box */}
       <div className="mt-8 bg-gradient-to-r from-blue-50 to-teal-50 border border-blue-200 rounded-xl p-6">
-        <h3 className="font-bold text-gray-900 mb-2 flex items-center gap-2">
+        <h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
           <span>💡</span> Fakülte içeriklerine nasıl katkıda bulunurum?
         </h3>
         <p className="text-sm text-gray-700 mb-4">
@@ -256,15 +256,15 @@ function FacultiesPage() {
         <div className="flex flex-wrap gap-3">
           <div className="bg-white px-4 py-2 rounded-lg border border-gray-200">
             <span className="text-xs text-gray-500">Wiki Düzenleme</span>
-            <p className="font-bold text-[#00BFA5]">+10 Coin</p>
+            <p className="font-semibold text-[#00BFA5]">+10 Coin</p>
           </div>
           <div className="bg-white px-4 py-2 rounded-lg border border-gray-200">
             <span className="text-xs text-gray-500">Yeni Başlık</span>
-            <p className="font-bold text-[#00BFA5]">+20 Coin</p>
+            <p className="font-semibold text-[#00BFA5]">+20 Coin</p>
           </div>
           <div className="bg-white px-4 py-2 rounded-lg border border-gray-200">
             <span className="text-xs text-gray-500">Yorum Yazma</span>
-            <p className="font-bold text-[#00BFA5]">+2 Coin</p>
+            <p className="font-semibold text-[#00BFA5]">+2 Coin</p>
           </div>
         </div>
       </div>

@@ -151,12 +151,12 @@ function WikiSection() {
       {/* Header / Meta Bar */}
       <div className="bg-white border-b border-slate-100 px-8 py-5 flex items-center justify-between sticky top-0 z-10 opacity-95 backdrop-blur-sm">
         <div className="flex items-center gap-2 text-sm text-gray-500">
-           <span className="flex items-center gap-1 bg-slate-100 px-2 py-1 rounded text-xs font-medium text-slate-600">
+           <span className="flex items-center gap-1 bg-slate-100 px-2 py-1 rounded text-xs font-normal text-slate-600">
              <Clock size={12} />
              {WIKI_DATA.lastUpdated}
            </span>
            <span className="text-slate-300">|</span>
-           <span>Yazar: <span className="text-[#00BFA5] font-medium cursor-pointer hover:underline">{WIKI_DATA.author}</span></span>
+           <span>Yazar: <span className="text-[#00BFA5] font-normal cursor-pointer hover:underline">{WIKI_DATA.author}</span></span>
         </div>
         
         <div className="flex items-center gap-2">
@@ -188,7 +188,7 @@ function WikiSection() {
            <button 
              onClick={handleEdit}
              disabled={isEditing}
-             className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-bold shadow-sm hover:shadow-md transition-all active:scale-95 ml-2 disabled:opacity-50 disabled:cursor-not-allowed"
+             className="flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm font-semibold shadow-sm hover:shadow-md transition-all active:scale-95 ml-2 disabled:opacity-50 disabled:cursor-not-allowed"
              style={{ backgroundColor: COLORS.turquoise }}
            >
              {isEditing ? <Loader2 size={16} className="animate-spin" /> : <Edit2 size={16} />}
@@ -213,7 +213,7 @@ function WikiSection() {
                  <Wand2 size={18} />
                </div>
                <div>
-                 <h4 className="text-sm font-bold text-purple-900 mb-1">Gemini Özeti</h4>
+                 <h4 className="text-sm font-semibold text-purple-900 mb-1">Gemini Özeti</h4>
                  <p className="text-slate-700 leading-relaxed text-sm">{summary}</p>
                </div>
              </div>
@@ -228,7 +228,7 @@ function WikiSection() {
 
         {/* Voting Footer */}
         <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-sm font-medium text-slate-500">Bu içerik yararlı mıydı?</div>
+            <div className="text-sm font-normal text-slate-500">Bu içerik yararlı mıydı?</div>
             <div className="flex items-center gap-3">
                <button 
                  onClick={() => handleVote('up')}
@@ -284,7 +284,7 @@ function WikiSection() {
             </button>
             <div className="flex items-center gap-3 mb-6">
               <History size={28} className="text-purple-600" />
-              <h3 className="text-2xl font-bold text-gray-900">Sürüm Geçmişi</h3>
+              <h3 className="text-2xl font-semibold text-gray-900">Sürüm Geçmişi</h3>
             </div>
             <p className="text-sm text-gray-500 mb-6">
               Bu sayfanın düzenleme geçmişi. Her değişiklik coin kazandırır!
@@ -305,9 +305,9 @@ function WikiSection() {
                     />
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <h4 className="font-bold text-gray-900">{version.editor}</h4>
+                        <h4 className="font-semibold text-gray-900">{version.editor}</h4>
                         {index === 0 && (
-                          <span className="bg-purple-600 text-white text-xs font-bold px-2 py-0.5 rounded">
+                          <span className="bg-purple-600 text-white text-xs font-semibold px-2 py-0.5 rounded">
                             SON SÜRÜM
                           </span>
                         )}
@@ -345,7 +345,7 @@ function WikiSection() {
             </button>
             <div className="flex items-center gap-3 mb-6">
               <Link2 size={28} className="text-blue-600" />
-              <h3 className="text-2xl font-bold text-gray-900">Kaynaklar</h3>
+              <h3 className="text-2xl font-semibold text-gray-900">Kaynaklar</h3>
             </div>
             <p className="text-sm text-gray-500 mb-6">
               Bu içeriğin oluşturulmasında kullanılan güvenilir kaynaklar.

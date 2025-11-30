@@ -161,7 +161,9 @@ const App: React.FC = () => {
             path="/leaderboard" 
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <Leaderboard />
+                <Layout onLogout={handleLogout}>
+                  <Leaderboard />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -169,7 +171,9 @@ const App: React.FC = () => {
             path="/badges" 
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <BadgeGallery />
+                <Layout onLogout={handleLogout}>
+                  <BadgeGallery />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -177,7 +181,9 @@ const App: React.FC = () => {
             path="/tags" 
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <TagCloud />
+                <Layout onLogout={handleLogout}>
+                  <TagCloud />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -185,7 +191,9 @@ const App: React.FC = () => {
             path="/notifications" 
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <NotificationCenter />
+                <Layout onLogout={handleLogout}>
+                  <NotificationCenter />
+                </Layout>
               </ProtectedRoute>
             } 
           />
@@ -193,7 +201,9 @@ const App: React.FC = () => {
             path="/friends" 
             element={
               <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <FriendsPage />
+                <Layout onLogout={handleLogout}>
+                  <FriendsPage />
+                </Layout>
               </ProtectedRoute>
             } 
           />

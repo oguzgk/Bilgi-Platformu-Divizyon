@@ -465,7 +465,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
         {/* İçerik */}
         <div className="relative z-10 flex flex-col items-center justify-center w-full px-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+          <h1 className="text-4xl md:text-5xl font-semibold text-white mb-4 leading-tight">
             Şehrin Bilgi Evrenine Hoş Geldin
           </h1>
           <p className="text-xl text-white/90 mb-12">
@@ -494,7 +494,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           <div className="max-w-md mx-auto">
             {/* Logo ve Başlık */}
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-slate-800 mb-2">Konya Genç Wiki</h2>
+              <h2 className="text-3xl font-semibold text-slate-800 mb-2">Konya Genç Wiki</h2>
               <p className="text-slate-500">Genç Kültür Kart</p>
             </div>
 
@@ -506,7 +506,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     setActiveTab('login');
                     setError('');
                   }}
-                  className="flex-1 py-3 text-sm font-medium transition-all"
+                  className="flex-1 py-3 text-sm font-normal transition-all"
                   style={activeTab === 'login' 
                     ? { backgroundColor: COLORS.turquoise, color: 'white' } 
                     : { backgroundColor: '#f8fafc', color: '#64748b' }
@@ -519,7 +519,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     setActiveTab('register');
                     setError('');
                   }}
-                  className="flex-1 py-3 text-sm font-medium transition-all"
+                  className="flex-1 py-3 text-sm font-normal transition-all"
                   style={activeTab === 'register' 
                     ? { backgroundColor: COLORS.turquoise, color: 'white' } 
                     : { backgroundColor: '#f8fafc', color: '#64748b' }
@@ -536,7 +536,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     setError('');
                     setForgotEmail('');
                   }}
-                  className="flex items-center gap-2 text-sm font-medium hover:opacity-80 transition-opacity"
+                  className="flex items-center gap-2 text-sm font-normal hover:opacity-80 transition-opacity"
                   style={{ color: COLORS.turquoise }}
                 >
                   <ArrowLeft size={18} />
@@ -559,7 +559,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
                     <Mail size={40} className="text-emerald-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">E-posta Gönderildi!</h3>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-2">E-posta Gönderildi!</h3>
                   <p className="text-slate-500 mb-2">Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.</p>
                   <p className="text-sm text-slate-400">Giriş sayfasına yönlendiriliyorsunuz...</p>
                 </div>
@@ -570,7 +570,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: `${COLORS.turquoise}15` }}>
                       <KeyRound size={32} style={{ color: COLORS.turquoise }} />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-800 mb-2">Şifreni mi Unuttun?</h3>
+                    <h3 className="text-xl font-semibold text-slate-800 mb-2">Şifreni mi Unuttun?</h3>
                     <p className="text-sm text-slate-500">
                       Endişelenme! E-posta adresini gir, sana şifre sıfırlama bağlantısı gönderelim.
                     </p>
@@ -607,7 +607,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     {/* Gönder Butonu */}
                     <button
                       type="submit"
-                      className="w-full py-3.5 rounded-xl text-white font-bold text-sm uppercase tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
+                      className="w-full py-3.5 rounded-xl text-white font-semibold text-sm uppercase tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
                       style={{ backgroundColor: COLORS.turquoise }}
                     >
                       SIFIRLAMA BAĞLANTISI GÖNDER
@@ -682,7 +682,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                       setActiveTab('forgot');
                       setError('');
                     }}
-                    className="text-sm font-medium hover:underline" 
+                    className="text-sm font-normal hover:underline" 
                     style={{ color: COLORS.turquoise }}
                   >
                     Şifremi Unuttum
@@ -699,7 +699,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                 {/* Giriş Butonu */}
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl text-white font-bold text-sm uppercase tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
+                  className="w-full py-3.5 rounded-xl text-white font-semibold text-sm uppercase tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
                   style={{ backgroundColor: COLORS.turquoise }}
                 >
                   GİRİŞ YAP
@@ -730,7 +730,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 size={40} className="text-emerald-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">Kayıt Başarılı!</h3>
+                  <h3 className="text-xl font-semibold text-slate-800 mb-2">Kayıt Başarılı!</h3>
                   <p className="text-slate-500">Giriş sayfasına yönlendiriliyorsunuz...</p>
                 </div>
               ) : (
@@ -876,8 +876,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                         className="w-4 h-4 mt-0.5 rounded border-slate-300 text-emerald-500 focus:ring-emerald-500"
                       />
                       <label htmlFor="acceptTerms" className="text-sm text-slate-600 cursor-pointer">
-                        <span className="font-medium" style={{ color: COLORS.turquoise }}>Kullanım Koşulları</span> ve{' '}
-                        <span className="font-medium" style={{ color: COLORS.turquoise }}>Gizlilik Politikası</span>'nı okudum, kabul ediyorum.
+                        <span className="font-normal" style={{ color: COLORS.turquoise }}>Kullanım Koşulları</span> ve{' '}
+                        <span className="font-normal" style={{ color: COLORS.turquoise }}>Gizlilik Politikası</span>'nı okudum, kabul ediyorum.
                       </label>
                     </div>
 
@@ -891,7 +891,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     {/* Kayıt Butonu */}
                     <button
                       type="submit"
-                      className="w-full py-3.5 rounded-xl text-white font-bold text-sm uppercase tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
+                      className="w-full py-3.5 rounded-xl text-white font-semibold text-sm uppercase tracking-wide shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
                       style={{ backgroundColor: COLORS.turquoise }}
                     >
                       KAYIT OL

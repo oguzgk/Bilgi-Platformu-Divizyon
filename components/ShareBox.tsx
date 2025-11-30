@@ -101,7 +101,7 @@ const ShareBox: React.FC = () => {
             >
               <X size={20} />
             </button>
-            <h3 className="text-xl font-bold mb-4">Fotoğraf / Video Ekle</h3>
+            <h3 className="text-xl font-semibold mb-4">Fotoğraf / Video Ekle</h3>
             <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-emerald-500 transition-colors cursor-pointer">
               <Upload size={48} className="mx-auto mb-3 text-gray-400" />
               <p className="text-gray-600 mb-2">Dosya seçmek için tıklayın</p>
@@ -125,7 +125,7 @@ const ShareBox: React.FC = () => {
             >
               <X size={20} />
             </button>
-            <h3 className="text-xl font-bold mb-4">Arkadaşlarını Etiketle</h3>
+            <h3 className="text-xl font-semibold mb-4">Arkadaşlarını Etiketle</h3>
             <input
               type="text"
               placeholder="Arkadaş ara..."
@@ -149,7 +149,7 @@ const ShareBox: React.FC = () => {
                     }`}
                   >
                     <img src={friend.avatar} alt={friend.username} className="w-10 h-10 rounded-full" />
-                    <span className={`font-medium ${isSelected ? 'text-sky-700' : 'text-gray-800'}`}>
+                    <span className={`font-normal ${isSelected ? 'text-sky-700' : 'text-gray-800'}`}>
                       @{friend.username}
                     </span>
                     {isSelected && <span className="ml-auto text-sky-600">✓</span>}
@@ -160,7 +160,7 @@ const ShareBox: React.FC = () => {
             <div className="mt-4 flex gap-2">
               <button
                 onClick={() => setShowTagModal(false)}
-                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors"
+                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-normal rounded-lg transition-colors"
               >
                 İptal
               </button>
@@ -175,7 +175,7 @@ const ShareBox: React.FC = () => {
                   });
                 }}
                 disabled={selectedFriends.length === 0}
-                className="flex-1 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-normal rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Etiketle ({selectedFriends.length})
               </button>
@@ -195,7 +195,7 @@ const ShareBox: React.FC = () => {
             >
               <X size={20} />
             </button>
-            <h3 className="text-xl font-bold mb-4">Nasıl Hissediyorsun?</h3>
+            <h3 className="text-xl font-semibold mb-4">Nasıl Hissediyorsun?</h3>
             <div className="grid grid-cols-2 gap-3">
               {feelings.map((feeling) => (
                 <button
@@ -213,7 +213,7 @@ const ShareBox: React.FC = () => {
                   className="flex items-center gap-3 p-4 border border-gray-200 rounded-xl hover:border-amber-500 hover:bg-amber-50 transition-all"
                 >
                   <span className="text-3xl">{feeling.emoji}</span>
-                  <span className="font-medium text-gray-800">{feeling.label}</span>
+                  <span className="font-normal text-gray-800">{feeling.label}</span>
                 </button>
               ))}
             </div>

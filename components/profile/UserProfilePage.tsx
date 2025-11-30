@@ -77,7 +77,7 @@ function UserProfilePage() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <Link 
             to="/"
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-medium mb-3"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-normal mb-3"
           >
             <ArrowLeft size={20} />
             <span>Ana Sayfaya Dön</span>
@@ -91,7 +91,7 @@ function UserProfilePage() {
                 className="w-20 h-20 rounded-full border-4 border-gray-200 shadow-lg"
               />
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">{user.title}</h1>
+                <h1 className="text-3xl font-semibold text-gray-900">{user.title}</h1>
                 <p className="text-gray-500">@{user.username}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <RoleBadge role={user.metadata?.role || 'yeni_gelen'} size="small" showMultiplier={true} />
@@ -142,7 +142,7 @@ function UserProfilePage() {
           <div className="lg:col-span-1 space-y-6">
             {/* Hakkında */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <User size={20} className="text-[#00BFA5]" />
                 Hakkında
               </h3>
@@ -164,7 +164,7 @@ function UserProfilePage() {
 
             {/* İstatistikler */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <TrendingUp size={20} className="text-[#00BFA5]" />
                 İstatistikler
               </h3>
@@ -174,35 +174,35 @@ function UserProfilePage() {
                     <BookOpen size={16} className="text-blue-500" />
                     <span>Wiki Düzenlemeleri</span>
                   </div>
-                  <span className="font-bold text-gray-900">45</span>
+                  <span className="font-semibold text-gray-900">45</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <MessageSquare size={16} className="text-green-500" />
                     <span>Yorumlar</span>
                   </div>
-                  <span className="font-bold text-gray-900">128</span>
+                  <span className="font-semibold text-gray-900">128</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <TrendingUp size={16} className="text-purple-500" />
                     <span>Başlıklar</span>
                   </div>
-                  <span className="font-bold text-gray-900">23</span>
+                  <span className="font-semibold text-gray-900">23</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <Zap size={16} className="text-amber-500" />
                     <span>Toplam Beğeni</span>
                   </div>
-                  <span className="font-bold text-gray-900">567</span>
+                  <span className="font-semibold text-gray-900">567</span>
                 </div>
               </div>
             </div>
 
             {/* Rozetler */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <Award size={20} className="text-[#00BFA5]" />
                 Rozetler ({badges.length})
               </h3>
@@ -229,7 +229,7 @@ function UserProfilePage() {
           {/* Right Main - Activity */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
                 <TrendingUp size={24} className="text-[#00BFA5]" />
                 Son Aktiviteler
               </h3>
@@ -254,7 +254,7 @@ function UserProfilePage() {
                         {getIcon()}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                        <p className="text-sm font-normal text-gray-900">{activity.title}</p>
                         <div className="flex items-center gap-2 mt-1">
                           <span className="text-xs text-gray-500">{activity.time}</span>
                           <span className="text-xs text-gray-400">•</span>
@@ -270,7 +270,7 @@ function UserProfilePage() {
               </div>
 
               {/* Load More */}
-              <button className="w-full mt-6 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-xl transition-colors">
+              <button className="w-full mt-6 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-normal rounded-xl transition-colors">
                 Daha Fazla Yükle
               </button>
             </div>
@@ -283,7 +283,7 @@ function UserProfilePage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 animate-slideDown">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
                 <Flag size={24} className="text-red-500" />
                 Kullanıcıyı Raporla
               </h3>
@@ -304,7 +304,7 @@ function UserProfilePage() {
                 <button
                   key={reason}
                   onClick={() => handleReport(reason)}
-                  className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-red-50 rounded-lg transition-colors text-gray-700 hover:text-red-600 font-medium"
+                  className="w-full text-left px-4 py-3 bg-gray-50 hover:bg-red-50 rounded-lg transition-colors text-gray-700 hover:text-red-600 font-normal"
                 >
                   {reason}
                 </button>
@@ -313,7 +313,7 @@ function UserProfilePage() {
 
             <button
               onClick={() => setShowReportModal(false)}
-              className="w-full mt-4 px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium rounded-lg transition-colors"
+              className="w-full mt-4 px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 font-normal rounded-lg transition-colors"
             >
               İptal
             </button>

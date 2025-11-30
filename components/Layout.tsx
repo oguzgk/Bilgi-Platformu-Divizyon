@@ -191,7 +191,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onLogout }) => {
                         setSearchQuery('');
                         setShowSearchResults(false);
                       }}
-                      className="text-sm text-[#00BFA5] hover:text-[#009688] font-medium"
+                      className="text-sm text-[#00BFA5] hover:text-[#009688] font-normal"
                     >
                       Tüm sonuçları gör →
                     </button>
@@ -220,7 +220,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onLogout }) => {
                       </h4>
                       <button
                         onClick={handleClearRecentSearches}
-                        className="text-xs text-red-500 hover:text-red-600 font-medium"
+                        className="text-xs text-red-500 hover:text-red-600 font-normal"
                       >
                         Temizle
                       </button>
@@ -275,7 +275,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onLogout }) => {
               to="/profile" 
               className="group flex items-center gap-2 bg-gradient-to-r from-yellow-50 to-amber-50 px-3 py-2 rounded-lg border border-yellow-200 hover:border-yellow-300 hover:shadow-md transition-all hover:-translate-y-0.5"
             >
-              <span className="text-yellow-700 font-bold text-sm group-hover:text-yellow-800 transition-colors">
+              <span className="text-yellow-700 font-semibold text-sm group-hover:text-yellow-800 transition-colors">
                 {CURRENT_USER.coins.toLocaleString()}
               </span>
               <Sparkles size={16} className="text-yellow-500 group-hover:animate-pulse" />

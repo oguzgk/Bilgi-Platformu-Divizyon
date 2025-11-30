@@ -94,7 +94,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ friend, onClose }) => {
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-bold text-sm truncate">{friend.displayName}</h3>
+            <h3 className="font-semibold text-sm truncate">{friend.displayName}</h3>
             <p className="text-xs text-white/80">
               {friend.isOnline ? 'Çevrimiçi' : 'Çevrimdışı'}
             </p>

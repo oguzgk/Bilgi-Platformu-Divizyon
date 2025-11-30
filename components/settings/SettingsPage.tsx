@@ -123,10 +123,10 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
       <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex flex-col z-20 hidden lg:flex">
         {/* Brand */}
         <div className="p-6 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: COLORS.turquoise }}>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-semibold" style={{ backgroundColor: COLORS.turquoise }}>
             K
           </div>
-          <h1 className="text-xl font-bold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
+          <h1 className="text-xl font-semibold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
         </div>
 
         {/* Navigation */}
@@ -140,7 +140,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
                   <li key={item.id}>
                     <Link
                       to={item.path}
-                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                      className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-normal transition-colors text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     >
                       <Icon size={20} className="text-gray-400" />
                       {item.name}
@@ -156,14 +156,14 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
         <div className="p-4 border-t border-gray-100">
           <Link
             to="/settings"
-            className="flex items-center gap-3 px-4 py-2 text-sm font-medium bg-[#F0F4F8] text-[#00BFA5] w-full rounded-lg transition-colors"
+            className="flex items-center gap-3 px-4 py-2 text-sm font-normal bg-[#F0F4F8] text-[#00BFA5] w-full rounded-lg transition-colors"
           >
             <Settings size={18} />
             Ayarlar
           </Link>
           <button 
             onClick={onLogout}
-            className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+            className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
           >
             <LogOut size={18} />
             Çıkış Yap
@@ -178,7 +178,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
           <div className="max-w-4xl mx-auto px-6 py-4">
             <Link 
               to="/"
-              className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-medium mb-3"
+              className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-normal mb-3"
             >
               <ChevronLeft size={20} />
               <span>Ana Sayfaya Dön</span>
@@ -188,7 +188,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
                 <Settings size={24} className="text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Ayarlar</h1>
+                <h1 className="text-2xl font-semibold text-gray-900">Ayarlar</h1>
                 <p className="text-sm text-gray-500">Hesap ve uygulama tercihlerini yönet</p>
               </div>
             </div>
@@ -205,7 +205,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
               <User size={24} className="text-blue-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Hesap Ayarları</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Hesap Ayarları</h2>
               <p className="text-sm text-gray-500">Profil bilgilerini düzenle</p>
             </div>
           </div>
@@ -276,7 +276,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
 
             <button
               onClick={handleSaveAccount}
-              className="w-full px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
+              className="w-full px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
             >
               <Check size={20} />
               Hesap Bilgilerini Kaydet
@@ -291,7 +291,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
               <Bell size={24} className="text-purple-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Bildirim Tercihleri</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Bildirim Tercihleri</h2>
               <p className="text-sm text-gray-500">Hangi bildirimleri almak istediğini seç</p>
             </div>
           </div>
@@ -331,7 +331,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
 
           <button
             onClick={handleSaveNotifications}
-            className="w-full mt-6 px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-6 px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
           >
             <Check size={20} />
             Bildirim Tercihlerini Kaydet
@@ -345,7 +345,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
               <Lock size={24} className="text-amber-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Gizlilik</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Gizlilik</h2>
               <p className="text-sm text-gray-500">Gizlilik ayarlarını yönet</p>
             </div>
           </div>
@@ -396,7 +396,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
 
           <button
             onClick={handleSavePrivacy}
-            className="w-full mt-6 px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-6 px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
           >
             <Check size={20} />
             Gizlilik Ayarlarını Kaydet
@@ -410,7 +410,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
               <Palette size={24} className="text-indigo-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Tema</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Tema</h2>
               <p className="text-sm text-gray-500">Açık/Koyu mod seçenekleri</p>
             </div>
           </div>
@@ -444,7 +444,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
 
           <button
             onClick={handleSaveTheme}
-            className="w-full mt-6 px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full mt-6 px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
           >
             <Check size={20} />
             Tema Tercihini Kaydet
@@ -458,7 +458,7 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
               <Globe size={24} className="text-green-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Dil</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Dil</h2>
               <p className="text-sm text-gray-500">Uygulama dilini değiştir</p>
             </div>
           </div>
@@ -488,22 +488,22 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
               <Shield size={24} className="text-red-600" />
             </div>
             <div>
-              <h2 className="text-xl font-bold text-gray-900">Tehlikeli Bölge</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Tehlikeli Bölge</h2>
               <p className="text-sm text-gray-500">Hesap yönetimi ve silme işlemleri</p>
             </div>
           </div>
 
           <div className="space-y-3">
-            <button className="w-full px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
+            <button className="w-full px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
               <Mail size={20} />
               E-posta Adresini Doğrula
             </button>
             
-            <button className="w-full px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
+            <button className="w-full px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
               Hesabı Geçici Olarak Dondur
             </button>
             
-            <button className="w-full px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
+            <button className="w-full px-6 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2">
               <X size={20} />
               Hesabı Kalıcı Olarak Sil
             </button>

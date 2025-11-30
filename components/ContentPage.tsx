@@ -19,12 +19,12 @@ const CONTENT_DATA: Record<string, {
     content: (
       <div className="space-y-6">
         <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-          <h3 className="font-bold text-blue-900 mb-2">📅 Vize Sınavları: 18-29 Aralık 2024</h3>
+          <h3 className="font-semibold text-blue-900 mb-2">📅 Vize Sınavları: 18-29 Aralık 2024</h3>
           <p className="text-blue-800 text-sm">Sınav yerleri ve saatleri için dekanlık web sitesini kontrol edin.</p>
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-gray-900">Hukuk Fakültesi Sınav Takvimi</h3>
+          <h3 className="text-xl font-semibold text-gray-900">Hukuk Fakültesi Sınav Takvimi</h3>
           
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
@@ -58,7 +58,7 @@ const CONTENT_DATA: Record<string, {
           </div>
 
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <h4 className="font-bold text-yellow-900 mb-2">⚠️ Önemli Hatırlatmalar:</h4>
+            <h4 className="font-semibold text-yellow-900 mb-2">⚠️ Önemli Hatırlatmalar:</h4>
             <ul className="list-disc list-inside text-yellow-800 text-sm space-y-1">
               <li>Sınavlara kimlik ve öğrenci belgesi ile gelin</li>
               <li>Sınav salonlarına en az 15 dakika önceden gelin</li>
@@ -78,7 +78,7 @@ const CONTENT_DATA: Record<string, {
     content: (
       <div className="space-y-6">
         <div className="bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 rounded-xl p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">🗺️ Kampüs Binalar Rehberi</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">🗺️ Kampüs Binalar Rehberi</h3>
           
           <div className="grid md:grid-cols-2 gap-4">
             {[
@@ -88,7 +88,7 @@ const CONTENT_DATA: Record<string, {
               { name: 'Merkez Kütüphane', code: 'D Blok', floor: '6 Kat', facilities: 'Çalışma Alanları' },
             ].map((building, idx) => (
               <div key={idx} className="bg-white border border-gray-200 rounded-lg p-4">
-                <h4 className="font-bold text-gray-900">{building.name}</h4>
+                <h4 className="font-semibold text-gray-900">{building.name}</h4>
                 <p className="text-sm text-gray-600 mt-1">📍 {building.code} - {building.floor}</p>
                 <p className="text-xs text-gray-500 mt-2">✨ {building.facilities}</p>
               </div>
@@ -112,7 +112,7 @@ const CONTENT_DATA: Record<string, {
     content: (
       <div className="space-y-6">
         <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-lg">
-          <h3 className="font-bold text-orange-900 mb-2">🍽️ Bu Hafta Menü</h3>
+          <h3 className="font-semibold text-orange-900 mb-2">🍽️ Bu Hafta Menü</h3>
           <p className="text-orange-800 text-sm">Öğrenci kartı ile 12₺ | Personel: 35₺</p>
         </div>
 
@@ -125,7 +125,7 @@ const CONTENT_DATA: Record<string, {
             { day: 'Cuma', menu: ['Tarhana Çorbası', 'Karnıyarık', 'Bulgur', 'Salata', 'Komposto'] },
           ].map((day, idx) => (
             <div key={idx} className="bg-white border-2 border-gray-200 rounded-xl p-4">
-              <h4 className="font-bold text-gray-900 mb-3 pb-2 border-b">{day.day}</h4>
+              <h4 className="font-semibold text-gray-900 mb-3 pb-2 border-b">{day.day}</h4>
               <ul className="space-y-2">
                 {day.menu.map((item, i) => (
                   <li key={i} className="text-sm text-gray-700 flex items-center gap-2">
@@ -139,7 +139,7 @@ const CONTENT_DATA: Record<string, {
         </div>
 
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-          <h4 className="font-bold text-green-900 mb-2">📍 Yemekhane Saatleri</h4>
+          <h4 className="font-semibold text-green-900 mb-2">📍 Yemekhane Saatleri</h4>
           <div className="text-sm text-green-800 space-y-1">
             <p>🕐 Öğle Yemeği: 11:30 - 14:30</p>
             <p>🕔 Akşam Yemeği: 17:30 - 20:00</p>
@@ -159,7 +159,7 @@ const CONTENT_DATA: Record<string, {
           <div className="flex items-start gap-4">
             <div className="text-6xl">🥙</div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Dönerci Şükrü</h3>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Dönerci Şükrü</h3>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-yellow-500">⭐⭐⭐⭐⭐</span>
                 <span className="text-sm text-gray-600">(487 değerlendirme)</span>
@@ -171,7 +171,7 @@ const CONTENT_DATA: Record<string, {
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <h4 className="font-bold text-gray-900 mb-3">📋 Menü & Fiyatlar</h4>
+            <h4 className="font-semibold text-gray-900 mb-3">📋 Menü & Fiyatlar</h4>
             <div className="space-y-2">
               {[
                 { item: 'Tavuk Döner Dürüm', price: '45₺' },
@@ -182,15 +182,15 @@ const CONTENT_DATA: Record<string, {
                 { item: 'Ayran', price: '10₺' },
               ].map((menu, idx) => (
                 <div key={idx} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                  <span className="text-sm font-medium text-gray-800">{menu.item}</span>
-                  <span className="font-bold text-orange-600">{menu.price}</span>
+                  <span className="text-sm font-normal text-gray-800">{menu.item}</span>
+                  <span className="font-semibold text-orange-600">{menu.price}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="font-bold text-gray-900 mb-3">📍 Bilgiler</h4>
+            <h4 className="font-semibold text-gray-900 mb-3">📍 Bilgiler</h4>
             <div className="space-y-3">
               <div className="p-3 bg-gray-50 rounded-lg">
                 <p className="text-sm font-semibold text-gray-700 mb-1">📍 Adres</p>
@@ -213,7 +213,7 @@ const CONTENT_DATA: Record<string, {
         </div>
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="font-bold text-blue-900 mb-2">💬 Öğrenci Yorumları</h4>
+          <h4 className="font-semibold text-blue-900 mb-2">💬 Öğrenci Yorumları</h4>
           <div className="space-y-2 text-sm text-blue-800">
             <p>"Kampüsteki en iyi döner burası!" - @ahmetyilmaz</p>
             <p>"Fiyat/performans çok iyi, kesinlikle deneyin!" - @aysedemir</p>
@@ -232,11 +232,11 @@ function ContentPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
         <div className="text-center">
-          <h1 className="text-6xl font-bold text-gray-300 mb-4">404</h1>
+          <h1 className="text-6xl font-semibold text-gray-300 mb-4">404</h1>
           <p className="text-xl text-gray-600 mb-6">Sayfa bulunamadı</p>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00BFA5] text-white font-bold rounded-xl hover:bg-[#009688] transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#00BFA5] text-white font-semibold rounded-xl hover:bg-[#009688] transition-colors"
           >
             <ArrowLeft size={20} />
             Ana Sayfaya Dön
@@ -258,7 +258,7 @@ function ContentPage() {
             className="flex items-center gap-2 text-gray-600 hover:text-[#00BFA5] transition-colors"
           >
             <ArrowLeft size={20} />
-            <span className="font-medium">Geri</span>
+            <span className="font-normal">Geri</span>
           </Link>
           <div className="h-6 w-px bg-gray-300"></div>
           <div className="flex items-center gap-3">
@@ -266,7 +266,7 @@ function ContentPage() {
               <Icon size={20} />
             </div>
             <div>
-              <h1 className="font-bold text-gray-900">{content.title}</h1>
+              <h1 className="font-semibold text-gray-900">{content.title}</h1>
               <p className="text-xs text-gray-500">{content.category}</p>
             </div>
           </div>

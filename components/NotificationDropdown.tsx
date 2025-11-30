@@ -82,7 +82,7 @@ function NotificationDropdown({
       >
         <Bell size={20} className={`transition-colors ${isOpen ? 'text-[#00BFA5]' : 'text-gray-600 group-hover:text-gray-900'}`} />
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-bold rounded-full px-1 animate-pulse">
+          <span className="absolute top-1 right-1 min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-[10px] font-semibold rounded-full px-1 animate-pulse">
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
@@ -93,11 +93,11 @@ function NotificationDropdown({
         <div className="absolute right-0 mt-2 w-96 max-w-[calc(100vw-2rem)] bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50 animate-slideDown">
           {/* Header */}
           <div className="px-4 py-3 border-b border-gray-200 bg-gray-50 flex items-center justify-between">
-            <h3 className="font-bold text-gray-900 text-sm">Bildirimler</h3>
+            <h3 className="font-semibold text-gray-900 text-sm">Bildirimler</h3>
             {unreadCount > 0 && (
               <button
                 onClick={onMarkAllAsRead}
-                className="text-xs text-[#00BFA5] hover:text-[#009688] font-medium transition-colors"
+                className="text-xs text-[#00BFA5] hover:text-[#009688] font-normal transition-colors"
               >
                 Tümünü Okundu İşaretle
               </button>
@@ -194,7 +194,7 @@ function NotificationDropdown({
           {/* Footer */}
           {notifications.length > 0 && (
             <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 text-center">
-              <button className="text-sm text-[#00BFA5] hover:text-[#009688] font-medium transition-colors">
+              <button className="text-sm text-[#00BFA5] hover:text-[#009688] font-normal transition-colors">
                 Tüm Bildirimleri Görüntüle
               </button>
             </div>

@@ -80,13 +80,12 @@ function FriendsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
+    <div>
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
           <Link 
             to="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-medium mb-4"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
           >
             <ChevronLeft size={20} />
             <span>Ana Sayfaya Dön</span>
@@ -97,7 +96,7 @@ function FriendsPage() {
               <Users size={32} />
             </div>
             <div>
-              <h1 className="text-4xl font-extrabold">Arkadaşlar</h1>
+              <h1 className="text-4xl font-semibold">Arkadaşlar</h1>
               <p className="text-white/80 text-lg">Arkadaşlarınla bağlantıda kal</p>
             </div>
           </div>
@@ -108,7 +107,7 @@ function FriendsPage() {
               <div className="flex items-center gap-3">
                 <Users size={24} />
                 <div>
-                  <p className="text-2xl font-bold">{friends.length}</p>
+                  <p className="text-2xl font-semibold">{friends.length}</p>
                   <p className="text-white/70 text-sm">Arkadaş</p>
                 </div>
               </div>
@@ -117,7 +116,7 @@ function FriendsPage() {
               <div className="flex items-center gap-3">
                 <Clock size={24} />
                 <div>
-                  <p className="text-2xl font-bold">{requests.length}</p>
+                  <p className="text-2xl font-semibold">{requests.length}</p>
                   <p className="text-white/70 text-sm">Bekleyen İstek</p>
                 </div>
               </div>
@@ -126,17 +125,16 @@ function FriendsPage() {
               <div className="flex items-center gap-3">
                 <Sparkles size={24} />
                 <div>
-                  <p className="text-2xl font-bold">{friends.filter(f => f.isOnline).length}</p>
+                  <p className="text-2xl font-semibold">{friends.filter(f => f.isOnline).length}</p>
                   <p className="text-white/70 text-sm">Çevrimiçi</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="py-8">
         {/* Tabs */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 mb-6 flex gap-2">
           <button
@@ -149,7 +147,7 @@ function FriendsPage() {
           >
             <Users size={20} />
             Arkadaşlarım
-            <span className="px-2 py-0.5 bg-white/30 rounded-full text-xs font-bold">
+            <span className="px-2 py-0.5 bg-white/30 rounded-full text-xs font-semibold">
               {friends.length}
             </span>
           </button>
@@ -164,7 +162,7 @@ function FriendsPage() {
             <Clock size={20} />
             Bekleyen İstekler
             {requests.length > 0 && (
-              <span className="px-2 py-0.5 bg-white/30 rounded-full text-xs font-bold">
+              <span className="px-2 py-0.5 bg-white/30 rounded-full text-xs font-semibold">
                 {requests.length}
               </span>
             )}
@@ -212,7 +210,7 @@ function FriendsPage() {
             {filteredFriends.length === 0 ? (
               <div className="col-span-2 text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-200">
                 <Users size={64} className="text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Arkadaş Bulunamadı</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Arkadaş Bulunamadı</h3>
                 <p className="text-gray-500">
                   {searchQuery 
                     ? `"${searchQuery}" araması için sonuç bulunamadı.`
@@ -234,7 +232,7 @@ function FriendsPage() {
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <Link to={`/user/${friend.username}`} className="font-bold text-gray-900 hover:text-[#00BFA5] transition-colors flex items-center gap-2 mb-1">
+                      <Link to={`/user/${friend.username}`} className="font-semibold text-gray-900 hover:text-[#00BFA5] transition-colors flex items-center gap-2 mb-1">
                         {friend.displayName}
                         <RoleBadge role={friend.role as any} size="small" showName={false} />
                       </Link>
@@ -286,7 +284,7 @@ function FriendsPage() {
             {requests.length === 0 ? (
               <div className="text-center py-16 bg-white rounded-2xl shadow-sm border border-gray-200">
                 <Clock size={64} className="text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Bekleyen İstek Yok</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Bekleyen İstek Yok</h3>
                 <p className="text-gray-500">Yeni arkadaşlık isteklerin burada görünecek.</p>
               </div>
             ) : (
@@ -300,7 +298,7 @@ function FriendsPage() {
                     />
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-bold text-gray-900">{request.displayName}</h3>
+                        <h3 className="font-semibold text-gray-900">{request.displayName}</h3>
                         <RoleBadge role={request.role as any} size="small" showName={false} />
                       </div>
                       <p className="text-sm text-gray-500 mb-2">@{request.username}</p>
@@ -310,14 +308,14 @@ function FriendsPage() {
                       <div className="flex gap-2">
                         <button
                           onClick={() => handleAcceptRequest(request.id, request.displayName)}
-                          className="px-4 py-2 bg-[#00BFA5] text-white rounded-lg font-medium hover:bg-[#009688] transition-colors flex items-center gap-2"
+                          className="px-4 py-2 bg-[#00BFA5] text-white rounded-lg font-normal hover:bg-[#009688] transition-colors flex items-center gap-2"
                         >
                           <Check size={18} />
                           Kabul Et
                         </button>
                         <button
                           onClick={() => handleRejectRequest(request.id, request.displayName)}
-                          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                          className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-normal hover:bg-gray-300 transition-colors"
                         >
                           Reddet
                         </button>
@@ -341,7 +339,7 @@ function FriendsPage() {
                     alt={suggestion.username}
                     className="w-20 h-20 rounded-full border-2 border-gray-200 mx-auto mb-3"
                   />
-                  <Link to={`/user/${suggestion.username}`} className="font-bold text-gray-900 hover:text-[#00BFA5] transition-colors flex items-center justify-center gap-2 mb-1">
+                  <Link to={`/user/${suggestion.username}`} className="font-semibold text-gray-900 hover:text-[#00BFA5] transition-colors flex items-center justify-center gap-2 mb-1">
                     {suggestion.displayName}
                     <RoleBadge role={suggestion.role as any} size="small" showName={false} />
                   </Link>
@@ -351,7 +349,7 @@ function FriendsPage() {
                   </p>
                   <button
                     onClick={() => handleAddFriend(suggestion.id, suggestion.displayName)}
-                    className="w-full px-4 py-2 bg-[#00BFA5] text-white rounded-lg font-medium hover:bg-[#009688] transition-colors flex items-center justify-center gap-2"
+                    className="w-full px-4 py-2 bg-[#00BFA5] text-white rounded-lg font-normal hover:bg-[#009688] transition-colors flex items-center justify-center gap-2"
                   >
                     <UserPlus size={18} />
                     Arkadaş Ekle

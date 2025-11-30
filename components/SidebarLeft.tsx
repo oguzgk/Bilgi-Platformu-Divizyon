@@ -63,10 +63,10 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
     <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex flex-col z-20 hidden lg:flex">
       {/* Brand */}
       <div className="p-6 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: COLORS.turquoise }}>
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-semibold" style={{ backgroundColor: COLORS.turquoise }}>
           K
         </div>
-        <h1 className="text-xl font-bold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
+        <h1 className="text-xl font-semibold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
       </div>
 
       {/* Navigation */}
@@ -78,7 +78,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
               <li key={item.id}>
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(item.path)
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-normal transition-colors ${isActive(item.path)
                       ? `bg-[#F0F4F8] text-[#00BFA5]`
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     }`}
@@ -98,14 +98,14 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
       <div className="p-4 border-t border-gray-100">
         <Link
           to="/settings"
-          className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+          className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
         >
           <Settings size={18} />
           Ayarlar
         </Link>
         <button 
           onClick={onLogout}
-          className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+          className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
         >
           <LogOut size={18} />
           Çıkış Yap
@@ -134,7 +134,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
                 <span className="text-3xl">{iconMap[CATEGORIES.find(c => c.id === showCategoryModal.id)?.icon || 'Home']}</span>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-gray-900">{CATEGORY_CONTENT[showCategoryModal.id]?.title || showCategoryModal.name}</h3>
+                <h3 className="text-2xl font-semibold text-gray-900">{CATEGORY_CONTENT[showCategoryModal.id]?.title || showCategoryModal.name}</h3>
                 <p className="text-sm text-gray-500">{CATEGORY_CONTENT[showCategoryModal.id]?.description || 'Kategori açıklaması'}</p>
               </div>
             </div>
@@ -143,7 +143,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
               <>
                 {/* Popüler Başlıklar */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                     <TrendingUp size={16} />
                     Popüler Başlıklar
                   </h4>
@@ -157,7 +157,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
                         }}
                         className="text-left p-3 bg-gray-50 hover:bg-[#00BFA5]/10 border border-gray-200 hover:border-[#00BFA5] rounded-lg transition-all group"
                       >
-                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#00BFA5] transition-colors">
+                        <span className="text-sm font-normal text-gray-700 group-hover:text-[#00BFA5] transition-colors">
                           {topic}
                         </span>
                       </button>
@@ -167,7 +167,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
 
                 {/* Hızlı Linkler */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
                     <ExternalLink size={16} />
                     Hızlı Erişim
                   </h4>
@@ -179,7 +179,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
                         onClick={() => setShowCategoryModal(null)}
                         className="flex items-center justify-between p-3 bg-white border border-gray-200 hover:border-[#00BFA5] hover:shadow-md rounded-lg transition-all group"
                       >
-                        <span className="text-sm font-medium text-gray-700 group-hover:text-[#00BFA5] transition-colors">
+                        <span className="text-sm font-normal text-gray-700 group-hover:text-[#00BFA5] transition-colors">
                           {link.title}
                         </span>
                         <ExternalLink size={14} className="text-gray-400 group-hover:text-[#00BFA5] transition-colors" />
@@ -206,7 +206,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({ onLogout }) => {
             {/* Action Button */}
             <button
               onClick={() => setShowCategoryModal(null)}
-              className="w-full mt-4 px-4 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors"
+              className="w-full mt-4 px-4 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-xl transition-colors"
             >
               Kapat
             </button>

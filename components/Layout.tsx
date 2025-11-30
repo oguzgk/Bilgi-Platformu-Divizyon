@@ -27,8 +27,36 @@ const Layout: React.FC<LayoutProps> = ({ children, onLogout }) => {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [userCoins, setUserCoins] = useState(() => {
+    const storedCoins = localStorage.getItem('userCoins');
+    return storedCoins ? parseInt(storedCoins, 10) : CURRENT_USER.coins;
+  });
   const searchRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  
+  // localStorage'dan coin bakiyesini dinle (diğer sayfalardan güncellemeler için)
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedCoins = localStorage.getItem('userCoins');
+      if (storedCoins) {
+        const newCoins = parseInt(storedCoins, 10);
+        setUserCoins(newCoins);
+        // CURRENT_USER'ı da güncelle
+        (CURRENT_USER as any).coins = newCoins;
+      }
+    };
+
+    // Storage event listener (başka sekmeden güncelleme için)
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Aynı sekmede güncelleme için custom event
+    window.addEventListener('coinsUpdated', handleStorageChange as EventListener);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('coinsUpdated', handleStorageChange as EventListener);
+    };
+  }, []);
   const { notifications, markAsRead, markAllAsRead, deleteNotification } = useNotifications();
 
   const popularSearches = ['Selimiye Camii', 'Mevlana Müzesi', 'Etli Ekmek', 'Yurt Tavsiyeleri', 'Hukuk Fakültesi'];
@@ -276,7 +304,7 @@ const Layout: React.FC<LayoutProps> = ({ children, onLogout }) => {
               className="group flex items-center gap-2 bg-gradient-to-r from-yellow-50 to-amber-50 px-3 py-2 rounded-lg border border-yellow-200 hover:border-yellow-300 hover:shadow-md transition-all hover:-translate-y-0.5"
             >
               <span className="text-yellow-700 font-semibold text-sm group-hover:text-yellow-800 transition-colors">
-                {CURRENT_USER.coins.toLocaleString()}
+                {userCoins.toLocaleString()}
               </span>
               <Sparkles size={16} className="text-yellow-500 group-hover:animate-pulse" />
             </Link>

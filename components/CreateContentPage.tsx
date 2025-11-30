@@ -59,7 +59,23 @@ function CreateContentPage() {
     await new Promise(resolve => setTimeout(resolve, 2000));
     
     // Coin kazandır
-    const coinAmount = COIN_REWARDS.createTopic * CURRENT_USER.multiplier;
+    const coinAmount = Math.floor(COIN_REWARDS.createTopic * CURRENT_USER.multiplier);
+    
+    // Coin bakiyesini localStorage'dan al veya CURRENT_USER'dan başlat
+    const storedCoins = localStorage.getItem('userCoins');
+    const currentCoins = storedCoins ? parseInt(storedCoins, 10) : CURRENT_USER.coins;
+    const newCoinBalance = currentCoins + coinAmount;
+    
+    // Coin bakiyesini localStorage'a kaydet
+    localStorage.setItem('userCoins', newCoinBalance.toString());
+    
+    // CURRENT_USER'ı da güncelle (runtime'da)
+    (CURRENT_USER as any).coins = newCoinBalance;
+    
+    // Diğer bileşenlere coin güncellemesini bildir
+    window.dispatchEvent(new CustomEvent('coinsUpdated', { detail: { newBalance: newCoinBalance } }));
+    
+    // Coin bildirimi göster
     showNotification(coinAmount, 'Yeni başlık oluşturdunuz!', CURRENT_USER.multiplier);
     
     // Yeni içeriği localStorage'a kaydet

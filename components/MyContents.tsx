@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Edit3, MessageSquare, FileText, Trash2, Eye, ThumbsUp, ThumbsDown, Clock, TrendingUp, Check } from 'lucide-react';
+import { Edit3, MessageSquare, FileText, Trash2, Eye, ThumbsUp, ThumbsDown, Clock, TrendingUp, Check, Coins } from 'lucide-react';
 import { CURRENT_USER } from '../constants';
 import { useCoinNotification } from './CoinNotification';
 import { useNotifications } from '../contexts/NotificationContext';
@@ -386,7 +386,7 @@ function MyContents() {
         <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-              <span className="text-lg">🪙</span>
+              <Coins size={20} className="text-green-600" fill="#FFD700" />
             </div>
             <div>
               <p className="text-2xl font-semibold text-gray-900">{stats.totalCoins}</p>
@@ -495,7 +495,7 @@ function MyContents() {
                   </button>
                   {wiki.coinsEarned > 0 && (
                     <div className="flex items-center gap-1 text-amber-600">
-                      <span className="text-lg">🪙</span>
+                      <Coins size={16} className="text-amber-600" fill="#FFD700" />
                       <span className="font-semibold">+{wiki.coinsEarned} Coin</span>
                     </div>
                   )}

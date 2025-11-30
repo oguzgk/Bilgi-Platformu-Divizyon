@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Award, Lock, ChevronLeft, Filter, Trophy, Users, Star, Zap } from 'lucide-react';
+import { Award, Lock, ChevronLeft, Filter, Trophy, Users, Star, Zap, Coins } from 'lucide-react';
 import { ALL_BADGES, COLORS, Badge } from '../constants';
 
 type CategoryFilter = 'all' | 'contribution' | 'social' | 'special' | 'achievement';
@@ -195,8 +195,12 @@ function BadgeGallery() {
                 )}
 
                 {/* Badge Icon */}
-                <div className={`text-5xl mb-3 ${badge.unlocked ? '' : 'grayscale opacity-50'}`}>
-                  {badge.icon}
+                <div className={`text-5xl mb-3 flex items-center justify-center ${badge.unlocked ? '' : 'grayscale opacity-50'}`}>
+                  {badge.id === 'coin_master' ? (
+                    <Coins size={48} className="text-white" fill="#FFD700" strokeWidth={2} />
+                  ) : (
+                    <span>{badge.icon}</span>
+                  )}
                 </div>
 
                 {/* Badge Name */}

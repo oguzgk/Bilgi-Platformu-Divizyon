@@ -361,9 +361,9 @@ function SettingsPage({ onLogout }: SettingsPageProps) {
                 onChange={(e) => setPrivacy(prev => ({ ...prev, profileVisibility: e.target.value }))}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00BFA5] focus:border-transparent transition-all"
               >
-                <option value="public">🌍 Herkese Açık</option>
-                <option value="friends">👥 Sadece Arkadaşlar</option>
-                <option value="private">🔒 Özel (Sadece Ben)</option>
+                <option value="public">Herkese Açık</option>
+                <option value="friends">Sadece Arkadaşlar</option>
+                <option value="private">Özel (Sadece Ben)</option>
               </select>
             </div>
 

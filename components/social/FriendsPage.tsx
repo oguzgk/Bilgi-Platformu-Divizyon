@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Users, UserPlus, UserCheck, MessageSquare, ChevronLeft, Search, X,
-  TrendingUp, Award, Sparkles, Clock, Check
+  TrendingUp, Award, Sparkles, Clock, Check, Coins
 } from 'lucide-react';
 import { CURRENT_USER } from '../../constants';
 import RoleBadge from '../RoleBadge';
@@ -243,7 +243,7 @@ function FriendsPage() {
                           Lv.{friend.level}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Sparkles size={12} />
+                          <Coins size={12} className="text-amber-600" fill="#FFD700" />
                           {friend.coins}
                         </span>
                         <span className="flex items-center gap-1">

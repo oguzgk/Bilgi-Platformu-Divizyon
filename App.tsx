@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Flame, FileText } from 'lucide-react';
 import Layout from './components/Layout';
 import ProfilePage from './components/profile/ProfilePage';
 import UserProfilePage from './components/profile/UserProfilePage';
@@ -34,23 +35,25 @@ const HomePage: React.FC<HomePageProps> = ({ onLogout }) => {
       <div className="mb-6 flex items-center gap-4 border-b border-gray-200">
         <button
           onClick={() => setActiveTab('discover')}
-          className={`pb-3 px-4 font-bold transition-all ${
+          className={`pb-3 px-4 font-bold transition-all flex items-center gap-2 ${
             activeTab === 'discover'
               ? 'text-[#00BFA5] border-b-2 border-[#00BFA5]'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          🔥 Keşfet
+          <Flame size={18} />
+          Keşfet
         </button>
         <button
           onClick={() => setActiveTab('mycontents')}
-          className={`pb-3 px-4 font-bold transition-all ${
+          className={`pb-3 px-4 font-bold transition-all flex items-center gap-2 ${
             activeTab === 'mycontents'
               ? 'text-[#00BFA5] border-b-2 border-[#00BFA5]'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          📝 Benim İçeriklerim
+          <FileText size={18} />
+          Benim İçeriklerim
         </button>
       </div>
 

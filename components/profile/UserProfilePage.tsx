@@ -43,7 +43,7 @@ function UserProfilePage() {
     setIsFollowing(!isFollowing);
     addNotification(
       'announcement',
-      isFollowing ? 'Takibi Bıraktın' : 'Takip Ediliyor! 👥',
+      isFollowing ? 'Takibi Bıraktın' : 'Takip Ediliyor!',
       isFollowing 
         ? `${user.username} kullanıcısını takip etmeyi bıraktın.`
         : `${user.username} kullanıcısını takip etmeye başladın. Yeni içerikleri bildirimlerden görebilirsin!`,

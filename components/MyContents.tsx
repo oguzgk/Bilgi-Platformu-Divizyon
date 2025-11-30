@@ -326,11 +326,11 @@ function MyContents() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'approved':
-        return <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded-lg">✓ Onaylandı</span>;
+        return <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-lg">✓ Onaylandı</span>;
       case 'pending':
-        return <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-lg">⏳ Beklemede</span>;
+        return <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-semibold rounded-lg">⏳ Beklemede</span>;
       case 'rejected':
-        return <span className="px-2 py-1 bg-red-100 text-red-700 text-xs font-bold rounded-lg">✗ Reddedildi</span>;
+        return <span className="px-2 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-lg">✗ Reddedildi</span>;
       default:
         return null;
     }
@@ -353,7 +353,7 @@ function MyContents() {
               <FileText size={20} className="text-blue-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.totalWikis}</p>
+              <p className="text-2xl font-semibold text-gray-900">{stats.totalWikis}</p>
               <p className="text-xs text-gray-500">Wiki Düzenleme</p>
             </div>
           </div>
@@ -365,7 +365,7 @@ function MyContents() {
               <MessageSquare size={20} className="text-purple-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.totalComments}</p>
+              <p className="text-2xl font-semibold text-gray-900">{stats.totalComments}</p>
               <p className="text-xs text-gray-500">Yorum</p>
             </div>
           </div>
@@ -377,7 +377,7 @@ function MyContents() {
               <TrendingUp size={20} className="text-amber-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.totalTopics}</p>
+              <p className="text-2xl font-semibold text-gray-900">{stats.totalTopics}</p>
               <p className="text-xs text-gray-500">Başlık</p>
             </div>
           </div>
@@ -389,7 +389,7 @@ function MyContents() {
               <span className="text-lg">🪙</span>
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.totalCoins}</p>
+              <p className="text-2xl font-semibold text-gray-900">{stats.totalCoins}</p>
               <p className="text-xs text-gray-500">Kazanılan Coin</p>
             </div>
           </div>
@@ -409,7 +409,7 @@ function MyContents() {
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id as ContentType)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold text-sm transition-all whitespace-nowrap ${
                 activeFilter === filter.id
                   ? 'bg-[#00BFA5] text-white shadow-md'
                   : 'text-gray-600 hover:bg-gray-100'
@@ -425,7 +425,7 @@ function MyContents() {
       {/* Wiki Edits */}
       {(activeFilter === 'all' || activeFilter === 'wikis') && (
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <Edit3 size={20} className="text-[#00BFA5]" />
             Wiki Düzenlemelerim
           </h2>
@@ -435,11 +435,11 @@ function MyContents() {
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-bold text-gray-900">{wiki.title}</h3>
+                      <h3 className="font-semibold text-gray-900">{wiki.title}</h3>
                       {getStatusBadge(wiki.status)}
                     </div>
                     <p className="text-sm text-gray-500">
-                      <span className="text-[#00BFA5] font-medium">{wiki.category}</span> • {wiki.editDate}
+                      <span className="text-[#00BFA5] font-normal">{wiki.category}</span> • {wiki.editDate}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -509,7 +509,7 @@ function MyContents() {
       {/* Comments */}
       {(activeFilter === 'all' || activeFilter === 'comments') && (
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <MessageSquare size={20} className="text-[#00BFA5]" />
             Yorumlarım
           </h2>
@@ -518,7 +518,7 @@ function MyContents() {
               <div key={comment.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
-                    <h3 className="font-bold text-gray-900 mb-1">{comment.topicTitle}</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">{comment.topicTitle}</h3>
                     
                     {editingCommentId === comment.id ? (
                       // Edit Mode
@@ -533,14 +533,14 @@ function MyContents() {
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleSaveComment(comment.id)}
-                            className="px-4 py-2 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-lg transition-colors flex items-center gap-2"
+                            className="px-4 py-2 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-lg transition-colors flex items-center gap-2"
                           >
                             <Check size={16} />
                             Kaydet
                           </button>
                           <button
                             onClick={handleCancelEdit}
-                            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold rounded-lg transition-colors"
+                            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-colors"
                           >
                             İptal
                           </button>
@@ -599,7 +599,7 @@ function MyContents() {
       {/* Topics */}
       {(activeFilter === 'all' || activeFilter === 'topics') && (
         <section>
-          <h2 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
             <TrendingUp size={20} className="text-[#00BFA5]" />
             Açtığım Başlıklar
           </h2>
@@ -608,9 +608,9 @@ function MyContents() {
               <div key={topic.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-bold text-gray-900 mb-1">{topic.title}</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">{topic.title}</h3>
                     <p className="text-sm text-gray-500 mb-3">
-                      <span className="text-[#00BFA5] font-medium">{topic.category}</span> • {topic.date}
+                      <span className="text-[#00BFA5] font-normal">{topic.category}</span> • {topic.date}
                     </p>
                     <div className="flex items-center gap-4 text-sm text-gray-600">
                       <div className="flex items-center gap-1">
@@ -625,7 +625,7 @@ function MyContents() {
                   </div>
                   <button
                     onClick={() => handleViewTopic(topic.id, topic.title)}
-                    className="px-4 py-2 bg-[#00BFA5] hover:bg-[#009688] text-white font-medium rounded-lg transition-colors flex items-center gap-2"
+                    className="px-4 py-2 bg-[#00BFA5] hover:bg-[#009688] text-white font-normal rounded-lg transition-colors flex items-center gap-2"
                   >
                     <Eye size={18} />
                     Görüntüle
@@ -641,9 +641,9 @@ function MyContents() {
       {activeFilter === 'wikis' && myWikiEdits.length === 0 && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-12 text-center">
           <Edit3 size={48} className="text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-bold text-gray-900 mb-2">Henüz Wiki Düzenlemeniz Yok</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">Henüz Wiki Düzenlemeniz Yok</h3>
           <p className="text-gray-500 mb-6">Wiki sayfalarını düzenleyerek coin kazanın ve rolünüzü yükseltin!</p>
-          <button className="px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-bold rounded-xl transition-colors">
+          <button className="px-6 py-3 bg-[#00BFA5] hover:bg-[#009688] text-white font-semibold rounded-xl transition-colors">
             Wiki Düzenlemeye Başla
           </button>
         </div>

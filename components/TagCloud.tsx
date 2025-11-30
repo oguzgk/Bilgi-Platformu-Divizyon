@@ -39,13 +39,12 @@ function TagCloud() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
+    <div>
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
           <Link 
             to="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-medium mb-4"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
           >
             <ChevronLeft size={20} />
             <span>Ana Sayfaya Dön</span>
@@ -56,22 +55,21 @@ function TagCloud() {
               <Tag size={32} />
             </div>
             <div>
-              <h1 className="text-4xl font-extrabold">Etiket Bulutu</h1>
+              <h1 className="text-4xl font-semibold">Etiket Bulutu</h1>
               <p className="text-white/80 text-lg">Popüler konular ve etiketler</p>
             </div>
           </div>
         </div>
-      </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="py-8">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center gap-3">
               <Hash size={24} className="text-[#00BFA5]" />
               <div>
-                <p className="text-2xl font-bold text-gray-900">{POPULAR_TAGS.length}</p>
+                <p className="text-2xl font-semibold text-gray-900">{POPULAR_TAGS.length}</p>
                 <p className="text-sm text-gray-500">Toplam Etiket</p>
               </div>
             </div>
@@ -80,7 +78,7 @@ function TagCloud() {
             <div className="flex items-center gap-3">
               <TrendingUp size={24} className="text-[#00BFA5]" />
               <div>
-                <p className="text-2xl font-bold text-gray-900">
+                <p className="text-2xl font-semibold text-gray-900">
                   {POPULAR_TAGS.reduce((sum, tag) => sum + tag.count, 0)}
                 </p>
                 <p className="text-sm text-gray-500">Toplam Kullanım</p>
@@ -91,7 +89,7 @@ function TagCloud() {
             <div className="flex items-center gap-3">
               <Tag size={24} className="text-[#00BFA5]" />
               <div>
-                <p className="text-2xl font-bold text-gray-900">{POPULAR_TAGS[0].name}</p>
+                <p className="text-2xl font-semibold text-gray-900">{POPULAR_TAGS[0].name}</p>
                 <p className="text-sm text-gray-500">En Popüler</p>
               </div>
             </div>
@@ -100,7 +98,7 @@ function TagCloud() {
 
         {/* Tag Cloud */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
             <Hash size={28} className="text-[#00BFA5]" />
             Popüler Etiketler
           </h2>
@@ -127,7 +125,7 @@ function TagCloud() {
           <div className="mt-8 bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-200 rounded-2xl p-6 animate-slideDown">
             <div className="flex items-start justify-between">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 flex items-center gap-2">
                   <Tag size={24} className="text-teal-600" />
                   #{POPULAR_TAGS.find(t => t.id === selectedTag)?.name}
                 </h3>
@@ -137,7 +135,7 @@ function TagCloud() {
               </div>
               <Link
                 to={`/search?tag=${POPULAR_TAGS.find(t => t.id === selectedTag)?.name}`}
-                className="px-4 py-2 bg-[#00BFA5] text-white rounded-lg font-medium hover:bg-[#009688] transition-colors"
+                className="px-4 py-2 bg-[#00BFA5] text-white rounded-lg font-normal hover:bg-[#009688] transition-colors"
               >
                 İçerikleri Gör
               </Link>
@@ -150,7 +148,7 @@ function TagCloud() {
           <div className="flex items-start gap-4">
             <Hash size={32} className="text-teal-600 flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">Etiketler Nasıl Kullanılır?</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">Etiketler Nasıl Kullanılır?</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
                   <span className="text-teal-600">•</span>

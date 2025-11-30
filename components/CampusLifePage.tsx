@@ -184,14 +184,14 @@ function CampusLifePage() {
     switch (status) {
       case 'live':
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-500 text-white text-xs font-bold rounded-full animate-pulse">
+          <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-full animate-pulse">
             <span className="w-2 h-2 bg-white rounded-full"></span>
             CANLI
           </span>
         );
       case 'upcoming':
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#00BFA5] text-white text-xs font-bold rounded-full">
+          <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#00BFA5] text-white text-xs font-semibold rounded-full">
             <Clock size={12} />
             YAKLAŞAN
           </span>
@@ -246,7 +246,7 @@ function CampusLifePage() {
     <div className="min-h-screen bg-[#F0F4F8]">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 rounded-2xl p-8 mb-8 text-white shadow-lg">
-        <h1 className="text-4xl font-bold mb-3 flex items-center gap-3">
+        <h1 className="text-4xl font-semibold mb-3 flex items-center gap-3">
           <Coffee size={40} />
           Kampüs Yaşamı
         </h1>
@@ -271,7 +271,7 @@ function CampusLifePage() {
           {/* Kulüp Etkinlikleri */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <h2 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
                 <TrendingUp size={24} className="text-[#00BFA5]" />
                 Kulüp Etkinlikleri
               </h2>
@@ -286,7 +286,7 @@ function CampusLifePage() {
                     setCurrentPage(0);
                   }
                 }}
-                className="text-sm text-[#00BFA5] hover:text-teal-600 font-medium flex items-center gap-1"
+                className="text-sm text-[#00BFA5] hover:text-teal-600 font-normal flex items-center gap-1"
               >
                 {showAllEvents ? 'Daha Az Göster' : 'Tümünü Gör'}
                 <ChevronRight size={16} />
@@ -363,7 +363,7 @@ function CampusLifePage() {
                   {/* Event Info */}
                   <div className="p-4">
                     <div className="text-xs text-[#00BFA5] font-semibold mb-1">{event.club}</div>
-                    <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#00BFA5] transition-colors">
+                    <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#00BFA5] transition-colors">
                       {event.title}
                     </h3>
                     
@@ -410,7 +410,7 @@ function CampusLifePage() {
 
           {/* Canlı Durum */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <div className="relative">
                 <Bell size={24} className="text-red-500" />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping"></span>
@@ -434,7 +434,7 @@ function CampusLifePage() {
                      <BookOpen size={24} />}
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-gray-900">{status.title}</h3>
+                    <h3 className="font-semibold text-gray-900">{status.title}</h3>
                     <div className="flex items-center gap-3 text-xs text-gray-600 mt-1">
                       <span className="flex items-center gap-1">
                         <MapPin size={12} />
@@ -447,7 +447,7 @@ function CampusLifePage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="flex items-center gap-1 text-sm font-bold text-teal-600">
+                    <div className="flex items-center gap-1 text-sm font-semibold text-teal-600">
                       <Users size={16} />
                       {status.attendees}
                     </div>
@@ -463,7 +463,7 @@ function CampusLifePage() {
         <div className="lg:col-span-1 space-y-6">
           {/* Etkinlik Takvimi */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <Calendar size={20} className="text-[#00BFA5]" />
               Etkinlik Takvimi
             </h2>
@@ -472,7 +472,7 @@ function CampusLifePage() {
             <div className="bg-gradient-to-br from-[#00BFA5] to-teal-600 rounded-xl p-4 text-white mb-4">
               <div className="text-center">
                 <p className="text-sm opacity-80">Mayıs 2024</p>
-                <p className="text-5xl font-bold my-2">{selectedDate || 15}</p>
+                <p className="text-5xl font-semibold my-2">{selectedDate || 15}</p>
                 <p className="text-sm opacity-80">
                   {selectedDate && eventDays.includes(selectedDate) 
                     ? `${filteredEvents.length} Etkinlik` 
@@ -498,7 +498,7 @@ function CampusLifePage() {
                       setSelectedDate(day);
                       setShowAllEvents(false);
                     }}
-                    className={`aspect-square text-sm font-medium rounded-lg transition-all ${
+                    className={`aspect-square text-sm font-normal rounded-lg transition-all ${
                       isSelected
                         ? 'bg-[#00BFA5] text-white shadow-lg scale-110'
                         : hasEvent
@@ -518,7 +518,7 @@ function CampusLifePage() {
 
           {/* Yaklaşan Etkinlikler */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <Clock size={20} className="text-[#00BFA5]" />
               Yaklaşan Etkinlikler
             </h2>
@@ -532,11 +532,11 @@ function CampusLifePage() {
                   <div className="flex-shrink-0 w-12 text-center">
                     <div className="bg-gradient-to-br from-[#00BFA5] to-teal-600 text-white rounded-lg p-2">
                       <p className="text-xs font-semibold">{event.date.split(' ')[1]}</p>
-                      <p className="text-lg font-bold">{event.date.split(' ')[0]}</p>
+                      <p className="text-lg font-semibold">{event.date.split(' ')[0]}</p>
                     </div>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-sm text-gray-900 group-hover:text-[#00BFA5] transition-colors line-clamp-1">
+                    <h3 className="font-semibold text-sm text-gray-900 group-hover:text-[#00BFA5] transition-colors line-clamp-1">
                       {event.title}
                     </h3>
                     <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
@@ -553,7 +553,7 @@ function CampusLifePage() {
               ))}
             </div>
 
-            <button className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white font-bold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
+            <button className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all flex items-center justify-center gap-2">
               <Calendar size={18} />
               Tüm Etkinlikleri Gör
             </button>

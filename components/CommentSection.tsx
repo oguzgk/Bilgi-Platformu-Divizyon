@@ -81,7 +81,7 @@ function CommentSection() {
       {/* Divider */}
       <div className="flex items-center gap-4 py-6 mb-2">
          <div className="h-px bg-gray-200 flex-1"></div>
-         <h2 className="text-lg font-bold text-gray-400 uppercase tracking-widest px-2">Öğrenci Yorumları</h2>
+         <h2 className="text-lg font-semibold text-gray-400 uppercase tracking-widest px-2">Öğrenci Yorumları</h2>
          <div className="h-px bg-gray-200 flex-1"></div>
       </div>
 
@@ -112,7 +112,7 @@ function CommentSection() {
                <button 
                  onClick={handleSubmitComment}
                  disabled={!newComment.trim() || isSubmitting}
-                 className="flex items-center gap-2 px-6 py-2 rounded-lg text-white font-bold text-sm shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                 className="flex items-center gap-2 px-6 py-2 rounded-lg text-white font-semibold text-sm shadow-sm hover:shadow-md transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                  style={{ backgroundColor: COLORS.turquoise }}
                >
                  <Send size={16} className={isSubmitting ? 'animate-pulse' : ''} />
@@ -135,7 +135,7 @@ function CommentSection() {
                   >
                      <ArrowBigUp size={28} fill={comment.userVote === 'up' ? 'currentColor' : 'none'} />
                   </button>
-                  <span className={`font-bold text-sm ${comment.userVote ? 'text-gray-800' : 'text-gray-500'}`}>
+                  <span className={`font-semibold text-sm ${comment.userVote ? 'text-gray-800' : 'text-gray-500'}`}>
                     {comment.likes - comment.dislikes}
                   </span>
                   <button 
@@ -151,7 +151,7 @@ function CommentSection() {
                   <div className="flex items-center justify-between mb-2">
                      <div className="flex items-center gap-2">
                         <img src={comment.user.avatarUrl} alt={comment.user.username} className="w-6 h-6 rounded-full" />
-                        <span className="text-sm font-bold text-gray-900 hover:text-[#00BFA5] cursor-pointer transition-colors">@{comment.user.username}</span>
+                        <span className="text-sm font-semibold text-gray-900 hover:text-[#00BFA5] cursor-pointer transition-colors">@{comment.user.username}</span>
                         <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                         <span className="text-xs text-gray-400">{comment.timestamp}</span>
                      </div>

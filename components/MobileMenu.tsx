@@ -59,12 +59,12 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
         <div className="p-6 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div 
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold"
+              className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-semibold"
               style={{ backgroundColor: COLORS.turquoise }}
             >
               K
             </div>
-            <h1 className="text-xl font-bold text-gray-800">Konya Genç Wiki</h1>
+            <h1 className="text-xl font-semibold text-gray-800">Konya Genç Wiki</h1>
           </div>
           <button 
             onClick={onClose}
@@ -83,7 +83,7 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
               className="w-12 h-12 rounded-full border-2 border-white shadow-md"
             />
             <div>
-              <h3 className="font-bold text-gray-800">@{CURRENT_USER.username}</h3>
+              <h3 className="font-semibold text-gray-800">@{CURRENT_USER.username}</h3>
               <p className="text-xs text-gray-500">Level {CURRENT_USER.level}</p>
             </div>
           </div>
@@ -99,7 +99,7 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
                 <Link
                   to={item.path}
                   onClick={onClose}
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-normal transition-colors ${
                     isActive(item.path)
                       ? `bg-[#F0F4F8] text-[#00BFA5]`
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
@@ -120,7 +120,7 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
           <Link 
             to="/settings"
             onClick={onClose}
-            className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
           >
             <Settings size={18} />
             Ayarlar
@@ -130,7 +130,7 @@ function MobileMenu({ isOpen, onClose, onLogout }: MobileMenuProps) {
               onLogout?.();
               onClose();
             }}
-            className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+            className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
           >
             <LogOut size={18} />
             Çıkış Yap

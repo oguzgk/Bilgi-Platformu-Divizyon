@@ -395,7 +395,7 @@ const ExamCalendar: React.FC = () => {
                   {examsOnDate.map((exam, idx) => (
                     <div
                       key={idx}
-                      className="text-[10px] font-medium bg-white bg-opacity-90 text-gray-800 px-1.5 py-0.5 rounded truncate w-full text-left"
+                      className="text-[10px] font-normal bg-white bg-opacity-90 text-gray-800 px-1.5 py-0.5 rounded truncate w-full text-left"
                       title={exam.courseName}
                     >
                       {exam.courseName}
@@ -421,7 +421,7 @@ const ExamCalendar: React.FC = () => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-3">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm font-bold text-gray-800">
+          <h3 className="text-sm font-semibold text-gray-800">
             {currentMonth.toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}
           </h3>
           <div className="flex gap-1">
@@ -488,7 +488,7 @@ const ExamCalendar: React.FC = () => {
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 rounded-t-2xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold mb-1 text-gray-900">Yeni Sınav Ekle</h3>
+                  <h3 className="text-2xl font-semibold mb-1 text-gray-900">Yeni Sınav Ekle</h3>
                   <p className="text-sm text-gray-600">Sınav detaylarını girin ve konuları ekleyin</p>
                 </div>
                 <button
@@ -591,10 +591,10 @@ const ExamCalendar: React.FC = () => {
                         className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200"
                       >
                         <div className="shrink-0 w-6 h-6 bg-[#00BFA5] bg-opacity-20 rounded-full flex items-center justify-center">
-                          <span className="text-xs font-bold text-[#00BFA5]">{index + 1}</span>
+                          <span className="text-xs font-semibold text-[#00BFA5]">{index + 1}</span>
                         </div>
                         <div className="flex-1">
-                          <p className="text-sm text-gray-800 font-medium">{topic.title}</p>
+                          <p className="text-sm text-gray-800 font-normal">{topic.title}</p>
                           <div className="flex items-center gap-3 mt-1">
                             {topic.questionCount && (
                               <span className="text-xs text-gray-600 bg-blue-100 px-2 py-0.5 rounded">
@@ -652,7 +652,7 @@ const ExamCalendar: React.FC = () => {
                     />
                     <button
                       onClick={handleAddTopic}
-                      className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors font-medium flex items-center gap-2 shrink-0"
+                      className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors font-normal flex items-center gap-2 shrink-0"
                     >
                       <Plus size={18} />
                       Ekle
@@ -665,14 +665,14 @@ const ExamCalendar: React.FC = () => {
               <div className="flex gap-3 pt-4 border-t border-gray-200">
                 <button
                   onClick={() => setIsAddingExam(false)}
-                  className="flex-1 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors font-medium"
+                  className="flex-1 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition-colors font-normal"
                 >
                   İptal
                 </button>
                 <button
                   onClick={handleAddExam}
                   disabled={!newExam.courseName || !newExam.examDate || !newExam.examTime}
-                  className="flex-1 px-6 py-3 bg-[#00BFA5] hover:bg-[#00a590] text-white rounded-xl transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="flex-1 px-6 py-3 bg-[#00BFA5] hover:bg-[#00a590] text-white rounded-xl transition-colors font-normal disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <CheckCircle2 size={20} />
                   Sınavı Kaydet
@@ -693,7 +693,7 @@ const ExamCalendar: React.FC = () => {
               <div className="sticky top-0 bg-white border-b border-gray-200 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800">
+                    <h3 className="text-xl font-semibold text-gray-800">
                       {selectedDate.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
                     </h3>
                     <p className="text-sm text-gray-500 mt-1">
@@ -721,7 +721,7 @@ const ExamCalendar: React.FC = () => {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <h4 className="font-bold text-gray-800 mb-1">{exam.courseName}</h4>
+                        <h4 className="font-semibold text-gray-800 mb-1">{exam.courseName}</h4>
                         <div className="flex items-center gap-3 text-sm text-gray-600">
                           <div className="flex items-center gap-1">
                             <Clock size={14} />
@@ -753,7 +753,7 @@ const ExamCalendar: React.FC = () => {
                 <div className="sticky top-0 bg-white border-b border-gray-200 p-6">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-2 text-gray-900">{selectedExam.courseName}</h3>
+                      <h3 className="text-2xl font-semibold mb-2 text-gray-900">{selectedExam.courseName}</h3>
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1.5">
                           <Calendar size={16} />
@@ -789,7 +789,7 @@ const ExamCalendar: React.FC = () => {
                 <div className="p-6 overflow-y-auto flex-1">
                   {selectedExam.topics.length > 0 ? (
                     <div>
-                      <h4 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                      <h4 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                         <BookOpen size={20} className="text-[#00BFA5]" />
                         Vize Konuları ({selectedExam.topics.length})
                       </h4>
@@ -800,13 +800,13 @@ const ExamCalendar: React.FC = () => {
                             className="flex items-start gap-4 p-4 bg-linear-to-r from-gray-50 to-white rounded-xl border border-gray-200 hover:border-[#00BFA5] transition-colors"
                           >
                             <div className="shrink-0 w-8 h-8 bg-[#00BFA5] bg-opacity-20 rounded-full flex items-center justify-center">
-                              <span className="text-sm font-bold text-[#00BFA5]">{index + 1}</span>
+                              <span className="text-sm font-semibold text-[#00BFA5]">{index + 1}</span>
                             </div>
                             <div className="flex-1">
                               <p className="text-gray-800 font-semibold leading-relaxed mb-2">{topic.title}</p>
                               <div className="flex items-center gap-3">
                                 {topic.questionCount && (
-                                  <span className="text-xs bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-medium">
+                                  <span className="text-xs bg-blue-100 text-blue-700 px-2.5 py-1 rounded-full font-normal">
                                     {topic.questionCount} soru
                                   </span>
                                 )}
@@ -855,13 +855,13 @@ const ExamCalendar: React.FC = () => {
                 <Calendar size={28} color={COLORS.turquoise} />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">Vize Takvimi</h1>
+                <h1 className="text-2xl font-semibold text-gray-800">Vize Takvimi</h1>
                 <p className="text-sm text-gray-500">Sınav programınızı yönetin ve konularınızı takip edin</p>
               </div>
             </div>
             <button
               onClick={() => setIsAddingExam(true)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-[#00BFA5] text-white rounded-xl hover:bg-[#00a590] transition-colors font-medium"
+              className="flex items-center gap-2 px-4 py-2.5 bg-[#00BFA5] text-white rounded-xl hover:bg-[#00a590] transition-colors font-normal"
             >
               <Plus size={20} />
               Sınav Ekle
@@ -887,9 +887,9 @@ const ExamCalendar: React.FC = () => {
                   <div className="p-2.5 bg-blue-100 rounded-lg">
                     <BookOpen size={20} className="text-blue-600" />
                   </div>
-                  <p className="text-2xl font-bold text-gray-800">{exams.length}</p>
+                  <p className="text-2xl font-semibold text-gray-800">{exams.length}</p>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">Toplam Sınav</p>
+                <p className="text-sm text-gray-600 font-normal">Toplam Sınav</p>
               </button>
               
               {filterStatus === 'all' && exams.length > 0 && (
@@ -915,7 +915,7 @@ const ExamCalendar: React.FC = () => {
                               <span>{exam.examTime}</span>
                             </div>
                           </div>
-                          <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                          <span className={`px-2 py-0.5 rounded text-xs font-semibold ${
                             exam.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'
                           }`}>
                             {exam.status === 'completed' ? 'Tamamlandı' : 'Yaklaşan'}
@@ -940,11 +940,11 @@ const ExamCalendar: React.FC = () => {
                   <div className="p-2.5 bg-orange-100 rounded-lg">
                     <AlertCircle size={20} className="text-orange-600" />
                   </div>
-                  <p className="text-2xl font-bold text-gray-800">
+                  <p className="text-2xl font-semibold text-gray-800">
                     {exams.filter(e => e.status === 'upcoming').length}
                   </p>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">Yaklaşan Sınav</p>
+                <p className="text-sm text-gray-600 font-normal">Yaklaşan Sınav</p>
               </button>
               
               {filterStatus === 'upcoming' && exams.filter(e => e.status === 'upcoming').length > 0 && (
@@ -971,7 +971,7 @@ const ExamCalendar: React.FC = () => {
                             </div>
                           </div>
                           {getDaysUntilExam(exam.examDate) <= 3 && (
-                            <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-medium">
+                            <span className="px-2 py-0.5 bg-red-100 text-red-700 rounded text-xs font-normal">
                               Acil!
                             </span>
                           )}
@@ -995,11 +995,11 @@ const ExamCalendar: React.FC = () => {
                   <div className="p-2.5 bg-green-100 rounded-lg">
                     <CheckCircle2 size={20} className="text-green-600" />
                   </div>
-                  <p className="text-2xl font-bold text-gray-800">
+                  <p className="text-2xl font-semibold text-gray-800">
                     {exams.filter(e => e.status === 'completed').length}
                   </p>
                 </div>
-                <p className="text-sm text-gray-600 font-medium">Tamamlanan</p>
+                <p className="text-sm text-gray-600 font-normal">Tamamlanan</p>
               </button>
               
               {filterStatus === 'completed' && exams.filter(e => e.status === 'completed').length > 0 && (
@@ -1045,13 +1045,13 @@ const ExamCalendar: React.FC = () => {
         <div className="space-y-4">
           {filterStatus !== 'all' && (
             <div className="flex items-center justify-between bg-[#00BFA5] bg-opacity-10 rounded-xl p-4 border border-[#00BFA5] border-opacity-30">
-              <p className="text-sm font-medium text-gray-700">
+              <p className="text-sm font-normal text-gray-700">
                 {filterStatus === 'upcoming' && `${filteredExams.length} yaklaşan sınav gösteriliyor`}
                 {filterStatus === 'completed' && `${filteredExams.length} tamamlanmış sınav gösteriliyor`}
               </p>
               <button
                 onClick={() => setFilterStatus('all')}
-                className="text-sm font-medium text-[#00BFA5] hover:underline"
+                className="text-sm font-normal text-[#00BFA5] hover:underline"
               >
                 Tümünü Göster
               </button>
@@ -1093,7 +1093,7 @@ const ExamCalendar: React.FC = () => {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-xl font-bold text-gray-800">{exam.courseName}</h3>
+                          <h3 className="text-xl font-semibold text-gray-800">{exam.courseName}</h3>
                           <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(exam.status)}`}>
                             {daysUntil > 0 ? `${daysUntil} gün kaldı` : daysUntil === 0 ? 'Bugün' : 'Geçti'}
                           </span>
@@ -1156,9 +1156,9 @@ const ExamCalendar: React.FC = () => {
                                 className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                               >
                                 <div className="shrink-0 w-6 h-6 bg-[#00BFA5] bg-opacity-20 rounded-full flex items-center justify-center mt-0.5">
-                                  <span className="text-xs font-bold text-[#00BFA5]">{index + 1}</span>
+                                  <span className="text-xs font-semibold text-[#00BFA5]">{index + 1}</span>
                                 </div>
-                                <span className="text-sm text-gray-700 font-medium flex-1">{topic}</span>
+                                <span className="text-sm text-gray-700 font-normal flex-1">{topic}</span>
                               </div>
                             ))}
                           </div>

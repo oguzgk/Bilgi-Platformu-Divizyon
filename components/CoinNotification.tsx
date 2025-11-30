@@ -80,14 +80,14 @@ function CoinNotification({
               </span>
               <span className="text-sm font-semibold text-gray-600">GençCoin</span>
               {multiplier > 1 && (
-                <span className="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                <span className="bg-purple-100 text-purple-700 text-xs font-semibold px-2 py-0.5 rounded-full flex items-center gap-1">
                   <TrendingUp size={12} />
                   {multiplier}x
                 </span>
               )}
             </div>
             
-            <p className="text-sm text-gray-700 font-medium">
+            <p className="text-sm text-gray-700 font-normal">
               {reason}
             </p>
 

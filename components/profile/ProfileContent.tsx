@@ -34,8 +34,8 @@ const ProfileContent: React.FC = () => {
                             <stat.icon size={24} />
                         </div>
                         <div>
-                            <p className="text-xs text-gray-500 font-medium uppercase">{stat.label}</p>
-                            <p className="text-xl font-bold text-gray-800">{stat.value}</p>
+                            <p className="text-xs text-gray-500 font-normal uppercase">{stat.label}</p>
+                            <p className="text-xl font-semibold text-gray-800">{stat.value}</p>
                         </div>
                     </div>
                 ))}
@@ -43,7 +43,7 @@ const ProfileContent: React.FC = () => {
 
             {/* Badges Grid */}
             <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                     <Award className="text-seljuk-gold" />
                     Rozetlerim
                 </h3>
@@ -51,7 +51,7 @@ const ProfileContent: React.FC = () => {
                     {badges.map((badge, index) => (
                         <div key={index} className={`aspect-square flex flex-col items-center justify-center p-2 rounded-2xl border-2 transition-all cursor-pointer ${badge.unlocked ? 'bg-white border-seljuk-gold/30 hover:border-seljuk-gold shadow-sm' : 'bg-gray-50 border-gray-200 opacity-60 grayscale'}`}>
                             <div className="text-3xl mb-2">{badge.icon}</div>
-                            <span className="text-[10px] text-center font-bold text-gray-600 leading-tight">{badge.name}</span>
+                            <span className="text-[10px] text-center font-semibold text-gray-600 leading-tight">{badge.name}</span>
                         </div>
                     ))}
                 </div>
@@ -59,7 +59,7 @@ const ProfileContent: React.FC = () => {
 
             {/* Contribution History */}
             <div>
-                <h3 className="text-lg font-bold text-gray-800 mb-4">Son Aktiviteler</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">Son Aktiviteler</h3>
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     {history.map((item, index) => (
                         <div key={item.id} className={`flex items-center justify-between p-4 hover:bg-gray-50 transition-colors ${index !== history.length - 1 ? 'border-b border-gray-100' : ''}`}>
@@ -72,7 +72,7 @@ const ProfileContent: React.FC = () => {
                                     <p className="text-xs text-gray-400">{item.time}</p>
                                 </div>
                             </div>
-                            <div className="font-bold text-green-500 text-sm">
+                            <div className="font-semibold text-green-500 text-sm">
                                 +{item.gain} GençCoin
                             </div>
                         </div>

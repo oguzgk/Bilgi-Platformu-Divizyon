@@ -85,7 +85,7 @@ function WikiEditor({ isOpen, onClose, initialContent, topicId, topicTitle }: Wi
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-gray-900 flex items-center gap-2">
               <FileText className="text-[#00BFA5]" size={28} />
               Wiki Düzenle
             </h2>
@@ -105,9 +105,9 @@ function WikiEditor({ isOpen, onClose, initialContent, topicId, topicTitle }: Wi
         {/* Toolbar */}
         <div className="flex items-center justify-between px-6 py-3 border-b border-gray-100 bg-gray-50">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <span className="font-medium">{wordCount} kelime</span>
+            <span className="font-normal">{wordCount} kelime</span>
             <span className="text-gray-400">•</span>
-            <span className="font-medium">{charCount} karakter</span>
+            <span className="font-normal">{charCount} karakter</span>
             {hasChanges && (
               <>
                 <span className="text-gray-400">•</span>
@@ -120,7 +120,7 @@ function WikiEditor({ isOpen, onClose, initialContent, topicId, topicTitle }: Wi
           </div>
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 transition-colors text-gray-700 font-medium"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 transition-colors text-gray-700 font-normal"
           >
             <Eye size={18} />
             {showPreview ? 'Düzenleme' : 'Önizleme'}
@@ -167,13 +167,13 @@ function WikiEditor({ isOpen, onClose, initialContent, topicId, topicTitle }: Wi
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className="px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+              className="px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-normal hover:bg-gray-50 transition-colors"
               disabled={isSaving}
             >
               İptal
             </button>
             <button
-              className="px-5 py-2.5 rounded-lg bg-gray-100 text-gray-600 font-medium hover:bg-gray-200 transition-colors flex items-center gap-2"
+              className="px-5 py-2.5 rounded-lg bg-gray-100 text-gray-600 font-normal hover:bg-gray-200 transition-colors flex items-center gap-2"
               disabled={isSaving}
             >
               <History size={18} />

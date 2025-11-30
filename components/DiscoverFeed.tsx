@@ -50,7 +50,7 @@ function DiscoverFeed() {
       <section>
         <div className="flex items-center gap-2 mb-4">
           <Megaphone size={20} className="text-blue-600" />
-          <h2 className="text-lg font-bold text-gray-800">KBB Duyuruları</h2>
+          <h2 className="text-lg font-semibold text-gray-800">KBB Duyuruları</h2>
         </div>
         <div className="space-y-3">
           {KBB_ANNOUNCEMENTS.map((announcement) => (
@@ -67,7 +67,7 @@ function DiscoverFeed() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     {announcement.isPinned && (
-                      <span className="bg-blue-500 text-white text-xs font-bold px-2 py-0.5 rounded">
+                      <span className="bg-blue-500 text-white text-xs font-semibold px-2 py-0.5 rounded">
                         SABİTLENDİ
                       </span>
                     )}
@@ -75,7 +75,7 @@ function DiscoverFeed() {
                       {announcement.category}
                     </span>
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-1">{announcement.title}</h3>
+                  <h3 className="font-semibold text-gray-900 mb-1">{announcement.title}</h3>
                   <p className="text-xs text-gray-500 flex items-center gap-1">
                     <Clock size={12} />
                     {announcement.date}
@@ -92,7 +92,7 @@ function DiscoverFeed() {
       <section>
         <div className="flex items-center gap-2 mb-4">
           <Flame size={20} className="text-orange-600" />
-          <h2 className="text-lg font-bold text-gray-800">Trend Başlıklar</h2>
+          <h2 className="text-lg font-semibold text-gray-800">Trend Başlıklar</h2>
           <span className="text-xs text-gray-500">(En çok düzenlenen Wikiler)</span>
         </div>
         <div className="space-y-3">
@@ -106,7 +106,7 @@ function DiscoverFeed() {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     {topic.isHot && (
-                      <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                      <span className="bg-orange-100 text-orange-700 text-xs font-semibold px-2 py-0.5 rounded flex items-center gap-1">
                         <Flame size={12} />
                         SICAK
                       </span>
@@ -116,7 +116,7 @@ function DiscoverFeed() {
                     </span>
                   </div>
                   
-                  <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#00BFA5] transition-colors">
+                  <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-[#00BFA5] transition-colors">
                     {topic.title}
                   </h3>
                   
@@ -132,7 +132,7 @@ function DiscoverFeed() {
                   </div>
                   
                   <p className="text-xs text-gray-400 mt-2">
-                    Son düzenleyen: <span className="text-[#00BFA5] font-medium hover:underline">@{topic.lastEditedBy}</span> • {topic.timestamp}
+                    Son düzenleyen: <span className="text-[#00BFA5] font-normal hover:underline">@{topic.lastEditedBy}</span> • {topic.timestamp}
                   </p>
                 </div>
               </div>
@@ -145,7 +145,7 @@ function DiscoverFeed() {
       <section>
         <div className="flex items-center gap-2 mb-4">
           <TrendingUp size={20} className="text-purple-600" />
-          <h2 className="text-lg font-bold text-gray-800">Popüler Yorumlar</h2>
+          <h2 className="text-lg font-semibold text-gray-800">Popüler Yorumlar</h2>
           <span className="text-xs text-gray-500">(En çok beğenilen Sözlük girişleri)</span>
         </div>
         <div className="space-y-3">
@@ -183,7 +183,7 @@ function DiscoverFeed() {
                 </div>
                 
                 <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1 text-sm font-bold text-purple-600">
+                  <span className="flex items-center gap-1 text-sm font-semibold text-purple-600">
                     <ThumbsUp size={14} fill="currentColor" />
                     {comment.likes}
                   </span>
@@ -199,7 +199,7 @@ function DiscoverFeed() {
         <Link
           to="/"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="inline-block px-8 py-3 bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+          className="inline-block px-8 py-3 bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
         >
           Daha Fazla Keşfet
         </Link>
@@ -222,7 +222,7 @@ function DiscoverFeed() {
             <div className="flex items-start gap-3 mb-4">
               <Megaphone size={24} className="text-blue-600 flex-shrink-0" />
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   {KBB_ANNOUNCEMENTS.find(a => a.id === showAnnouncementDetail)?.title}
                 </h3>
                 <p className="text-sm text-gray-600">
@@ -239,7 +239,7 @@ function DiscoverFeed() {
             <div className="mt-6 flex gap-3">
               <button
                 onClick={() => setShowAnnouncementDetail(null)}
-                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium rounded-lg transition-colors"
+                className="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-normal rounded-lg transition-colors"
               >
                 Kapat
               </button>
@@ -247,7 +247,7 @@ function DiscoverFeed() {
                 href="https://www.konya.bel.tr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors text-center"
+                className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-normal rounded-lg transition-colors text-center"
               >
                 Web Sitesine Git
               </a>

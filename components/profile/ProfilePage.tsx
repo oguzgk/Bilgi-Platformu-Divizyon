@@ -54,10 +54,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
             <aside className="fixed left-0 top-0 h-screen w-64 bg-white border-r border-gray-100 flex-col z-20 hidden lg:flex">
                 {/* Brand */}
                 <div className="p-6 flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: COLORS.turquoise }}>
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-semibold" style={{ backgroundColor: COLORS.turquoise }}>
                         K
                     </div>
-                    <h1 className="text-xl font-bold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
+                    <h1 className="text-xl font-semibold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
                 </div>
 
                 {/* Navigation */}
@@ -69,7 +69,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
                                 <li key={item.id}>
                                     <Link
                                         to={item.path}
-                                        className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(item.path)
+                                        className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-normal transition-colors ${isActive(item.path)
                                             ? `bg-[#F0F4F8] text-[#00BFA5]`
                                             : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                             }`}
@@ -89,14 +89,14 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
                 <div className="p-4 border-t border-gray-100">
                     <Link
                         to="/settings"
-                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
                     >
                         <Settings size={18} />
                         Ayarlar
                     </Link>
                     <button
                         onClick={onLogout}
-                        className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+                        className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
                     >
                         <LogOut size={18} />
                         Çıkış Yap
@@ -112,10 +112,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
                         {/* Brand */}
                         <div className="p-6 flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold" style={{ backgroundColor: COLORS.turquoise }}>
+                                <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-semibold" style={{ backgroundColor: COLORS.turquoise }}>
                                     K
                                 </div>
-                                <h1 className="text-xl font-bold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
+                                <h1 className="text-xl font-semibold text-gray-800 tracking-tight">Konya Genç Wiki</h1>
                             </div>
                             <button onClick={() => setIsMobileMenuOpen(false)} className="p-1 hover:bg-gray-100 rounded-lg">
                                 <X size={20} />
@@ -132,7 +132,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
                                             <Link
                                                 to={item.path}
                                                 onClick={() => setIsMobileMenuOpen(false)}
-                                                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(item.path)
+                                                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-normal transition-colors ${isActive(item.path)
                                                     ? `bg-[#F0F4F8] text-[#00BFA5]`
                                                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                                                     }`}
@@ -153,14 +153,14 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
                             <Link
                                 to="/settings"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
+                                className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-gray-600 hover:text-gray-900 w-full rounded-lg hover:bg-gray-50 transition-colors"
                             >
                                 <Settings size={18} />
                                 Ayarlar
                             </Link>
                             <button
                                 onClick={onLogout}
-                                className="flex items-center gap-3 px-4 py-2 text-sm font-medium text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
+                                className="flex items-center gap-3 px-4 py-2 text-sm font-normal text-red-500 hover:text-red-600 w-full rounded-lg hover:bg-red-50 transition-colors mt-1"
                             >
                                 <LogOut size={18} />
                                 Çıkış Yap
@@ -179,10 +179,10 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onLogout }) => {
                     <Menu size={24} className="text-gray-600" />
                 </button>
                 <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white font-bold text-sm" style={{ backgroundColor: COLORS.turquoise }}>
+                    <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white font-semibold text-sm" style={{ backgroundColor: COLORS.turquoise }}>
                         K
                     </div>
-                    <span className="text-lg font-bold text-gray-800">Profilim</span>
+                    <span className="text-lg font-semibold text-gray-800">Profilim</span>
                 </div>
             </div>
 

@@ -259,7 +259,7 @@ function AdvancedSearch({ isOpen, onClose, initialQuery = '' }: AdvancedSearchPr
                 <button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id as any)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all whitespace-nowrap ${
                     activeFilter === filter.id
                       ? 'bg-[#00BFA5] text-white shadow-md'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -279,7 +279,7 @@ function AdvancedSearch({ isOpen, onClose, initialQuery = '' }: AdvancedSearchPr
             <div>
               {/* Popüler Aramalar */}
               <div className="mb-6">
-                <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
                   <TrendingUp size={16} />
                   Popüler Aramalar
                 </h3>
@@ -288,7 +288,7 @@ function AdvancedSearch({ isOpen, onClose, initialQuery = '' }: AdvancedSearchPr
                     <button
                       key={idx}
                       onClick={() => handleSearch(search)}
-                      className="px-3 py-1.5 bg-gray-100 hover:bg-[#00BFA5] hover:text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2"
+                      className="px-3 py-1.5 bg-gray-100 hover:bg-[#00BFA5] hover:text-white rounded-lg text-sm font-normal transition-all flex items-center gap-2"
                     >
                       <Tag size={14} />
                       {search}
@@ -301,13 +301,13 @@ function AdvancedSearch({ isOpen, onClose, initialQuery = '' }: AdvancedSearchPr
               {recentSearches.length > 0 && (
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider flex items-center gap-2">
+                    <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-2">
                       <Clock size={16} />
                       Son Aramalar
                     </h3>
                     <button
                       onClick={clearRecentSearches}
-                      className="text-xs text-red-500 hover:text-red-600 font-medium"
+                      className="text-xs text-red-500 hover:text-red-600 font-normal"
                     >
                       Temizle
                     </button>
@@ -319,7 +319,7 @@ function AdvancedSearch({ isOpen, onClose, initialQuery = '' }: AdvancedSearchPr
                         onClick={() => handleSearch(search)}
                         className="w-full text-left px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors flex items-center justify-between group"
                       >
-                        <span className="text-gray-700 font-medium">{search}</span>
+                        <span className="text-gray-700 font-normal">{search}</span>
                         <ChevronRight size={16} className="text-gray-400 group-hover:text-gray-600" />
                       </button>
                     ))}
@@ -332,7 +332,7 @@ function AdvancedSearch({ isOpen, onClose, initialQuery = '' }: AdvancedSearchPr
           {query && results.length === 0 && !isSearching && (
             <div className="text-center py-12">
               <Search size={48} className="text-gray-300 mx-auto mb-4" />
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Sonuç Bulunamadı</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Sonuç Bulunamadı</h3>
               <p className="text-gray-500">"{query}" için hiçbir sonuç bulunamadı.</p>
             </div>
           )}

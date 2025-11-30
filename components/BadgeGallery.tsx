@@ -62,13 +62,12 @@ function BadgeGallery() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4F8]">
+    <div>
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
           <Link 
             to="/profile"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-medium mb-4"
+            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
           >
             <ChevronLeft size={20} />
             <span>Profile Dön</span>
@@ -79,7 +78,7 @@ function BadgeGallery() {
               <Award size={32} />
             </div>
             <div>
-              <h1 className="text-4xl font-extrabold">Rozet Galerisi</h1>
+              <h1 className="text-4xl font-semibold">Rozet Galerisi</h1>
               <p className="text-white/80 text-lg">Başarılarını sergile</p>
             </div>
           </div>
@@ -88,7 +87,7 @@ function BadgeGallery() {
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 mt-6">
             <div className="flex items-center justify-between mb-3">
               <p className="text-white/90 font-semibold">İlerleme Durumu</p>
-              <p className="text-white font-bold text-xl">{unlockedCount} / {ALL_BADGES.length}</p>
+              <p className="text-white font-semibold text-xl">{unlockedCount} / {ALL_BADGES.length}</p>
             </div>
             <div className="w-full bg-white/20 rounded-full h-4 overflow-hidden">
               <div 
@@ -99,10 +98,9 @@ function BadgeGallery() {
             <p className="text-white/70 text-sm mt-2">%{progress.toFixed(0)} tamamlandı</p>
           </div>
         </div>
-      </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="py-8">
         {/* Filters */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -125,7 +123,7 @@ function BadgeGallery() {
                     <button
                       key={cat.id}
                       onClick={() => setCategoryFilter(cat.id as CategoryFilter)}
-                      className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                      className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
                         categoryFilter === cat.id
                           ? 'bg-purple-500 text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -154,7 +152,7 @@ function BadgeGallery() {
                   <button
                     key={status.id}
                     onClick={() => setStatusFilter(status.id as StatusFilter)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                       statusFilter === status.id
                         ? 'bg-purple-500 text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -184,7 +182,7 @@ function BadgeGallery() {
               >
                 {/* Rarity Badge */}
                 {badge.unlocked && (
-                  <div className="absolute top-2 right-2 px-2 py-1 bg-white/30 backdrop-blur-sm rounded-lg text-xs font-bold">
+                  <div className="absolute top-2 right-2 px-2 py-1 bg-white/30 backdrop-blur-sm rounded-lg text-xs font-semibold">
                     {getRarityName(badge.rarity)}
                   </div>
                 )}
@@ -202,7 +200,7 @@ function BadgeGallery() {
                 </div>
 
                 {/* Badge Name */}
-                <h3 className={`font-bold text-sm mb-1 line-clamp-2 ${badge.unlocked ? 'text-white' : 'text-gray-600'}`}>
+                <h3 className={`font-semibold text-sm mb-1 line-clamp-2 ${badge.unlocked ? 'text-white' : 'text-gray-600'}`}>
                   {badge.name}
                 </h3>
 
@@ -226,7 +224,7 @@ function BadgeGallery() {
         {filteredBadges.length === 0 && (
           <div className="text-center py-16">
             <Award size={64} className="text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Rozet Bulunamadı</h3>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">Rozet Bulunamadı</h3>
             <p className="text-gray-500">Seçili filtrelerde rozet bulunmuyor.</p>
           </div>
         )}
@@ -236,7 +234,7 @@ function BadgeGallery() {
           <div className="flex items-start gap-4">
             <Trophy size={32} className="text-purple-600 flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-gray-900 mb-2">Rozet Nasıl Kazanılır?</h3>
+              <h3 className="font-semibold text-gray-900 mb-2">Rozet Nasıl Kazanılır?</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
                   <span className="text-purple-600">•</span>

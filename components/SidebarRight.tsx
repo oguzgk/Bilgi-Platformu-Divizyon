@@ -26,12 +26,12 @@ const SidebarRight: React.FC = () => {
               alt={CURRENT_USER.username} 
               className="w-14 h-14 rounded-full border-2 border-white shadow-md object-cover"
             />
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-white">
+            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gray-800 rounded-full flex items-center justify-center text-xs font-semibold text-white border-2 border-white">
               {CURRENT_USER.level}
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-gray-800">{CURRENT_USER.username}</h3>
+            <h3 className="font-semibold text-gray-800">{CURRENT_USER.username}</h3>
             <p className="text-xs text-gray-500">Hukuk 2. Sınıf</p>
           </div>
         </div>
@@ -58,11 +58,11 @@ const SidebarRight: React.FC = () => {
 
         {/* Coins */}
         <div className="flex items-center justify-between bg-yellow-50 rounded-lg p-3 border border-yellow-100 mb-4">
-           <div className="flex items-center gap-2 text-yellow-700 font-bold">
+           <div className="flex items-center gap-2 text-yellow-700 font-semibold">
               <Coins size={18} className="text-yellow-500" fill={COLORS.gold} />
               <span>{CURRENT_USER.coins.toLocaleString()}</span>
            </div>
-           <span className="text-xs text-yellow-600 font-medium">GençCoin</span>
+           <span className="text-xs text-yellow-600 font-normal">GençCoin</span>
         </div>
 
         {/* Next Role Progress */}
@@ -72,7 +72,7 @@ const SidebarRight: React.FC = () => {
               <span className="text-xs font-semibold text-gray-600">Bir sonraki rol</span>
               <div className="flex items-center gap-1">
                 <RoleBadge role={nextRole} size="small" showName={false} />
-                <span className="text-xs font-bold text-gray-700">{getRoleInfo(nextRole).name}</span>
+                <span className="text-xs font-semibold text-gray-700">{getRoleInfo(nextRole).name}</span>
               </div>
             </div>
             <div className="flex items-center gap-2 text-xs text-gray-600">
@@ -93,7 +93,7 @@ const SidebarRight: React.FC = () => {
           <div className="flex items-center gap-3 mb-2">
             <Trophy size={24} className="text-yellow-600 group-hover:animate-bounce" />
             <div>
-              <h4 className="font-bold text-gray-900">Liderlik Tablosu</h4>
+              <h4 className="font-semibold text-gray-900">Liderlik Tablosu</h4>
               <p className="text-xs text-gray-600">En başarılılar</p>
             </div>
           </div>
@@ -106,7 +106,7 @@ const SidebarRight: React.FC = () => {
 
       {/* Related Topics */}
       <div>
-        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+        <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
             <LinkIcon size={14} />
             İlgili Konular
         </h4>
@@ -143,7 +143,7 @@ const SidebarRight: React.FC = () => {
                       className={`flex items-start justify-between p-3 rounded-xl border transition-all group ${colors.bg} ${colors.border}`}
                     >
                       <div className="flex-1 min-w-0">
-                        <span className="text-sm font-medium text-gray-800 line-clamp-2 group-hover:text-[#00BFA5] transition-colors">
+                        <span className="text-sm font-normal text-gray-800 line-clamp-2 group-hover:text-[#00BFA5] transition-colors">
                           {link.title}
                         </span>
                         {link.category && (

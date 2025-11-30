@@ -111,12 +111,12 @@ function CreateContentPage() {
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <div 
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-semibold text-sm"
                 style={{ backgroundColor: COLORS.turquoise }}
               >
                 K
               </div>
-              <span className="text-lg font-bold text-slate-800">Konya Genç Wiki</span>
+              <span className="text-lg font-semibold text-slate-800">Konya Genç Wiki</span>
             </Link>
             <span className="text-slate-300">|</span>
             <span className="text-sm text-slate-500">Yeni İçerik Oluştur</span>
@@ -153,7 +153,7 @@ function CreateContentPage() {
                   {feeling && (
                     <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
                       <span className="text-2xl">{feeling.emoji}</span>
-                      <span className="text-sm font-medium text-amber-700">Kendini {feeling.label} hissediyor</span>
+                      <span className="text-sm font-normal text-amber-700">Kendini {feeling.label} hissediyor</span>
                       <button
                         onClick={() => setFeeling(null)}
                         className="ml-2 text-amber-600 hover:text-amber-800"
@@ -164,7 +164,7 @@ function CreateContentPage() {
                   )}
                   {taggedFriends.length > 0 && (
                     <div className="flex items-center gap-2 bg-sky-50 border border-sky-200 rounded-lg px-3 py-2">
-                      <span className="text-sm font-medium text-sky-700">
+                      <span className="text-sm font-normal text-sky-700">
                         {taggedFriends.length} arkadaş etiketlendi
                       </span>
                       <button
@@ -184,7 +184,7 @@ function CreateContentPage() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="Başlık Giriniz (Örn: Selçuk Hukuk Ders Notları)"
-                className="w-full text-2xl md:text-3xl font-bold text-slate-300 placeholder:text-slate-300 focus:text-slate-800 outline-none mb-4 transition-colors"
+                className="w-full text-2xl md:text-3xl font-semibold text-slate-300 placeholder:text-slate-300 focus:text-slate-800 outline-none mb-4 transition-colors"
               />
 
               {/* İçerik */}
@@ -203,7 +203,7 @@ function CreateContentPage() {
                 
                 <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg">
                   <p className="text-slate-700">
-                    <span className="text-amber-700 font-medium italic">Düzenlendi:</span> Bu paragraf son güncelleme ile eklendi ve topluluk tarafından onaylandı.
+                    <span className="text-amber-700 font-normal italic">Düzenlendi:</span> Bu paragraf son güncelleme ile eklendi ve topluluk tarafından onaylandı.
                   </p>
                 </div>
 
@@ -214,7 +214,7 @@ function CreateContentPage() {
 
               {/* Kaynak Linki */}
               <div className="mt-8">
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label className="block text-sm font-normal text-slate-700 mb-2">
                   Kaynak Linki / Referans <span className="text-emerald-500">*</span>
                 </label>
                 <input
@@ -241,7 +241,7 @@ function CreateContentPage() {
             <button 
               onClick={handlePublish}
               disabled={!title.trim() || !content.trim() || isPublishing}
-              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-bold shadow-lg hover:shadow-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold shadow-lg hover:shadow-xl transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ backgroundColor: COLORS.turquoise }}
             >
               {isPublishing ? <Loader2 size={18} className="animate-spin" /> : <Coins size={18} />}
@@ -254,7 +254,7 @@ function CreateContentPage() {
             <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
               <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto p-8">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-2xl font-bold">Önizleme</h3>
+                  <h3 className="text-2xl font-semibold">Önizleme</h3>
                   <button 
                     onClick={() => setShowPreview(false)}
                     className="text-gray-400 hover:text-gray-600"
@@ -262,7 +262,7 @@ function CreateContentPage() {
                     ✕
                   </button>
                 </div>
-                <h1 className="text-3xl font-bold mb-4">{title || 'Başlık girilmedi'}</h1>
+                <h1 className="text-3xl font-semibold mb-4">{title || 'Başlık girilmedi'}</h1>
                 <div className="prose max-w-none">
                   <p className="whitespace-pre-wrap">{content || 'İçerik girilmedi'}</p>
                 </div>
@@ -286,7 +286,7 @@ function CreateContentPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-slate-700">Potansiyel Kazanç</h3>
-                <p className="text-2xl font-bold text-emerald-500">+20 GençCoin</p>
+                <p className="text-2xl font-semibold text-emerald-500">+20 GençCoin</p>
                 <p className="text-xs text-slate-500 mt-1">
                   Bu katkı sana ödül kazandıracak! Kaliteli içerik üret, coin kazan.
                 </p>
@@ -320,7 +320,7 @@ function CreateContentPage() {
               <Clock size={14} />
               <span>Son düzenleme: 10 dk önce</span>
             </div>
-            <span className="inline-block px-3 py-1 text-xs font-medium text-sky-600 bg-sky-50 border border-sky-200 rounded-lg">
+            <span className="inline-block px-3 py-1 text-xs font-normal text-sky-600 bg-sky-50 border border-sky-200 rounded-lg">
               Taslak
             </span>
           </div>

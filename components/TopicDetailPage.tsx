@@ -47,7 +47,7 @@ function TopicDetailPage() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <Link 
             to="/"
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-medium mb-3"
+            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-normal mb-3"
           >
             <ArrowLeft size={20} />
             <span>Ana Sayfaya Dön</span>
@@ -56,7 +56,7 @@ function TopicDetailPage() {
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <span className="px-3 py-1 bg-[#00BFA5] text-white text-xs font-bold rounded-lg">
+                <span className="px-3 py-1 bg-[#00BFA5] text-white text-xs font-semibold rounded-lg">
                   {topic.category}
                 </span>
                 <span className="text-sm text-gray-500 flex items-center gap-1">
@@ -64,11 +64,11 @@ function TopicDetailPage() {
                   {topic.date}
                 </span>
               </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{topic.title}</h1>
+              <h1 className="text-3xl font-semibold text-gray-900 mb-2">{topic.title}</h1>
               <div className="flex items-center gap-4 text-sm text-gray-600">
                 <div className="flex items-center gap-1">
                   <User size={16} />
-                  <span className="font-medium text-[#00BFA5]">{topic.author}</span>
+                  <span className="font-normal text-[#00BFA5]">{topic.author}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Eye size={16} />
@@ -93,7 +93,7 @@ function TopicDetailPage() {
         <div className="space-y-6">
           {/* ShareBox sadece başlık sahibine göster */}
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Bu Başlık Hakkında</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Bu Başlık Hakkında</h3>
             <p className="text-gray-700 mb-4">
               Bu başlığı sen açtın. Aşağıda wiki (objektif bilgi) ve yorumlar (subjektif görüşler) bölümlerini görebilirsin.
             </p>

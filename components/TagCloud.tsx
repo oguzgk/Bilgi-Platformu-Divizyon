@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Tag, TrendingUp, Hash, ChevronLeft } from 'lucide-react';
+import { Tag, TrendingUp, Hash } from 'lucide-react';
 
 interface TagData {
   id: string;
@@ -42,14 +42,6 @@ function TagCloud() {
     <div>
       {/* Header */}
       <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
-          <Link 
-            to="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
-          >
-            <ChevronLeft size={20} />
-            <span>Ana Sayfaya Dön</span>
-          </Link>
-          
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
               <Tag size={32} />

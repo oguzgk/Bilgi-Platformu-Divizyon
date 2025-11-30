@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Bell, X, Check, Trash2, Filter, ChevronLeft,
+  Bell, X, Check, Trash2, Filter,
   Coins, MessageSquare, ThumbsUp, TrendingUp, Award, Megaphone, UserPlus
 } from 'lucide-react';
 import { useNotifications } from '../../contexts/NotificationContext';
@@ -52,14 +52,6 @@ function NotificationCenter() {
     <div>
       {/* Header */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-4">
-          <Link 
-            to="/"
-            className="inline-flex items-center gap-2 text-gray-500 hover:text-[#00BFA5] transition-colors font-normal mb-3"
-          >
-            <ChevronLeft size={20} />
-            <span>Ana Sayfaya Dön</span>
-          </Link>
-          
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-[#00BFA5] rounded-xl flex items-center justify-center relative">

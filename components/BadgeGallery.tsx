@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Award, Lock, ChevronLeft, Filter, Trophy, Users, Star, Zap, Coins } from 'lucide-react';
+import { Award, Lock, Filter, Trophy, Users, Star, Zap, Coins } from 'lucide-react';
 import { ALL_BADGES, COLORS, Badge } from '../constants';
 
 type CategoryFilter = 'all' | 'contribution' | 'social' | 'special' | 'achievement';
@@ -64,15 +63,7 @@ function BadgeGallery() {
   return (
     <div>
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
-          <Link 
-            to="/profile"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
-          >
-            <ChevronLeft size={20} />
-            <span>Profile Dön</span>
-          </Link>
-          
+      <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
               <Award size={32} />
@@ -125,7 +116,7 @@ function BadgeGallery() {
                       onClick={() => setCategoryFilter(cat.id as CategoryFilter)}
                       className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
                         categoryFilter === cat.id
-                          ? 'bg-purple-500 text-white shadow-md'
+                          ? 'bg-[#00BFA5] text-white shadow-md'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -154,7 +145,7 @@ function BadgeGallery() {
                     onClick={() => setStatusFilter(status.id as StatusFilter)}
                     className={`px-4 py-2 rounded-lg font-semibold transition-all ${
                       statusFilter === status.id
-                        ? 'bg-purple-500 text-white shadow-md'
+                        ? 'bg-[#00BFA5] text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -234,26 +225,26 @@ function BadgeGallery() {
         )}
 
         {/* Info Box */}
-        <div className="mt-8 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-2xl p-6">
+        <div className="mt-8 bg-gradient-to-r from-teal-50 to-cyan-50 border border-teal-200 rounded-2xl p-6">
           <div className="flex items-start gap-4">
-            <Trophy size={32} className="text-purple-600 flex-shrink-0" />
+            <Trophy size={32} className="text-[#00BFA5] flex-shrink-0" />
             <div>
               <h3 className="font-semibold text-gray-900 mb-2">Rozet Nasıl Kazanılır?</h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start gap-2">
-                  <span className="text-purple-600">•</span>
+                  <span className="text-[#00BFA5]">•</span>
                   <span><strong>Katkı Rozetleri:</strong> Wiki düzenlemeleri ve içerik oluşturarak kazanılır</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-purple-600">•</span>
+                  <span className="text-[#00BFA5]">•</span>
                   <span><strong>Sosyal Rozetler:</strong> Toplulukla etkileşime girerek kazanılır</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-purple-600">•</span>
+                  <span className="text-[#00BFA5]">•</span>
                   <span><strong>Özel Rozetler:</strong> Belirli tarihlerde veya özel durumlarda verilir</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-purple-600">•</span>
+                  <span className="text-[#00BFA5]">•</span>
                   <span><strong>Başarı Rozetleri:</strong> Belirli hedeflere ulaşarak kazanılır</span>
                 </li>
               </ul>

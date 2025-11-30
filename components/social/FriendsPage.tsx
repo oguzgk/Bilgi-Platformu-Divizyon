@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Users, UserPlus, UserCheck, MessageSquare, ChevronLeft, Search, X,
-  TrendingUp, Award, Sparkles, Clock, Check, Coins
+  TrendingUp, Award, Sparkles, Clock, Check, Coins, Copy, CheckCircle
 } from 'lucide-react';
 import { CURRENT_USER } from '../../constants';
 import RoleBadge from '../RoleBadge';
@@ -23,11 +23,33 @@ interface Friend {
   status: 'friends' | 'pending' | 'suggested';
 }
 
+// Referans kodu oluşturma fonksiyonu
+const generateReferralCode = (username: string): string => {
+  // Kullanıcı adına göre benzersiz bir kod oluştur
+  const base = username.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `${base}${random}`;
+};
+
+// Referans kodunu localStorage'dan al veya oluştur
+const getOrCreateReferralCode = (): string => {
+  const stored = localStorage.getItem('referralCode');
+  if (stored) {
+    return stored;
+  }
+  const newCode = generateReferralCode(CURRENT_USER.username);
+  localStorage.setItem('referralCode', newCode);
+  return newCode;
+};
+
 function FriendsPage() {
   const { addNotification } = useNotifications();
   const [activeTab, setActiveTab] = useState<'friends' | 'requests' | 'suggestions'>('friends');
   const [searchQuery, setSearchQuery] = useState('');
   const [openChatBox, setOpenChatBox] = useState<Friend | null>(null);
+  const [referralCode, setReferralCode] = useState<string>('');
+  const [copied, setCopied] = useState(false);
+  const [inviteCode, setInviteCode] = useState('');
 
   // Mock data
   const [friends, setFriends] = useState<Friend[]>([
@@ -47,6 +69,45 @@ function FriendsPage() {
     { id: 's2', username: 'ahmet_yilmaz', displayName: 'Ahmet Yılmaz', avatarUrl: 'https://i.pravatar.cc/150?img=92', role: 'yeni_gelen', level: 3, coins: 450, isOnline: false, lastSeen: '3 gün önce', mutualFriends: 4, status: 'suggested' },
     { id: 's3', username: 'beyza_oz', displayName: 'Beyza Öz', avatarUrl: 'https://i.pravatar.cc/150?img=99', role: 'gezgin', level: 10, coins: 2100, isOnline: true, mutualFriends: 12, status: 'suggested' },
   ]);
+
+  // Referans kodunu yükle
+  useEffect(() => {
+    const code = getOrCreateReferralCode();
+    setReferralCode(code);
+  }, []);
+
+  // Referans kodunu kopyala
+  const handleCopyReferralCode = async () => {
+    try {
+      await navigator.clipboard.writeText(referralCode);
+      setCopied(true);
+      addNotification('success', 'Kopyalandı! ✅', 'Referans kodu panoya kopyalandı.');
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      // Fallback: Eski tarayıcılar için
+      const textArea = document.createElement('textarea');
+      textArea.value = referralCode;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopied(true);
+      addNotification('success', 'Kopyalandı! ✅', 'Referans kodu panoya kopyalandı.');
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  // Referans kodu ile davet et
+  const handleInviteWithCode = () => {
+    if (!inviteCode.trim()) {
+      addNotification('error', 'Hata', 'Lütfen geçerli bir referans kodu girin.');
+      return;
+    }
+    
+    // Referans kodunu kontrol et ve davet gönder
+    addNotification('success', 'Davet Gönderildi! 🎉', `${inviteCode} referans koduna sahip kullanıcıya davet gönderildi!`);
+    setInviteCode('');
+  };
 
   const handleRemoveFriend = (id: string, name: string) => {
     if (window.confirm(`${name} ile arkadaşlığı kaldırmak istediğinize emin misiniz?`)) {
@@ -83,14 +144,6 @@ function FriendsPage() {
     <div>
       {/* Header */}
       <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 text-white -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8 py-12">
-          <Link 
-            to="/"
-            className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-normal mb-4"
-          >
-            <ChevronLeft size={20} />
-            <span>Ana Sayfaya Dön</span>
-          </Link>
-          
           <div className="flex items-center gap-4 mb-6">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
               <Users size={32} />
@@ -178,6 +231,65 @@ function FriendsPage() {
             <Sparkles size={20} />
             Öneriler
           </button>
+        </div>
+
+        {/* Referans Kodu Bölümü */}
+        <div className="bg-gradient-to-r from-[#00BFA5] to-teal-600 rounded-2xl shadow-sm border border-teal-200 p-6 mb-6">
+          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+            <div className="flex-1">
+              <h3 className="text-white font-semibold text-lg mb-2 flex items-center gap-2">
+                <UserPlus size={20} />
+                Arkadaşını Davet Et
+              </h3>
+              <p className="text-white/80 text-sm mb-3">
+                Referans kodunu paylaş ve arkadaşlarını platforma davet et!
+              </p>
+              <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-lg p-3">
+                <code className="text-white font-mono font-semibold text-lg flex-1">
+                  {referralCode}
+                </code>
+                <button
+                  onClick={handleCopyReferralCode}
+                  className={`px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2 ${
+                    copied
+                      ? 'bg-green-500 text-white'
+                      : 'bg-white text-[#00BFA5] hover:bg-white/90'
+                  }`}
+                >
+                  {copied ? (
+                    <>
+                      <CheckCircle size={18} />
+                      Kopyalandı!
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={18} />
+                      Kopyala
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+            <div className="w-full md:w-auto md:min-w-[300px]">
+              <h4 className="text-white font-semibold text-sm mb-2">Referans Kodu ile Davet Et</h4>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={inviteCode}
+                  onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+                  placeholder="Referans kodu gir..."
+                  className="flex-1 px-4 py-2 rounded-lg border border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                />
+                <button
+                  onClick={handleInviteWithCode}
+                  className="px-4 py-2 bg-white text-[#00BFA5] rounded-lg font-semibold hover:bg-white/90 transition-colors flex items-center gap-2"
+                >
+                  <UserPlus size={18} />
+                  Davet Et
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Search (only for friends tab) */}

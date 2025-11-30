@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Trophy, Coins, ChevronRight, Link as LinkIcon, Star, ArrowRight } from 'lucide-react';
 import { CURRENT_USER, RELATED_LINKS, COLORS } from '../constants';
@@ -6,8 +6,33 @@ import RoleBadge from './RoleBadge';
 import { getCoinsToNextRole, getRoleInfo } from '../utils/roleHelpers';
 
 const SidebarRight: React.FC = () => {
+  const [userCoins, setUserCoins] = useState(() => {
+    const storedCoins = localStorage.getItem('userCoins');
+    return storedCoins ? parseInt(storedCoins, 10) : CURRENT_USER.coins;
+  });
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedCoins = localStorage.getItem('userCoins');
+      if (storedCoins) {
+        const newCoins = parseInt(storedCoins, 10);
+        setUserCoins(newCoins);
+        // CURRENT_USER'ı da güncelle
+        (CURRENT_USER as any).coins = newCoins;
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('coinsUpdated', handleStorageChange as EventListener);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('coinsUpdated', handleStorageChange as EventListener);
+    };
+  }, []);
+
   const xpPercentage = (CURRENT_USER.xp / CURRENT_USER.maxXp) * 100;
-  const { nextRole, coinsNeeded } = getCoinsToNextRole(CURRENT_USER.coins);
+  const { nextRole, coinsNeeded } = getCoinsToNextRole(userCoins);
   const currentRoleInfo = getRoleInfo(CURRENT_USER.role);
 
   return (
@@ -58,11 +83,11 @@ const SidebarRight: React.FC = () => {
 
         {/* Coins */}
         <div className="flex items-center justify-between bg-yellow-50 rounded-lg p-3 border border-yellow-100 mb-4">
-           <div className="flex items-center gap-2 text-yellow-700 font-semibold">
+          <div className="flex items-center gap-2 text-yellow-700 font-semibold">
               <Coins size={18} className="text-yellow-500" fill={COLORS.gold} />
-              <span>{CURRENT_USER.coins.toLocaleString()}</span>
-           </div>
-           <span className="text-xs text-yellow-600 font-normal">GençCoin</span>
+              <span>{userCoins.toLocaleString()}</span>
+            </div>
+            <span className="text-xs text-yellow-600 font-normal">GençCoin</span>
         </div>
 
         {/* Next Role Progress */}
